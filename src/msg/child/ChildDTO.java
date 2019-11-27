@@ -1,46 +1,46 @@
 package msg.child;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ChildDTO {
 	private int seq;
-	private int target;
-	private String gender;
+	private String target;  // 010(아동) / 060(지적장애인) / 070(치매노인) 
+	private String gender;  // M, W
 	private String name;
 	private String birth_date;
 	private Timestamp missing_date;
-	private String missing_zipcode;
-	private String missing_addr1;
-	private String missing_addr2;
+	private int missing_area;  // 1, 2, 3, ... ,17 (서울, 부산, 대구, ...)
+	private String missing_area_detail;
 	private int height;
 	private int weight;
-	private int hair;
+	private int hair;  // 두발형태
 	private int blood_type;
 	private String feature;
-	private int top;
-	private int top_kind;
-	private int bottoms;
-	private int bottoms_kind;
-	private int shoes;
+	private int top;  // 긴팔, 반팔
+	private int top_kind;  // 상의 종류
+	private int bottoms;  // 긴바지, 반바지
+	private int bottoms_kind;  // 하의 종류
+	private int shoes;  // 신발 종류
 	private int shoes_size;
 	private String reporter;
 	private String reporter_id;
 	private String re_birth_date;
-	private int re_relation;
+	private int re_relation;  // 실종자와의 관계
 	private String re_contact1;
 	private String re_contact2;
-	private String agreeYN;
+	private String agreeYN;  // 작성 폼 승인 여부
 	
 	
 	
 	public ChildDTO() {
 		super();
 	}
-	public ChildDTO(int seq, int target, String gender, String name, String birth_date, Timestamp missing_date,
-			String missing_zipcode, String missing_addr1, String missing_addr2, int height, int weight, int hair,
-			int blood_type, String feature, int top, int top_kind, int bottoms, int bottoms_kind, int shoes,
-			int shoes_size, String reporter, String reporter_id, String re_birth_date, int re_relation,
-			String re_contact1, String re_contact2, String agreeYN) {
+	public ChildDTO(int seq, String target, String gender, String name, String birth_date, Timestamp missing_date,
+			int missing_area, String missing_area_detail, int height, int weight, int hair, int blood_type,
+			String feature, int top, int top_kind, int bottoms, int bottoms_kind, int shoes, int shoes_size,
+			String reporter, String reporter_id, String re_birth_date, int re_relation, String re_contact1,
+			String re_contact2, String agreeYN) {
 		super();
 		this.seq = seq;
 		this.target = target;
@@ -48,9 +48,8 @@ public class ChildDTO {
 		this.name = name;
 		this.birth_date = birth_date;
 		this.missing_date = missing_date;
-		this.missing_zipcode = missing_zipcode;
-		this.missing_addr1 = missing_addr1;
-		this.missing_addr2 = missing_addr2;
+		this.missing_area = missing_area;
+		this.missing_area_detail = missing_area_detail;
 		this.height = height;
 		this.weight = weight;
 		this.hair = hair;
@@ -77,10 +76,10 @@ public class ChildDTO {
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
-	public int getTarget() {
+	public String getTarget() {
 		return target;
 	}
-	public void setTarget(int target) {
+	public void setTarget(String target) {
 		this.target = target;
 	}
 	public String getGender() {
@@ -107,23 +106,17 @@ public class ChildDTO {
 	public void setMissing_date(Timestamp missing_date) {
 		this.missing_date = missing_date;
 	}
-	public String getMissing_zipcode() {
-		return missing_zipcode;
+	public int getMissing_area() {
+		return missing_area;
 	}
-	public void setMissing_zipcode(String missing_zipcode) {
-		this.missing_zipcode = missing_zipcode;
+	public void setMissing_area(int missing_area) {
+		this.missing_area = missing_area;
 	}
-	public String getMissing_addr1() {
-		return missing_addr1;
+	public String getMissing_area_detail() {
+		return missing_area_detail;
 	}
-	public void setMissing_addr1(String missing_addr1) {
-		this.missing_addr1 = missing_addr1;
-	}
-	public String getMissing_addr2() {
-		return missing_addr2;
-	}
-	public void setMissing_addr2(String missing_addr2) {
-		this.missing_addr2 = missing_addr2;
+	public void setMissing_area_detail(String missing_area_detail) {
+		this.missing_area_detail = missing_area_detail;
 	}
 	public int getHeight() {
 		return height;
@@ -234,4 +227,9 @@ public class ChildDTO {
 		this.agreeYN = agreeYN;
 	}
 	
+	public String getFormedDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+		return sdf.format(this.missing_date);
+	}
 }

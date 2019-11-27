@@ -53,9 +53,12 @@ public class ChildController extends HttpServlet {
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("child/childList.jsp").forward(request, response);
 			}
+			else if(cmd.contentEquals("/childDetail.child")) {
+				
+			}
 			
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 	}

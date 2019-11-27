@@ -144,14 +144,13 @@ public class ChildDAO {
 					ChildDTO dto = new ChildDTO();
 
 					dto.setSeq(rs.getInt("seq"));
-					dto.setTarget(rs.getInt("target"));
+					dto.setTarget(rs.getString("target"));
 					dto.setGender(rs.getString("gender"));
 					dto.setName(rs.getString("name"));
 					dto.setBirth_date(rs.getString("birth_date"));
 					dto.setMissing_date(rs.getTimestamp("missing_date"));
-					dto.setMissing_zipcode(rs.getString("missing_zipcode"));
-					dto.setMissing_addr1(rs.getString("missing_addr1"));
-					dto.setMissing_addr2(rs.getString("missing_addr2"));
+					dto.setMissing_area(rs.getInt("missing_area"));
+					dto.setMissing_area_detail(rs.getString("missing_area_detail"));
 					dto.setHeight(rs.getInt("height"));
 					dto.setWeight(rs.getInt("weight"));
 					dto.setHair(rs.getInt("hair"));
@@ -167,8 +166,8 @@ public class ChildDAO {
 					dto.setReporter_id(rs.getString("reporter_id"));
 					dto.setRe_birth_date(rs.getString("re_birth_date"));
 					dto.setRe_relation(rs.getInt("re_relation"));
-					dto.setRe_contact1(rs.getString("contact1"));
-					dto.setRe_contact2(rs.getString("contact2"));
+					dto.setRe_contact1(rs.getString("re_contact1"));
+					dto.setRe_contact2(rs.getString("re_contact2"));
 					dto.setAgreeYN(rs.getString("agreeYN"));
 
 					list.add(dto);
@@ -192,14 +191,13 @@ public class ChildDAO {
 				ChildDTO dto = new ChildDTO();
 				
 				dto.setSeq(rs.getInt("seq"));
-				dto.setTarget(rs.getInt("target"));
+				dto.setTarget(rs.getString("target"));
 				dto.setGender(rs.getString("gender"));
 				dto.setName(rs.getString("name"));
 				dto.setBirth_date(rs.getString("birth_date"));
 				dto.setMissing_date(rs.getTimestamp("missing_date"));
-				dto.setMissing_zipcode(rs.getString("missing_zipcode"));
-				dto.setMissing_addr1(rs.getString("missing_addr1"));
-				dto.setMissing_addr2(rs.getString("missing_addr2"));
+				dto.setMissing_area(rs.getInt("missing_area"));
+				dto.setMissing_area_detail(rs.getString("missing_area_detail"));
 				dto.setHeight(rs.getInt("height"));
 				dto.setWeight(rs.getInt("weight"));
 				dto.setHair(rs.getInt("hair"));
@@ -215,8 +213,8 @@ public class ChildDAO {
 				dto.setReporter_id(rs.getString("reporter_id"));
 				dto.setRe_birth_date(rs.getString("re_birth_date"));
 				dto.setRe_relation(rs.getInt("re_relation"));
-				dto.setRe_contact1(rs.getString("contact1"));
-				dto.setRe_contact2(rs.getString("contact2"));
+				dto.setRe_contact1(rs.getString("re_contact1"));
+				dto.setRe_contact2(rs.getString("re_contact2"));
 				dto.setAgreeYN(rs.getString("agreeYN"));
 				
 				list.add(dto);
