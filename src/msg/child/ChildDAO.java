@@ -92,17 +92,17 @@ public class ChildDAO {
 		// String 덧셈 역할을 해주는 class
 		StringBuilder sb = new StringBuilder();
 		if(needPrev == true) {
-			sb.append("<a href='chlidList.brd?cpage=" + (startNavi - 1) + "'>");
+			sb.append("<a href='chlidList.child?cpage=" + (startNavi - 1) + "'>");
 			sb.append("< ");
 			sb.append("</a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='childList.brd?cpage=" + i + "'>");
+			sb.append("<a href='childList.child?cpage=" + i + "'>");
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext == true) {
-			sb.append("<a href='childList.brd?cpage=" + (endNavi + 1) + "'>");
+			sb.append("<a href='childList.child?cpage=" + (endNavi + 1) + "'>");
 			sb.append(">");
 			sb.append("</a>");
 		}

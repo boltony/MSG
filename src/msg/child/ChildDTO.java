@@ -1,7 +1,9 @@
 package msg.child;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChildDTO {
 	private int seq;
@@ -227,8 +229,32 @@ public class ChildDTO {
 		this.agreeYN = agreeYN;
 	}
 	
-	public String getFormedDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	public String get_real_gender() {
+		if(this.gender.equalsIgnoreCase("M")) {
+			return "남";
+		}
+		else {
+			return "여";
+		}
+	}
+	
+	public String get_formed_birth() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+		Date date = null;
+		
+		try {
+			date = sdf1.parse(this.birth_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy년 MM월 dd일");
+		
+		return sdf2.format(date);
+	}
+	
+	public String get_formed_missing_date() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
 		return sdf.format(this.missing_date);
 	}

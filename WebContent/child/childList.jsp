@@ -14,66 +14,85 @@
 <title>실종 아동 목록</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-	*{
-		box-sizing:border-box
-	}
+* {
+	box-sizing: border-box
+}
 
-	.container>div{
-		border-bottom:1px solid black;
-	}
+.missing_list {
+	/*                min-width:900px;*/
+	max-width: 900px;
+}
+
+.simple_list {
+	border: 1px solid black;
+	min-width: 420px;
+}
+
+.simple_list>img {
+	width: 200px;
+	height: 200px;
+	float: left;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
+	<br>
 	<div class="container">
 		<div class="row">
 			<br>
 			<div class="col-12 text-center">
-				<h4>#자유게시판</h4>
+				<h4>#실종아동 목록</h4>
+				<hr>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-1 text-center d-none d-sm-block"></div>
-			<div class="col-sm-6 text-center d-none d-sm-block">Name</div>
-			<div class="col-sm-2 text-center d-none d-sm-block">Gender</div>
-			<div class="col-sm-2 text-center d-none d-sm-block">Birth</div>
-			<div class="col-sm-1 text-center d-none d-sm-block">Missing Date</div>
+			<div class="col-sm-3 text-center d-none d-sm-block">1</div>
+			<div class="col-sm-3 text-center d-none d-sm-block">2</div>
+			<div class="col-sm-3 text-center d-none d-sm-block">3</div>
+			<div class="col-sm-3 text-center d-none d-sm-block">4</div>
 		</div>
-
+	</div>
+	<hr>
+	<div class="container missing_list">
 		<c:choose>
 			<c:when test="${list.size()==0}">
-				<div class="row">
+				<div class="row r1">
 					<div class="col-12 text-center">작성된 글이 없습니다.</div>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list}" var="dto" varStatus="status">
-					<div class="row">
-						<div class="col-2 col-sm-1 text-center">${dto.seq}</div>
-						<div class="col-10 col-sm-6">
-							<a
-								href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}">${dto.name}</a>
+				<div class="row">
+					<c:forEach items="${list}" var="dto" varStatus="status">
+						<div class="col-12 col-sm-6 simple_list mb-4">
+							<img src="img/조묘진.jpg"> <br>
+							<h4>${dto.name}(${dto.gender})</h4>
+							<h>생년월일 : ${dto.get_formed_birth()}</h>
+							<br>
+							<h>실종일자 : ${dto.get_formed_missing_date()}</h>
+							<br>
+							<h>실종지역 : ${dto.missing_area}</h>
+							<br> <br>
+							<div>
+								<button>상세정보</button>
+								<button>공유하기</button>
+							</div>
 						</div>
-						<div class="col-2 col-sm-2">${dto.gender}</div>
-						<div class="col-4 col-sm-2">${dto.birth_date}</div>
-						<div class="col-4 col-sm-1 text-center">${dto.missing_date}</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</c:otherwise>
 		</c:choose>
-
-		<div class="row">
-			<div class="col-12 text-center">${pageNavi}</div>
-		</div>
-		<div class="row">
-			<div class="col-12 text-right">
-				<button type="button" id="backBtn" name="backBtn">돌아가기</button>
-			</div>
-		</div>
 	</div>
-	
+
+	<div class="row">
+		<div class="col-12 text-center">${pageNavi}</div>
+	</div>
+
 	<script>
-		$("#backBtn").on("click", function(){
-			location.href="${pageContext.request.contextPath}/index.jsp";
+		$("#backBtn").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/index.jsp";
 		});
 	</script>
 </body>
