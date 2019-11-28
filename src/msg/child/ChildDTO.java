@@ -32,9 +32,9 @@ public class ChildDTO {
 	private String re_contact1;
 	private String re_contact2;
 	private String agreeYN;  // 작성 폼 승인 여부
-	
-	
-	
+
+
+
 	public ChildDTO() {
 		super();
 	}
@@ -71,7 +71,7 @@ public class ChildDTO {
 		this.re_contact2 = re_contact2;
 		this.agreeYN = agreeYN;
 	}
-	
+
 	public int getSeq() {
 		return seq;
 	}
@@ -228,7 +228,7 @@ public class ChildDTO {
 	public void setAgreeYN(String agreeYN) {
 		this.agreeYN = agreeYN;
 	}
-	
+
 	public String get_real_gender() {
 		if(this.gender.equalsIgnoreCase("M")) {
 			return "남";
@@ -237,25 +237,53 @@ public class ChildDTO {
 			return "여";
 		}
 	}
-	
+
 	public String get_formed_birth() {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
 		Date date = null;
-		
+
 		try {
 			date = sdf1.parse(this.birth_date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy년 MM월 dd일");
-		
+
 		return sdf2.format(date);
 	}
-	
+
 	public String get_formed_missing_date() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
 		return sdf.format(this.missing_date);
 	}
+
+	public String get_real_missing_area() {
+		String area = null;
+
+		switch(this.missing_area) {
+			case 1: area = "서울"; break;
+			case 2: area = "부산"; break;
+			case 3: area = "대구"; break;
+			case 4: area = "인천"; break;
+			case 5: area = "광주"; break;
+			case 6: area = "대전"; break;
+			case 7: area = "울산"; break;
+			case 8: area = "강원"; break;
+			case 9: area = "경기"; break;
+			case 10: area = "경남"; break;
+			case 11: area = "경북"; break;
+			case 12: area = "전남"; break;
+			case 13: area = "전북"; break;
+			case 14: area = "제주"; break;
+			case 15: area = "충남"; break;
+			case 16: area = "충북"; break;
+			case 17: area = "세종"; break;
+			default: area = "그 외 지역"; break;
+		}
+		
+		return area;
+	}
+
 }

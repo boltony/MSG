@@ -8,12 +8,12 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<button id="welcomeBtn">Welcome</button>
+	<button id="inputBtn">To Input</button>
 	<button id="childBtn">To Child List</button>
 	
 	<script>
-		$("#welcomeBtn").on("click", function(){
-			alert("Welcome My Team!!");
+		$("#inputBtn").on("click", function(){
+			location.href="${pageContext.request.contextPath}/child/insertInfo.jsp";
 		});
 		
 		$("#childBtn").on("click", function(){

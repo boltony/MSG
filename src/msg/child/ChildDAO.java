@@ -92,7 +92,7 @@ public class ChildDAO {
 		// String 덧셈 역할을 해주는 class
 		StringBuilder sb = new StringBuilder();
 		if(needPrev == true) {
-			sb.append("<a href='chlidList.child?cpage=" + (startNavi - 1) + "'>");
+			sb.append("<a href='childList.child?cpage=" + (startNavi - 1) + "'>");
 			sb.append("< ");
 			sb.append("</a>");
 		}
@@ -124,6 +124,48 @@ public class ChildDAO {
 			return result;
 		}
 	}
+	
+	public int insert(ChildDTO dto) throws Exception{
+	      String sql = "insert into child values(child_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+	      try(
+	            Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	         
+	         
+	         pstat.setString(1, dto.getTarget());
+	         pstat.setString(2, dto.getGender());
+	         pstat.setString(3, dto.getName());
+	         pstat.setString(4, dto.getBirth_date());
+	         pstat.setTimestamp(5, dto.getMissing_date());
+	         pstat.setInt(6, dto.getMissing_area());
+	         pstat.setString(7, dto.getMissing_area_detail());
+	         pstat.setInt(8, dto.getHeight());
+	         pstat.setInt(9, dto.getWeight());
+	         pstat.setInt(10, dto.getHair());
+	         pstat.setInt(11, dto.getBlood_type());
+	         pstat.setString(12, dto.getFeature());
+	         pstat.setInt(13, dto.getTop());
+	         pstat.setInt(14, dto.getTop_kind());
+	         pstat.setInt(15, dto.getBottoms());
+	         pstat.setInt(16, dto.getBottoms_kind());
+	         pstat.setInt(17, dto.getShoes());
+	         pstat.setInt(18, dto.getShoes_size());
+	         pstat.setString(19, dto.getReporter());
+	         pstat.setString(20, dto.getReporter_id());
+	         pstat.setString(21, dto.getRe_birth_date());
+	         pstat.setInt(22, dto.getRe_relation());
+	         pstat.setString(23, dto.getRe_contact1());
+	         pstat.setString(24, dto.getRe_contact2());
+	         pstat.setString(25, dto.getAgreeYN());      
+
+	         int result = pstat.executeUpdate();
+	         con.commit();
+
+	         return result;
+	      }
+	   }
 	
 	public List<ChildDTO> selectByPage(int begin, int end) throws Exception {
 		String sql = "select * from"
