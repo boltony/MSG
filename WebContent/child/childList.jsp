@@ -5,18 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/childStyle.css">
@@ -36,7 +34,6 @@
 	max-width: 400px;
 	border-radius: 20px;
 }
-
 .simple_list>img {
 	width: 200px;
 	height: 200px;
@@ -45,11 +42,13 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-
 .simple_list>h {
 	font-size: 12px;
 }
 
+.kakao-link-btn>img{
+	width: 40px;
+}
 </style>
 </head>
 <body>
@@ -99,7 +98,7 @@
 		</div>
 	</nav>
 	<!-- ----- navi 끝 ---------------------------------------------------  -->
-	
+
 
 	<!-- ----- quick menu 시작 --------------------------------------------  -->
 	<div id="container0">
@@ -142,8 +141,8 @@
 		</div>
 	</div>
 	<!-- ----- quick menu 끝 ---------------------------------------------  -->
-	
-	
+
+
 	<!-- ----- child list 시작 --------------------------------------------  -->
 	<br>
 	<div class="container">
@@ -185,7 +184,9 @@
 							<br> <br>
 							<div>
 								<button>상세정보</button>
-								<button>공유하기</button>
+								<a class="kakao-link-btn" href="javascript:;"> 
+									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+								</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -200,7 +201,8 @@
 			<div class="col-12 text-center">${pageNavi}</div>
 		</div>
 	</div>
-	<br><br>
+	<br>
+	<br>
 	<hr>
 	<!-- ----- child list 끝 ---------------------------------------------  -->
 
@@ -211,9 +213,9 @@
 			<div id=policy1>
 				<img
 					src="${pageContext.request.contextPath}/child/image/policylogo.png"
-					style="width: 140px;"><br>
-				<br> +82 10 0000 0000<br> info@msg.missingchildren<br>
-				Daeil-building 3F, 120 Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
+					style="width: 140px;"><br> <br> +82 10 0000 0000<br>
+				info@msg.missingchildren<br> Daeil-building 3F, 120
+				Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
 
 			</div>
 			<div id=policy2>
@@ -228,11 +230,57 @@
 			home ㅣ Created by MSG All Right Reserved</div>
 	</div>
 	<!-- ----- footer 끝 -------------------------------------------------  -->
-	
+
 	<script>
 		$("#backBtn").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/index.jsp";
 		});
+	
+		console.log($('.kakao-link-btn')[1]);
+		$('.kakao-link-btn').on("click", function(){
+			console.log("kakao");
+		});
+		
+		
+		//<![CDATA[
+		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('a224ed8e8d0df10de91c36a743e14394');
+
+		for (var i = 0; i < $(".kakao-link-btn").length; i++) {
+			// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+			Kakao.Link.createDefaultButton({
+						container : $('.kakao-link-btn')[i],
+						objectType : 'feed',
+						content : {
+							title : '카카오 링크 테스트',
+							description : '#카카오톡 #카카오API #카카오링크 #공유',
+							imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
+							link : {
+								mobileWebUrl : 'http://192.168.60.54:8080/MSG/childList.child',
+								webUrl : 'http://192.168.60.54:8080/MSG/childList.child'
+							}
+						},
+						social : {
+							likeCount : 286,
+							commentCount : 45,
+							sharedCount : 845
+						},
+						buttons : [ {
+							title : '웹으로 보기',
+							link : {
+								mobileWebUrl : 'https://www.naver.com/',
+								webUrl : 'https://www.naver.com/'
+							}
+						}, {
+							title : '앱으로 보기',
+							link : {
+								mobileWebUrl : 'https://www.google.com/',
+								webUrl : 'https://www.google.com/'
+							}
+						} ]
+					});
+		}
+		//]]>
 	</script>
 </body>
 </html>
