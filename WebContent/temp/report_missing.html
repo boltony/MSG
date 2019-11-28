@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>실종정보등록</title>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <style type="text/css">
+            body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif; line-height:1.5em; color:#666;}
+            input button{
+                background-color: #66b5d0;
+                padding: 15px 30px;
+                margin: 10px;
+                border: none;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                font-size: 20px;
+                display: inline-block;
+                cursor: pointer;
+                transition: all 0.35s;
+                border-radius: 15px 15px 15px 15px;
+                box-shadow: 0 9px #B0B0B0;
+
+            }
+            input button:hover{
+                text-shadow: 2px 2px 5px;
+                cursor : pointer;
+            }
+        </style> 
+    </head> 
+    <body> 
+        <form id="frm" method="post" action="/openApiTest/test1_1.jsp" enctype="multipart/form-data">
+            <table border="1" width="100%">
+                <caption><h2>실종아동등 신고 사전등록 신청 기본정보 입력</h2></caption>
+                <colgroup>
+                    <col width="17%" />
+                    <col width="33%" />
+                    <col width="17%" />
+                    <col width="33%" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>대상</th>
+                        <td colspan="3">
+                            <input type="radio" id="child" name="writngTrgetDscd" value="010" checked="checked" /> 아동(만18세 미만)
+                            <input type="radio" id="disabled_down" name="writngTrgetDscd" value="062" /> 정신장애인등(만 18세 이상)
+                            <input type="radio" id="dotard" name="writngTrgetDscd" value="070" /> 치매노인
+                        </td>      
+                    </tr>
+                    <tr>
+
+                        <th style="width: 181px;">성별</th>
+                        <td>
+                            <input type="radio" id="man" name="gender" value="1" checked="checked" />남자
+                            <input type="radio" id="woman" name="gender" value="2" />여자
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>성명</th>
+                        <td>
+                            <input type="text" id="name" name="name" placeholder="홍길동" />
+                        </td><th>생년월일</th><td><input type=text id="birth_date" placeholder="20150422"></td>
+
+
+                        <th>발생일</th>
+                        <td colspan="3">
+                            <input type="text" name="occrde" id="occrde" placeholder="20191126" />
+                            <input type="text" name="occrtm" id="occrtm" placeholder="14:43 ( : 제외)" />
+                        </td>      
+                    </tr>
+                    <tr>
+                        <th>발생장소</th>
+                        <td colspan="3">
+                            <input type="text" id="sample4_postcode" placeholder="우편번호"  name="zipcode">
+                            <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="missing_area">
+                            <input type="text" id="where" name="missing-area" placeholder="상세주소">
+                            <input type="button" value="주소찾기"   id="find" onclick="sample4_execDaumPostcode()" class="but">   
+                        </td>      
+                    </tr>
+                    <tr>
+                        <th>실종아동등 사진(jpg,gif파일)</th>
+                        <td colspan="3">
+                            <input type="file" name="file1" id="file1"/><br />
+                            <input type="file" name="file2" id="file2"/><br />
+                            <input type="file" name="file3" id="file3"/><br />
+                            <input type="file" name="file4" id="file4"/><br />
+                            <input type="file" name="file5" id="file5"/><br />
+                            <input type="file" name="file6" id="file6"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1" width="100%">
+                <caption><h3>신체특징 입력</h3></caption>
+                <colgroup>
+                    <col width="13%" />
+                    <col width="12%" />
+                    <col width="13%" />
+                    <col width="12%" />
+                    <col width="14%" />
+                    <col width="36%" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>신장</th>
+                        <td>
+                            <input type="text" id="height" name="height" placeholder="135" /> Cm
+                        </td>
+                        <th>체중</th>
+                        <td>
+                            <input type="text" id="weight" name="weight" placeholder="30" /> Kg
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>두발형태</th>
+                        <td colspan="3">
+                            <select id="hair" name="hair">
+                                <option value="">선택</option>
+                                <option value="010">삭발</option>
+                                <option value="020">대머리</option>
+                                <option value="030">긴머리</option>
+                                <option value="040">곱슬긴머리</option>
+                                <option value="050">단발머리</option>
+                                <option value="055">커트머리</option>
+                                <option value="060">곱슬단발머리</option>
+                                <option value="070">가발</option>
+                                <option value="080" selected="selected">스포츠형</option>
+                                <option value="090">짧은머리(생머리)</option>
+                                <option value="100">긴머리(생머리)</option>
+                                <option value="110">짧은머리(퍼머)</option>
+                                <option value="120">긴머리(퍼머)</option>
+                                <option value="130">묶음머리</option>
+                                <option value="990">기타</option>
+                            </select>
+
+                        </td>
+                        <th>혈액형</th>
+                        <td>
+                            <select id="blood_type" name="blood_type">
+                                <option value="">선택</option>
+                                <option value="0">미기재</option>
+                                <option value="1" selected="selected">A(RH+)</option>
+                                <option value="2">B(RH+)</option>
+                                <option value="3">O(RH+)</option>
+                                <option value="4">AB(RH+)</option>
+                                <option value="5">A(RH-)</option>
+                                <option value="6">B(RH-)</option>
+                                <option value="7">O(RH-)</option>
+                                <option value="8">AB(RH-)</option>
+                                <option value="9">기타</option>
+                            </select>
+                            <input type="text" id="etcBdpnm" name="etcBdpnm" />
+                        </td>      
+                    </tr>
+                    <tr>
+                        <th>신체특징 및 특이사항</th>
+                        <td colspan="5">
+                            <textarea id="etcSpfeatr" cols="90" rows="" name="etcSpfeatr" placeholder="아이의 왼쪽손등에 화상이있어요"></textarea>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <table border="1" width="100%">
+                <caption><h3>옷차림 입력</h3></caption>
+                <colgroup>
+                    <col width="13%" />
+                    <col width="87%" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>상의</th>
+                        <td>
+                            <input type="radio" id="longTop" name="top" value="10" checked="checked" />긴팔
+                            <input type="radio" id="shortTop" name="top" value="20" />반팔
+                            <select id="csltKndDscd" name="csltKndDscd">
+                                <option value="" selected="selected">선택</option>
+                                <option value="010">양복</option>
+                                <option value="020">잠바</option>
+                                <option value="030">캐주얼</option>
+                                <option value="040">운동복</option>
+                                <option value="050">속옷차림</option>
+                                <option value="060">원피스</option>
+                                <option value="070">투피스</option>
+                                <option value="080">유니폼</option>
+                                <option value="090">와이셔츠</option>
+                                <option value="100">코트류</option>
+                                <option value="110">티셔츠</option>
+                                <option value="120">가디건(스웨터)</option>
+                                <option value="130">작업복</option>
+                                <option value="140">브라우스</option>
+                                <option value="150">불상</option>
+                                <option value="990">기타</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>하의</th>
+                        <td>
+                            <input type="radio" id="longBottom" name="bottom" value="10" checked="checked" />긴
+                            <input type="radio" id="shortBottom" name="bottom" value="20" />짧은
+                            <select id="pntsKndDscd" name="bottom_kind">
+                                <option value="" selected="selected">선택</option>
+                                <option value="010">정장바지</option>
+                                <option value="020">운동복</option>
+                                <option value="030">잠옷</option>
+                                <option value="040">치마</option>
+                                <option value="050">유니폼</option>
+                                <option value="060">면바지</option>
+                                <option value="070">청바지</option>
+                                <option value="080">작업복</option>
+                                <option value="090">속옷</option>
+                                <option value="091">몸베바지</option>
+                                <option value="100">통바지</option>
+                                <option value="110">불상</option>
+                                <option value="120">바지</option>
+                                <option value="990">기타</option>
+                            </select>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>신발</th>
+                        <td>
+                            <select id="ftwrKndDscd" name="shoes">
+                                <option value="" selected="selected">선택</option>
+                                <option value="010">운동화</option>
+                                <option value="020">구두</option>
+                                <option value="030">고무신</option>
+                                <option value="040">장화</option>
+                                <option value="050">샌들</option>
+                                <option value="060">슬리퍼</option>
+                                <option value="070">부츠</option>
+                                <option value="080">단화</option>
+                                <option value="090">등산화</option>
+                                <option value="100">털신</option>
+                                <option value="110">맨발</option>
+                                <option value="120">불상</option>
+                                <option value="990">기타</option>
+                            </select>
+                            신발 사이즈
+                            <input type="text" id="ftSize" name="shoes_size" />    
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1" width="100%">
+                <caption><h3>신고 및 접수자 정보 입력</h3></caption>
+                <colgroup>
+                    <col width="13%" />
+                    <col width="37%" />
+                    <col width="13%" />
+                    <col width="37%" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>성명</th>
+                        <td>
+                            <input type="text" id="rptrNm" name="reporter" placeholder="보호자"/>
+                        </td>
+                        <th>생년월일</th>   <td>
+                        <input type="text" id="re_birth_date" name="re_birth_date" placeholder="19781204"></td>
+                    </tr>
+                    <tr>
+                        <th>관계</th>
+                        <td colspan="3">
+                            <input type="radio" id="parents" name="rptrRlDscd" value="10" checked="checked" />부모
+                            <input type="radio" id="children" name="rptrRlDscd" value="20" />자녀
+                            <input type="radio" id="spouse" name="rptrRlDscd" value="30" />배우자
+                            <input type="radio" id="relative" name="rptrRlDscd" value="40" />친척
+                            <input type="radio" id="sibling" name="rptrRlDscd" value="50" />형제
+                            <input type="radio" id="cohab" name="rptrRlDscd" value="70" />동거자
+                            <input type="radio" id="etc" name="rptrRlDscd" value="90" />기타
+                            <input type="text" name="etcRptrRlnm" />
+                        </td>   
+                    </tr>
+                    <tr>
+                        <th>휴대폰</th>
+                        <td>
+                            <input type="text"name="re_contact1" placeholder="01099997777" />
+                        </td>
+                        <th>전화번호</th>
+                        <td>
+                            <input type="text"name="re_contact2" placeholder="021234567" />
+                        </td>      
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; font-size:20px;">
+                <p>
+
+                </p>
+                <input type="submit" id="send" value="접수" />
+                <input type="reset" value="취소" />
+            </div>
+        </form>
+        <script>
+            $("#send").on("click",function(){
+                var insert = confirm("등록하시겠습니까?");
+                if(insert){
+                    alert("등록하였습니다\n실종자가 하루빨리 가족품에돌아오길 기원합니다");
+                }else{
+                    alert("취소되었습니다");
+                }
+            })
+        </script>
+    </body>
+    <script>
+        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.    
+        var daum = {
+            Postcode:function(){            
+            }
+        }   
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    console.log               
+                    document.getElementById('sample4_postcode').value = data.zonecode;
+                    document.getElementById("sample4_jibunAddress").value = data.jibunAddress;                     
+                }
+            }).open();
+        }
+    </script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</html>
