@@ -46,6 +46,9 @@
 	font-size: 12px;
 }
 
+.detail_btn>img{
+	width: 40px;
+}
 .kakao-link-btn>img{
 	width: 40px;
 }
@@ -60,7 +63,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light" style="width: 100%">
 		<a class="navbar-brand" href="#"><img
-			src="${pageContext.request.contextPath}/child/image/policylogo.png"
+			src="${pageContext.request.contextPath}/resources/images/policylogo.png"
 			style="width: 130px;"> LOGO</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -104,38 +107,38 @@
 	<div id="container0">
 		<div class="menu0">
 			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/login-64.png"
+				src="${pageContext.request.contextPath}/resources/images/login-64.png"
 				alt="">
 			<p>로그인</p>
 		</div>
 		<div class="menu0">
 			<a href=""> <img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/active-search-64.png"
+				src="${pageContext.request.contextPath}/resources/images/active-search-64.png"
 				alt="">
 				<p>실종아동찾기</p>
 			</a>
 		</div>
 		<div class="menu0">
 			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/reviewer-64.png"
+				src="${pageContext.request.contextPath}/resources/images/reviewer-64.png"
 				alt="">
 			<p>실종아동등록</p>
 		</div>
 		<div class="menu0">
 			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/banknotes-64%20(1).png"
+				src="${pageContext.request.contextPath}/resources/images/banknotes-64%20(1).png"
 				alt="">
 			<p>후원하기</p>
 		</div>
 		<div class="menu0">
 			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/text-file-4-64.png"
+				src="${pageContext.request.contextPath}/resources/images/text-file-4-64.png"
 				alt="">
 			<p>실종아동등록</p>
 		</div>
 		<div class="menu0">
 			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/child/image/chat-4-64%20(1).png"
+				src="${pageContext.request.contextPath}/resources/images/chat-4-64%20(1).png"
 				alt="">
 			<p>문의하기</p>
 		</div>
@@ -147,20 +150,12 @@
 	<br>
 	<div class="container">
 		<div class="row">
-			<br>
 			<div class="col-12 text-center">
 				<h4>#실종아동 목록</h4>
 				<hr>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-3 text-center d-none d-sm-block">1</div>
-			<div class="col-sm-3 text-center d-none d-sm-block">2</div>
-			<div class="col-sm-3 text-center d-none d-sm-block">3</div>
-			<div class="col-sm-3 text-center d-none d-sm-block">4</div>
-		</div>
 	</div>
-	<hr>
 	<div class="container missing_list">
 		<c:choose>
 			<c:when test="${list.size()==0}">
@@ -173,7 +168,7 @@
 					<c:forEach items="${list}" var="dto" varStatus="status">
 						<div class="col-12 col-sm-5 simple_list mb-4 offset-1">
 							<img
-								src="${pageContext.request.contextPath}/child/image/dubuzzing.jpg">
+								src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
 							<br>
 							<h4>${dto.name}(${dto.get_real_gender()})</h4>
 							<h>생년월일 : ${dto.get_formed_birth()}</h>
@@ -183,9 +178,12 @@
 							<h>실종지역 : ${dto.get_real_missing_area()}</h>
 							<br> <br>
 							<div>
-								<button>상세정보</button>
+								<a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
+								onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+									<img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
+								</a>
 								<a class="kakao-link-btn" href="javascript:;"> 
-									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png">
 								</a>
 							</div>
 						</div>
@@ -212,7 +210,7 @@
 		<div id=policyTitle1>
 			<div id=policy1>
 				<img
-					src="${pageContext.request.contextPath}/child/image/policylogo.png"
+					src="${pageContext.request.contextPath}/resources/images/policylogo.png"
 					style="width: 140px;"><br> <br> +82 10 0000 0000<br>
 				info@msg.missingchildren<br> Daeil-building 3F, 120
 				Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
@@ -235,12 +233,6 @@
 		$("#backBtn").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/index.jsp";
 		});
-	
-		console.log($('.kakao-link-btn')[1]);
-		$('.kakao-link-btn').on("click", function(){
-			console.log("kakao");
-		});
-		
 		
 		//<![CDATA[
 		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -249,36 +241,36 @@
 		for (var i = 0; i < $(".kakao-link-btn").length; i++) {
 			// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
 			Kakao.Link.createDefaultButton({
-						container : $('.kakao-link-btn')[i],
-						objectType : 'feed',
-						content : {
-							title : '카카오 링크 테스트',
-							description : '#카카오톡 #카카오API #카카오링크 #공유',
-							imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
-							link : {
-								mobileWebUrl : 'http://192.168.60.54:8080/MSG/childList.child',
-								webUrl : 'http://192.168.60.54:8080/MSG/childList.child'
-							}
-						},
-						social : {
-							likeCount : 286,
-							commentCount : 45,
-							sharedCount : 845
-						},
-						buttons : [ {
-							title : '웹으로 보기',
-							link : {
-								mobileWebUrl : 'https://www.naver.com/',
-								webUrl : 'https://www.naver.com/'
-							}
-						}, {
-							title : '앱으로 보기',
-							link : {
-								mobileWebUrl : 'https://www.google.com/',
-								webUrl : 'https://www.google.com/'
-							}
-						} ]
-					});
+				container : $('.kakao-link-btn')[i],
+				objectType : 'feed',
+				content : {
+					title : '카카오 링크 테스트',
+					description : '#카카오톡 #카카오API #카카오링크 #공유',
+					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
+					link : {
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childList.child',
+						webUrl : 'http://192.168.60.54:8080/MSG/childList.child'
+					}
+				},
+				social : {
+					likeCount : 286,
+					commentCount : 45,
+					sharedCount : 845
+				},
+				buttons : [ {
+					title : '웹으로 보기',
+					link : {
+						mobileWebUrl : 'https://www.naver.com/',
+						webUrl : 'https://www.naver.com/'
+					}
+				}, {
+					title : '앱으로 보기',
+					link : {
+						mobileWebUrl : 'https://www.google.com/',
+						webUrl : 'https://www.google.com/'
+					}
+				} ]
+			});
 		}
 		//]]>
 	</script>

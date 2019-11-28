@@ -223,7 +223,11 @@ public class ChildController extends HttpServlet {
 				request.getRequestDispatcher("child/childList.jsp").forward(request, response);
 			}
 			else if(cmd.contentEquals("/childDetail.child")) {
-
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				System.out.println("글 번호  : " + seq);
+				System.out.println();
+				
+				
 			}
 
 		} catch (Exception e) {
