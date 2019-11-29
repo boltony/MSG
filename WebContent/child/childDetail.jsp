@@ -33,5 +33,66 @@
 	<p>${dto.re_contact1}</p>
 	<p>${dto.re_contact2}</p>
 	<p>${dto.agreeYN}</p>
+	
+	
+	<div class="container">
+		<div class="box1">
+			<div class="img_box">
+				사진(캐러셀)
+			</div>
+			<div class="info_box1">
+				<br><br><br>
+				<label for="">제보자</label>
+				: ooo (부모)
+				<br>
+				<label for="">실종아동</label>
+				<br>
+				<label for="">이름</label>
+				: ooo (남)
+				<br>
+				<label for="">생년월일</label>
+				: oooooo
+				<br>
+				<label for="">실종날짜</label>
+				: oooooo
+				<br>
+				<label for="">실종지역</label>
+				: _________
+				<br>
+			</div>
+			<div class="info_box2">
+				<br><br><br>
+				<label for="">키</label>
+				: ___cm
+				<br>
+				<label for="">몸무게</label>
+				: ___kg
+				<br>
+				<label for="">머리 스타일</label>
+				: 짧은 생머리
+				<br>
+				<label for="">혈액형</label>
+				: B(RH+)
+				<br>
+				<label for="">상의 (종류)</label>
+				: 반팔 (티셔츠)
+				<br>
+				<label for="">하의 (종류)</label>
+				: 긴바지 (청바지)
+				<br>
+				<label for="">신발 (사이즈)</label>
+				: 운동화 (230)
+				<br>
+			</div>
+		</div>
+		<div class="box2">
+			<div class="area_detail_box">
+				실종지역 상세정보
+			</div>
+			<div class="feature_detail_box">
+				특징
+			</div>
+		</div>
+	</div>
 </body>
 </html>

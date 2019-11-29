@@ -42,7 +42,7 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.simple_list>h {
+.simple_info {
 	font-size: 12px;
 }
 
@@ -84,11 +84,13 @@
 								src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
 							<br>
 							<h4>${dto.name}(${dto.get_real_gender()})</h4>
-							<h>생년월일 : ${dto.get_formed_birth()}</h>
-							<br>
-							<h>실종일자 : ${dto.get_formed_missing_date()}</h>
-							<br>
-							<h>실종지역 : ${dto.get_real_missing_area()}</h>
+							<div class="simple_info">
+								생년월일 : ${dto.get_formed_birth()}
+								<br>
+								실종일자 : ${dto.get_formed_missing_date()}
+								<br>
+								실종지역 : ${dto.get_real_missing_area()}
+							</div>
 							<br> <br>
 							<div>
 								<a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
