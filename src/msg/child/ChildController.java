@@ -227,7 +227,14 @@ public class ChildController extends HttpServlet {
 				System.out.println("글 번호  : " + seq);
 				System.out.println();
 				
+				ChildDTO selectResult = childDAO.selectBySeq(seq);
+				String area_detail = selectResult.getMissing_area_detail().replaceAll("\n", "<br>");
+				selectResult.setMissing_area_detail(area_detail);
+				String feature = selectResult.getFeature().replaceAll("\n", "<br>");
+				selectResult.setFeature(feature);
 				
+				request.setAttribute("dto", selectResult);
+				request.getRequestDispatcher("child/childDetail.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {

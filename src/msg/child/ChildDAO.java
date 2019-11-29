@@ -265,4 +265,50 @@ public class ChildDAO {
 			return list;
 		}
 	}
+	
+	public ChildDTO selectBySeq(int seq) throws Exception {
+		String sql = "select * from child where seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				ChildDTO dto = new ChildDTO();
+				rs.next();
+				dto.setSeq(rs.getInt("seq"));
+				dto.setTarget(rs.getString("target"));
+				dto.setGender(rs.getString("gender"));
+				dto.setName(rs.getString("name"));
+				dto.setBirth_date(rs.getString("birth_date"));
+				dto.setMissing_date(rs.getTimestamp("missing_date"));
+				dto.setMissing_area(rs.getInt("missing_area"));
+				dto.setMissing_area_detail(rs.getString("missing_area_detail"));
+				dto.setHeight(rs.getInt("height"));
+				dto.setWeight(rs.getInt("weight"));
+				dto.setHair(rs.getInt("hair"));
+				dto.setBlood_type(rs.getInt("blood_type"));
+				dto.setFeature(rs.getString("feature"));
+				dto.setTop(rs.getInt("top"));
+				dto.setTop_kind(rs.getInt("top_kind"));
+				dto.setBottoms(rs.getInt("bottoms"));
+				dto.setBottoms_kind(rs.getInt("bottoms_kind"));
+				dto.setShoes(rs.getInt("shoes"));
+				dto.setShoes_size(rs.getInt("shoes_size"));
+				dto.setReporter(rs.getString("reporter"));
+				dto.setReporter_id(rs.getString("reporter_id"));
+				dto.setRe_birth_date(rs.getString("re_birth_date"));
+				dto.setRe_relation(rs.getInt("re_relation"));
+				dto.setRe_contact1(rs.getString("re_contact1"));
+				dto.setRe_contact2(rs.getString("re_contact2"));
+				dto.setAgreeYN(rs.getString("agreeYN"));
+				
+				con.commit();
+				return dto;
+			}
+		}
+	}
 }
