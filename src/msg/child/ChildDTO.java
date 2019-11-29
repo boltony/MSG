@@ -5,8 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import oracle.net.aso.d;
-
 public class ChildDTO {
 	private int seq;
 	private String target;  // 010(아동) / 060(지적장애인) / 070(치매노인) 

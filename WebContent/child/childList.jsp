@@ -17,7 +17,7 @@
 <script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<title>실종 아동 목록</title>
+<title>실종아동 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fixedStyle.css">
 <style>
 * {
@@ -95,8 +95,9 @@
 								onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
 									<img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
 								</a>
-								<a class="kakao-link-btn" href="javascript:;"> 
-									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png">
+								<a class="kakao-link-btn" href="javascript:;">
+									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+										alt="${dto.seq}" class="kl_img">
 								</a>
 							</div>
 						</div>
@@ -129,6 +130,8 @@
 		Kakao.init('a224ed8e8d0df10de91c36a743e14394');
 
 		for (var i = 0; i < $(".kakao-link-btn").length; i++) {
+			var btn_seq = $($(".kl_img")[i]).attr("alt");
+			console.log(btn_seq);
 			// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
 			Kakao.Link.createDefaultButton({
 				container : $('.kakao-link-btn')[i],
@@ -138,8 +141,8 @@
 					description : '#카카오톡 #카카오API #카카오링크 #공유',
 					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
 					link : {
-						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childList.child',
-						webUrl : 'http://192.168.60.54:8080/MSG/childList.child'
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				},
 				social : {
