@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,9 +17,8 @@
 <script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/childStyle.css">
 <title>실종 아동 목록</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fixedStyle.css">
 <style>
 * {
 	box-sizing: border-box
@@ -55,96 +55,9 @@
 </style>
 </head>
 <body>
-	<!-- ----- navi 시작 --------------------------------------------------  -->
-	<div id=upnavi>
-		<a href="#" class=mainSmallMenu>로그인</a> <a href="#"
-			class=mainSmallMenu>회원가입</a> <a href="#" class=mainSmallMenu>마이페이지</a>
-	</div>
 
-	<nav class="navbar navbar-expand-lg navbar-light" style="width: 100%">
-		<a class="navbar-brand" href="#"><img
-			src="${pageContext.request.contextPath}/resources/images/policylogo.png"
-			style="width: 130px;"> LOGO</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="#">HOME
-						<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">실종아동검색</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 실종아동등록 </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Action</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="#">Something else here</a>
-					</div></li>
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 자원봉사 </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Action</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="#">Something else here</a> <a
-							class="dropdown-item" href="#">Something else here</a>
-					</div></li>
-				<button class="btn btn-outline-success" type="button">후원하기</button>
-			</ul>
-		</div>
-	</nav>
-	<!-- ----- navi 끝 ---------------------------------------------------  -->
-
-
-	<!-- ----- quick menu 시작 --------------------------------------------  -->
-	<div id="container0">
-		<div class="menu0">
-			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/login-64.png"
-				alt="">
-			<p>로그인</p>
-		</div>
-		<div class="menu0">
-			<a href=""> <img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/active-search-64.png"
-				alt="">
-				<p>실종아동찾기</p>
-			</a>
-		</div>
-		<div class="menu0">
-			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/reviewer-64.png"
-				alt="">
-			<p>실종아동등록</p>
-		</div>
-		<div class="menu0">
-			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/banknotes-64%20(1).png"
-				alt="">
-			<p>후원하기</p>
-		</div>
-		<div class="menu0">
-			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/text-file-4-64.png"
-				alt="">
-			<p>실종아동등록</p>
-		</div>
-		<div class="menu0">
-			<img class="quick_menu_img"
-				src="${pageContext.request.contextPath}/resources/images/chat-4-64%20(1).png"
-				alt="">
-			<p>문의하기</p>
-		</div>
-	</div>
-	<!-- ----- quick menu 끝 ---------------------------------------------  -->
-
+	<jsp:include page="../resources/jsp/navi.jsp"></jsp:include>
+	<jsp:include page="../resources/jsp/quickMenu.jsp"></jsp:include>
 
 	<!-- ----- child list 시작 --------------------------------------------  -->
 	<br>
@@ -204,30 +117,7 @@
 	<hr>
 	<!-- ----- child list 끝 ---------------------------------------------  -->
 
-
-	<!-- ----- footer 시작 ------------------------------------------------  -->
-	<div class=policyContainer>
-		<div id=policyTitle1>
-			<div id=policy1>
-				<img
-					src="${pageContext.request.contextPath}/resources/images/policylogo.png"
-					style="width: 140px;"><br> <br> +82 10 0000 0000<br>
-				info@msg.missingchildren<br> Daeil-building 3F, 120
-				Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
-
-			</div>
-			<div id=policy2>
-				<a href="#" class=poline>About Us</a><br> <a href="#"
-					class=poline>Careers and Internships</a><br> <a href="#"
-					class=poline>Private Policy</a><br> <a href="#" class=poline>Terms
-					of Use</a><br> <a href="#" class=poline>Feedback</a><br>
-			</div>
-		</div>
-
-		<div id=policyTitle2>Copyright © 2019 KH Missing children Go
-			home ㅣ Created by MSG All Right Reserved</div>
-	</div>
-	<!-- ----- footer 끝 -------------------------------------------------  -->
+	<jsp:include page="../resources/jsp/footer.jsp"></jsp:include>
 
 	<script>
 		$("#backBtn").on("click", function() {
