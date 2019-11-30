@@ -222,7 +222,7 @@ input button:hover{
             <tr>
                <th>신체특징 및 특이사항</th>
                <td colspan="5">
-                  <textarea id="feature" cols="90" rows="8" name="feature" placeholder="아이의 왼쪽손등에 화상이있어요"></textarea>
+                  <textarea id="feature" cols="90" rows="8" name="feature" placeholder="아이의 왼쪽손등에 화상이있어요" style="resize:none"></textarea>
                <label id="feack" style="color: red">신체특징 및 특이사항입력은 필수입니다.</label></td>
             </tr>
             

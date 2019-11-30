@@ -5,33 +5,41 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" 
-             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-             crossorigin="anonymous">
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+              crossorigin="anonymous">
         <title>실종아동 목록</title>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <style>
-            *{
-                box-sizing:border-box
+            * {
+                box-sizing: border-box
             }
 
-            .missing_list{
-/*                min-width:900px;*/
-                max-width:1000px;
-            }
-
-            .simple_list{
+            .missing_list {
                 border:1px solid black;
-                min-width:400px;
-/*                max-width:500px;*/
+                max-width: 1000px;
             }
-            .simple_list>img{
-                width:200px;
-                height:200px;
-                float:left;
-                margin-right:20px;
-                margin-top:10px;
-                margin-bottom:10px;
+
+            .simple_list {
+                border: 1px solid black;
+/*                min-width: 370px;*/
+                max-width: 400px;
+                border-radius: 20px;
+            }
+            .img_info {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .simple_info {
+                font-size: 12px;
+            }
+
+            .detail_btn>img{
+                width: 40px;
+            }
+            .kakao-link-btn>img{
+                width: 40px;
             }
         </style>
     </head>
@@ -39,88 +47,147 @@
         <br>
         <div class="container">
             <div class="row">
-                <br>
                 <div class="col-12 text-center">
                     <h4>#실종아동 목록</h4>
                     <hr>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-3 text-center d-none d-sm-block">1</div>
-                <div class="col-sm-3 text-center d-none d-sm-block">2</div>
-                <div class="col-sm-3 text-center d-none d-sm-block">3</div>
-                <div class="col-sm-3 text-center d-none d-sm-block">4</div>
-            </div>
         </div>
-        <hr>
         <div class="container missing_list">
             <div class="row">
-                <div class="col-12 col-sm-5 simple_list mb-4 offset-1">
-                    <img src="img/조묘진.jpg">
-                    <br>
-                    <h4>Name (Gender)</h4>
-                    <h>Birth</h>
-                    <br>
-                    <h>Missing Date</h>
-                    <br>
-                    <h>Missing Area</h>
-                    <br>
-                    <br>
-                    <div>
-                        <button>상세정보</button>
-                        <button>공유하기</button>
+               
+                <div class="col-12 col-md-5 simple_list mb-4 offset-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 d-none d-md-block">
+                            <img class="img_info" src="img/%EC%9C%A0%EB%AA%85%EC%88%99.jpg">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <br>
+                            <h5>이름 (성별)</h5>
+                            <div class="simple_info">
+                                생년월일 : ________
+                                <br>
+                                실종일자 : ________
+                                <br>
+                                실종지역 : area
+                            </div>
+                            <br>
+                            <div>
+                                <a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
+                                   onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+                                    <img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
+                                </a>
+                                <a class="kakao-link-btn" href="javascript:;">
+                                    <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                                         alt="${dto.seq}" class="kl_img">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-5 simple_list mb-4 offset-1">
-                    <img src="img/유명숙.jpg">
-                    <br>
-                    <h4>Name (Gender)</h4>
-                    <h>Birth</h>
-                    <br>
-                    <h>Missing Date</h>
-                    <br>
-                    <h>Missing Area</h>
-                    <br>
-                    <br>
-                    <div>
-                        <button>상세정보</button>
-                        <button>공유하기</button>
+                
+                <div class="col-12 col-md-5 simple_list mb-4 offset-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 d-none d-md-block">
+                            <img class="img_info" src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <br>
+                            <h5>이름 (성별)</h5>
+                            <div class="simple_info">
+                                생년월일 : ________
+                                <br>
+                                실종일자 : ________
+                                <br>
+                                실종지역 : area
+                            </div>
+                            <br>
+                            <div>
+                                <a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
+                                   onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+                                    <img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
+                                </a>
+                                <a class="kakao-link-btn" href="javascript:;">
+                                    <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                                         alt="${dto.seq}" class="kl_img">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 simple_list mb-4">
-                    <img src="img/전경미.jpg">
-                    <br>
-                    <h4>Name (Gender)</h4>
-                    <h>Birth</h>
-                    <br>
-                    <h>Missing Date</h>
-                    <br>
-                    <h>Missing Area</h>
-                    <br>
-                    <br>
-                    <div>
-                        <button>상세정보</button>
-                        <button>공유하기</button>
+                
+                <div class="col-12 col-md-5 simple_list mb-4 offset-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 d-none d-md-block">
+                            <img class="img_info" src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <br>
+                            <h5>이름 (성별)</h5>
+                            <div class="simple_info">
+                                생년월일 : ________
+                                <br>
+                                실종일자 : ________
+                                <br>
+                                실종지역 : area
+                            </div>
+                            <br>
+                            <div>
+                                <a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
+                                   onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+                                    <img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
+                                </a>
+                                <a class="kakao-link-btn" href="javascript:;">
+                                    <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                                         alt="${dto.seq}" class="kl_img">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 simple_list mb-4">
-                    <img src="img/최정아.jpg">
-                    <br>
-                    <h4>Name (Gender)</h4>
-                    <h>Birth</h>
-                    <br>
-                    <h>Missing Date</h>
-                    <br>
-                    <h>Missing Area</h>
-                    <br>
-                    <br>
-                    <div>
-                        <button>상세정보</button>
-                        <button>공유하기</button>
+                
+                <div class="col-12 col-md-5 simple_list mb-4 offset-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 d-none d-md-block">
+                            <img class="img_info" src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <br>
+                            <h5>이름 (성별)</h5>
+                            <div class="simple_info">
+                                생년월일 : ________
+                                <br>
+                                실종일자 : ________
+                                <br>
+                                실종지역 : area
+                            </div>
+                            <br>
+                            <div>
+                                <a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
+                                   onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+                                    <img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
+                                </a>
+                                <a class="kakao-link-btn" href="javascript:;">
+                                    <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                                         alt="${dto.seq}" class="kl_img">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+
+        <br>
+        <div class="container pageNavi">
+            <div class="row">
+                <div class="col-12 text-center">${pageNavi}</div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <hr>
 
         <script>
             $("#backBtn").on("click", function(){

@@ -228,6 +228,21 @@ public class ChildDTO {
 	public void setAgreeYN(String agreeYN) {
 		this.agreeYN = agreeYN;
 	}
+	
+	public String get_real_target() {
+		if(this.target.equals("010")) {
+			return "아동";
+		}
+		else if(this.target.equals("060")) {
+			return "지적 장애인";
+		}
+		else if(this.target.equals("070")){
+			return "치매 노인";
+		}
+		else {
+			return "기타";
+		}
+	}
 
 	public String get_real_gender() {
 		if(this.gender.equalsIgnoreCase("M")) {
@@ -330,9 +345,9 @@ public class ChildDTO {
 		String real_top = null;
 		
 		switch(this.top) {
-			case 10: real_top = "긴팔";
-			case 20: real_top = "반팔";
-			default: real_top = "미입력";
+			case 10: real_top = "긴팔"; break;
+			case 20: real_top = "반팔"; break;
+			default: real_top = "미입력"; break;
 		}
 		
 		return real_top;
@@ -342,17 +357,17 @@ public class ChildDTO {
 		String real_top_kind = null;
 		
 		switch(this.top_kind) {
-			case 110: real_top_kind = "속옷차림";
-			case 120: real_top_kind = "운동복";
-			case 130: real_top_kind = "캐주얼";
-			case 140: real_top_kind = "티셔츠";
-			case 150: real_top_kind = "와이셔츠";
-			case 160: real_top_kind = "원피스";
-			case 170: real_top_kind = "스웨터";
-			case 180: real_top_kind = "코트";
-			case 190: real_top_kind = "정장";
-			case 990: real_top_kind = "기타";
-			default: real_top_kind = "미입력";
+			case 110: real_top_kind = "속옷차림"; break;
+			case 120: real_top_kind = "운동복"; break;
+			case 130: real_top_kind = "캐주얼"; break;
+			case 140: real_top_kind = "티셔츠"; break;
+			case 150: real_top_kind = "와이셔츠"; break;
+			case 160: real_top_kind = "원피스"; break;
+			case 170: real_top_kind = "스웨터"; break;
+			case 180: real_top_kind = "코트"; break;
+			case 190: real_top_kind = "정장"; break;
+			case 990: real_top_kind = "기타"; break;
+			default: real_top_kind = "미입력"; break;
 		}
 		
 		return real_top_kind;
@@ -362,9 +377,9 @@ public class ChildDTO {
 		String real_bottoms = null;
 		
 		switch(this.bottoms) {
-			case 10: real_bottoms = "긴 바지";
-			case 20: real_bottoms = "짧은 바지";
-			default: real_bottoms = "미입력";
+			case 10: real_bottoms = "긴 바지"; break;
+			case 20: real_bottoms = "짧은 바지"; break;
+			default: real_bottoms = "미입력"; break;
 		}
 		
 		return real_bottoms;
@@ -374,16 +389,16 @@ public class ChildDTO {
 		String real_bottoms_kind = null;
 		
 		switch(this.bottoms_kind) {
-			case 110: real_bottoms_kind = "속옷차림";
-			case 120: real_bottoms_kind = "운동복";
-			case 130: real_bottoms_kind = "캐주얼";
-			case 140: real_bottoms_kind = "청바지";
-			case 150: real_bottoms_kind = "통바지";
-			case 160: real_bottoms_kind = "면바지";
-			case 170: real_bottoms_kind = "치마";
-			case 180: real_bottoms_kind = "정장바지";
-			case 990: real_bottoms_kind = "기타";
-			default: real_bottoms_kind = "미입력";
+			case 110: real_bottoms_kind = "속옷차림"; break;
+			case 120: real_bottoms_kind = "운동복"; break;
+			case 130: real_bottoms_kind = "캐주얼"; break;
+			case 140: real_bottoms_kind = "청바지"; break;
+			case 150: real_bottoms_kind = "통바지"; break;
+			case 160: real_bottoms_kind = "면바지"; break;
+			case 170: real_bottoms_kind = "치마"; break;
+			case 180: real_bottoms_kind = "정장바지"; break;
+			case 990: real_bottoms_kind = "기타"; break;
+			default: real_bottoms_kind = "미입력"; break;
 		}
 		
 		return real_bottoms_kind;
@@ -393,34 +408,34 @@ public class ChildDTO {
 		String real_shoes = null;
 		
 		switch(this.shoes) {
-			case 110: real_shoes = "맨발";
-			case 120: real_shoes = "슬리퍼";
-			case 130: real_shoes = "샌들";
-			case 140: real_shoes = "단화";
-			case 150: real_shoes = "운동화";
-			case 160: real_shoes = "등산화";
-			case 170: real_shoes = "장화";
-			case 180: real_shoes = "부츠";
-			case 190: real_shoes = "구두";
-			case 990: real_shoes = "기타";
-			default: real_shoes = "미입력";
+			case 110: real_shoes = "맨발"; break;
+			case 120: real_shoes = "슬리퍼"; break;
+			case 130: real_shoes = "샌들"; break;
+			case 140: real_shoes = "단화"; break;
+			case 150: real_shoes = "운동화"; break;
+			case 160: real_shoes = "등산화"; break;
+			case 170: real_shoes = "장화"; break;
+			case 180: real_shoes = "부츠"; break;
+			case 190: real_shoes = "구두"; break;
+			case 990: real_shoes = "기타"; break;
+			default: real_shoes = "미입력"; break;
 		}
 		
 		return real_shoes;
 	}
 	
-	public String get_get_real_relation() {
+	public String get_real_relation() {
 		String real_relation = null;
 		
 		switch(this.re_relation) {
-			case 10: real_relation = "부모";
-			case 20: real_relation =  "자녀";
-			case 30: real_relation = "배우자";
-			case 40: real_relation = "친척";
-			case 50: real_relation = "형제";
-			case 70: real_relation = "동거자";
-			case 90: real_relation = "기타";
-			default: real_relation = "미입력";
+			case 10: real_relation = "부모"; break;
+			case 20: real_relation =  "자녀"; break;
+			case 30: real_relation = "배우자"; break;
+			case 40: real_relation = "친척"; break;
+			case 50: real_relation = "형제"; break;
+			case 70: real_relation = "동거자"; break;
+			case 90: real_relation = "기타"; break;
+			default: real_relation = "미입력"; break;
 		}
 		
 		return real_relation;

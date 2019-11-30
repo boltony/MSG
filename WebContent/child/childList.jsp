@@ -25,13 +25,11 @@
 }
 
 .missing_list {
-	max-width: 1000px;
+	max-width: 950px;
 }
 
 .simple_list {
 	border: 1px solid black;
-	min-width: 400px;
-	max-width: 400px;
 	border-radius: 20px;
 }
 .simple_list>img {
@@ -46,10 +44,16 @@
 	font-size: 12px;
 }
 
-.detail_btn>img{
+.detail_btn:hover {
+	text-decoration:none;
+}
+.detail_btn>img {
 	width: 40px;
 }
-.kakao-link-btn>img{
+.kakao-link-btn:hover {
+	text-decoration:none;
+}
+.kakao-link-btn>img {
 	width: 40px;
 }
 </style>
@@ -64,7 +68,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h4>#실종아동 목록</h4>
+				<h3>실종아동 목록</h3>
 				<hr>
 			</div>
 		</div>
@@ -72,18 +76,17 @@
 	<div class="container missing_list">
 		<c:choose>
 			<c:when test="${list.size()==0}">
-				<div class="row r1">
+				<div class="row">
 					<div class="col-12 text-center">작성된 글이 없습니다.</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="row">
 					<c:forEach items="${list}" var="dto" varStatus="status">
-						<div class="col-12 col-sm-5 simple_list mb-4 offset-1">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+						<div class="col-12 col-lg-5 simple_list mb-5 ml-0 ml-lg-5">
+							<img src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
 							<br>
-							<h4>${dto.name}(${dto.get_real_gender()})</h4>
+							<h5>${dto.name}(${dto.get_real_gender()})</h5>
 							<div class="simple_info">
 								생년월일 : ${dto.get_formed_birth()}
 								<br>
@@ -94,7 +97,7 @@
 							<br> <br>
 							<div>
 								<a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
-								onclick="window.open(this.href, '', 'width=1000px, height=600px, left=200px, top=200px'); return false;">
+								onclick="window.open(this.href, '', 'width=1000px, height=700px, left=200px, top=100px'); return false;">
 									<img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
 								</a>
 								<a class="kakao-link-btn" href="javascript:;">

@@ -34,9 +34,12 @@
     color: #35add1;
 }
 .btn-outline-success{
-    background-color: #47acac;
+    background-color: #66b5d0;
     border: none;
     color: #fafafa;
+}
+.btn-outline-success:hover{
+	background-color: #ffcc57;
 }
 
 

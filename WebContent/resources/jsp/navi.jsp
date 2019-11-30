@@ -9,7 +9,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%">
 	<a class="navbar-brand" href="#">
-		<img src="${pageContext.request.contextPath}/resources/images/policylogo.png" style="width: 130px;">LOGO
+		<img src="${pageContext.request.contextPath}/resources/images/msglogo.png" style="width: 200px;">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
