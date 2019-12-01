@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,6 +43,7 @@ public class ChildController extends HttpServlet {
 		System.out.println();
 
 		ChildDAO childDAO = ChildDAO.getInstance();
+		ChildFileDAO fileDAO = ChildFileDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 
 		try {
@@ -55,7 +58,7 @@ public class ChildController extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8", new DefaultFileRenamePolicy());
-				
+
 				int seq = 0;
 				String tar[] = multi.getParameterValues("target"); //대상
 				String target = "";
@@ -73,7 +76,7 @@ public class ChildController extends HttpServlet {
 				String birth_date = multi.getParameter("birth_date"); //생년월일
 
 				String date_str = multi.getParameter("missing_date") //실종일자
-							+ multi.getParameter("missing_time");
+						+ multi.getParameter("missing_time");
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 				Date date = sdf.parse(date_str);
 				Timestamp missing_date = new Timestamp(date.getTime());
@@ -87,28 +90,9 @@ public class ChildController extends HttpServlet {
 
 				String missing_area_detail = multi.getParameter("missing_area_detail"); //상세주소
 
-				if(multi.getFile("file1") != null) {
-					String fileName = multi.getFilesystemName("file1");  // upload 된 파일 이름
-					String oriFileName = multi.getOriginalFileName("file1");  // upload 되는 파일의 원래 이름
-					System.out.println(fileName);
-					System.out.println(oriFileName);
-				}
-				if(multi.getFile("file2") != null) {
-					String fileName = multi.getFilesystemName("file2");  // upload 된 파일 이름
-					String oriFileName = multi.getOriginalFileName("file2");  // upload 되는 파일의 원래 이름
-					System.out.println(fileName);
-					System.out.println(oriFileName);
-				}
-				if(multi.getFile("file3") != null) {
-					String fileName = multi.getFilesystemName("file3");  // upload 된 파일 이름
-					String oriFileName = multi.getOriginalFileName("file3");  // upload 되는 파일의 원래 이름
-					System.out.println(fileName);
-					System.out.println(oriFileName);
-				}
-				
 				int height = Integer.parseInt(multi.getParameter("height")); //키
 				int weight = Integer.parseInt(multi.getParameter("weight")); //체중
-				
+
 				String hai[] = multi.getParameterValues("hair"); //머리스타일
 				String ha = "";
 				for(int i=0;i<hai.length;i++) {
@@ -160,9 +144,9 @@ public class ChildController extends HttpServlet {
 				}
 				int shoes = Integer.parseInt(shoe);
 				int shoes_size = Integer.parseInt(multi.getParameter("shoes_size"));
-				
+
 				String reporter = multi.getParameter("reporter");  //제보자이름
-				
+
 				////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////
 				String reporter_id = "dd"; //세션값으로 로그인아이디 들어가는자린데 일단 임의값넣음
@@ -170,7 +154,7 @@ public class ChildController extends HttpServlet {
 				////////////////////////////////////////////////////////////////
 
 				String re_birth_date = multi.getParameter("re_birth_date");//제보자 생년월일
-				
+
 				String relation[] = multi.getParameterValues("re_relation"); //실종자와의 관계
 				String re_relatio = "";
 				for(int i=0; i<relation.length; i++) {
@@ -182,10 +166,29 @@ public class ChildController extends HttpServlet {
 				String re_contact2 = multi.getParameter("re_contact2"); //not null아님, 집전화
 				String agreeYN = "N";
 
+
 				int result = childDAO.insert(new ChildDTO(0, target, gender, name, birth_date, missing_date,   missing_area, missing_area_detail,
 						height, weight, hair, blood_type, feature, top, top_kind, bottoms, bottoms_kind, shoes, shoes_size, reporter, reporter_id,
 						re_birth_date, re_relation, re_contact1, re_contact2, agreeYN));
-				
+
+				int root = childDAO.getSeqByPost(reporter_id);
+
+				Enumeration<String> e = multi.getFileNames();
+				while(e.hasMoreElements()) {
+					String file_temp = e.nextElement();
+
+					if(multi.getFile(file_temp) != null) {
+						System.out.println("파일 : " + file_temp);
+						String fileName = multi.getFilesystemName(file_temp);  // upload 된 파일 이름
+						String oriFileName = multi.getOriginalFileName(file_temp);  // upload 되는 파일의 원래 이름
+						System.out.println(fileName);
+						System.out.println(oriFileName);
+
+						ChildFileDTO dto = new ChildFileDTO(0, root, fileName, oriFileName);
+						int fileResult = fileDAO.insert(dto);
+					}
+				}
+
 				if(result>0) {
 					System.out.println("등록성공!");
 					response.sendRedirect("index.jsp");
@@ -210,6 +213,17 @@ public class ChildController extends HttpServlet {
 				List<ChildDTO> list = childDAO.selectByPage(begin, end);
 				String pageNavi = childDAO.getPageNavi(cpage);
 
+				for(int i = 0; i < list.size(); i++) {
+					int seq = list.get(i).getSeq();
+					List<ChildFileDTO> file_list = fileDAO.getFilesByPost(seq);
+					
+					String val = "${pageContext.request.contextPath}/resources/images/icon_search.png";
+					if(file_list.size() > 0) {
+						val = "files/" + file_list.get(0).getFile_name();
+					}
+					request.setAttribute("rep_file" + seq, val);
+				}
+
 				request.setAttribute("list", list);
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("child/childList.jsp").forward(request, response);
@@ -218,14 +232,22 @@ public class ChildController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				System.out.println("글 번호  : " + seq);
 				System.out.println();
-				
+
 				ChildDTO selectResult = childDAO.selectBySeq(seq);
 				String area_detail = selectResult.getMissing_area_detail().replaceAll("\n", "<br>");
 				selectResult.setMissing_area_detail(area_detail);
 				String feature = selectResult.getFeature().replaceAll("\n", "<br>");
 				selectResult.setFeature(feature);
-				
+
+				List<ChildFileDTO> file_list = fileDAO.getFilesByPost(seq);
+				List<String> file_names_list = new ArrayList<>(); 
+				for(int i = 0; i < file_list.size(); i++) {
+					String file_url = "files/" + file_list.get(i).getFile_name();
+					file_names_list.add(file_url);
+				}
+
 				request.setAttribute("dto", selectResult);
+				request.setAttribute("file_names_list", file_names_list);
 				request.getRequestDispatcher("child/childDetail.jsp").forward(request, response);
 			}
 

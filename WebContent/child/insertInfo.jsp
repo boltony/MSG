@@ -94,7 +94,7 @@
 		</div>
 
 
-		<form id="frm" method="post" action="insert.child" enctype="multipart/form-data">
+		<form id="frm" method="post" action="../insert.child" enctype="multipart/form-data">
 
 			<div id="maininsert" class="col-9"
 				style="width: 70%; height: auto; float: left;">

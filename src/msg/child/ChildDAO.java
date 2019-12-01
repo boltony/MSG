@@ -22,18 +22,18 @@ public class ChildDAO {
 	}
 
 	private static ChildDAO instance;
-	
+
 	public synchronized static ChildDAO getInstance() {  // synchronized를 작성하면 한 번에 하나의 thread만 접속 가능함
 		if(instance == null) {  // 첫 번째 사람만 instance를 만들고, 두 번째 사람부터는 만들어진 instance를 사용함
 			instance = new ChildDAO();
 		}
 		return instance;
 	}
-	
+
 	public Connection getConnection() throws Exception {
 		return bds.getConnection();
 	}
-	
+
 	public String getPageNavi(int currentPage) throws Exception {  // 현재 내가 위치한 페이지
 
 		// 게시판 내의 글의 총 개수 (DB에 있는 글의 개수)
@@ -109,7 +109,7 @@ public class ChildDAO {
 
 		return sb.toString();
 	}
-	
+
 	private int getPostCount() throws Exception {
 		String sql = "select count(*) from child";
 		try(
@@ -124,49 +124,67 @@ public class ChildDAO {
 			return result;
 		}
 	}
-	
+
 	public int insert(ChildDTO dto) throws Exception{
-	      String sql = "insert into child values(child_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into child values(child_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-	      try(
-	            Connection con = this.getConnection();
-	            PreparedStatement pstat = con.prepareStatement(sql);
-	            ){
-	         
-	         
-	         pstat.setString(1, dto.getTarget());
-	         pstat.setString(2, dto.getGender());
-	         pstat.setString(3, dto.getName());
-	         pstat.setString(4, dto.getBirth_date());
-	         pstat.setTimestamp(5, dto.getMissing_date());
-	         pstat.setInt(6, dto.getMissing_area());
-	         pstat.setString(7, dto.getMissing_area_detail());
-	         pstat.setInt(8, dto.getHeight());
-	         pstat.setInt(9, dto.getWeight());
-	         pstat.setInt(10, dto.getHair());
-	         pstat.setInt(11, dto.getBlood_type());
-	         pstat.setString(12, dto.getFeature());
-	         pstat.setInt(13, dto.getTop());
-	         pstat.setInt(14, dto.getTop_kind());
-	         pstat.setInt(15, dto.getBottoms());
-	         pstat.setInt(16, dto.getBottoms_kind());
-	         pstat.setInt(17, dto.getShoes());
-	         pstat.setInt(18, dto.getShoes_size());
-	         pstat.setString(19, dto.getReporter());
-	         pstat.setString(20, dto.getReporter_id());
-	         pstat.setString(21, dto.getRe_birth_date());
-	         pstat.setInt(22, dto.getRe_relation());
-	         pstat.setString(23, dto.getRe_contact1());
-	         pstat.setString(24, dto.getRe_contact2());
-	         pstat.setString(25, dto.getAgreeYN());      
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
 
-	         int result = pstat.executeUpdate();
-	         con.commit();
 
-	         return result;
-	      }
-	   }
+			pstat.setString(1, dto.getTarget());
+			pstat.setString(2, dto.getGender());
+			pstat.setString(3, dto.getName());
+			pstat.setString(4, dto.getBirth_date());
+			pstat.setTimestamp(5, dto.getMissing_date());
+			pstat.setInt(6, dto.getMissing_area());
+			pstat.setString(7, dto.getMissing_area_detail());
+			pstat.setInt(8, dto.getHeight());
+			pstat.setInt(9, dto.getWeight());
+			pstat.setInt(10, dto.getHair());
+			pstat.setInt(11, dto.getBlood_type());
+			pstat.setString(12, dto.getFeature());
+			pstat.setInt(13, dto.getTop());
+			pstat.setInt(14, dto.getTop_kind());
+			pstat.setInt(15, dto.getBottoms());
+			pstat.setInt(16, dto.getBottoms_kind());
+			pstat.setInt(17, dto.getShoes());
+			pstat.setInt(18, dto.getShoes_size());
+			pstat.setString(19, dto.getReporter());
+			pstat.setString(20, dto.getReporter_id());
+			pstat.setString(21, dto.getRe_birth_date());
+			pstat.setInt(22, dto.getRe_relation());
+			pstat.setString(23, dto.getRe_contact1());
+			pstat.setString(24, dto.getRe_contact2());
+			pstat.setString(25, dto.getAgreeYN());      
+
+			int result = pstat.executeUpdate();
+			con.commit();
+
+			return result;
+		}
+	}
 	
+	public int getSeqByPost(String reporter) throws Exception {
+		String sql = "select max(seq) from child where reporter_id = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, reporter);
+			try(					
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				int seq = rs.getInt(1);
+
+				return seq;				
+			}
+		}
+	}
+
 	public List<ChildDTO> selectByPage(int begin, int end) throws Exception {
 		String sql = "select * from"
 				+ "(select child.*, row_number() over (order by seq desc) as rown from child)"
@@ -220,7 +238,7 @@ public class ChildDAO {
 			}
 		}
 	}
-	
+
 	public List<ChildDTO> selectAll() throws Exception {
 		String sql = "select * from child order by seq desc";
 		try(
@@ -231,7 +249,7 @@ public class ChildDAO {
 			List<ChildDTO> list = new ArrayList<>();
 			while(rs.next()) {
 				ChildDTO dto = new ChildDTO();
-				
+
 				dto.setSeq(rs.getInt("seq"));
 				dto.setTarget(rs.getString("target"));
 				dto.setGender(rs.getString("gender"));
@@ -258,14 +276,14 @@ public class ChildDAO {
 				dto.setRe_contact1(rs.getString("re_contact1"));
 				dto.setRe_contact2(rs.getString("re_contact2"));
 				dto.setAgreeYN(rs.getString("agreeYN"));
-				
+
 				list.add(dto);
 			}
 			con.commit();
 			return list;
 		}
 	}
-	
+
 	public ChildDTO selectBySeq(int seq) throws Exception {
 		String sql = "select * from child where seq = ?";
 		try(
@@ -273,7 +291,7 @@ public class ChildDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setInt(1, seq);
-			
+
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){
@@ -305,7 +323,7 @@ public class ChildDAO {
 				dto.setRe_contact1(rs.getString("re_contact1"));
 				dto.setRe_contact2(rs.getString("re_contact2"));
 				dto.setAgreeYN(rs.getString("agreeYN"));
-				
+
 				con.commit();
 				return dto;
 			}

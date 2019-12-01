@@ -84,7 +84,8 @@
 				<div class="row">
 					<c:forEach items="${list}" var="dto" varStatus="status">
 						<div class="col-12 col-lg-5 simple_list mb-5 ml-0 ml-lg-5">
-							<img src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+							<c:set var="rep_file" value="rep_file${dto.seq}"></c:set>
+							<img class="missing_img" src="${requestScope[rep_file]}">							
 							<br>
 							<h5>${dto.name}(${dto.get_real_gender()})</h5>
 							<div class="simple_info">
@@ -146,8 +147,8 @@
 					description : '#카카오톡 #카카오API #카카오링크 #공유',
 					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
 					link : {
-						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				},
 				social : {
@@ -158,14 +159,14 @@
 				buttons : [ {
 					title : '웹으로 보기',
 					link : {
-						mobileWebUrl : 'https://www.naver.com/',
-						webUrl : 'https://www.naver.com/'
+						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				}, {
 					title : '앱으로 보기',
 					link : {
-						mobileWebUrl : 'https://www.google.com/',
-						webUrl : 'https://www.google.com/'
+						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				} ]
 			});

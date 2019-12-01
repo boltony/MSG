@@ -87,7 +87,7 @@
         <div class="container cont1">
             <div class="row">
                 <div class="col-12 col-lg-4 info_box img_info">
-                    <img src="${pageContext.request.contextPath}/resources/images/dubuzzing.jpg">
+                    <img src="${file_names_list[0]}">
                 </div>
                 <div class="col-12 col-lg-4 info_box text_info1">
                     <br><br>
