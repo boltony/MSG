@@ -1,5 +1,6 @@
 package msg.child;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -12,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import msg.child.configuration.ChildConfiguration;
 
@@ -41,93 +45,123 @@ public class ChildController extends HttpServlet {
 
 		try {
 			if(cmd.contentEquals("/insert.child")) {
+				String uploadPath = request.getServletContext().getRealPath("/files");
+				System.out.println(uploadPath);
+
+				File uploadFilePath = new File(uploadPath);
+				if(!uploadFilePath.exists()) {
+					uploadFilePath.mkdir();
+				}
+
+				int maxSize = 1024 * 1024 * 10;
+				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8", new DefaultFileRenamePolicy());
+				
 				int seq = 0;
-				String tar[] = request.getParameterValues("target"); //대상
+				String tar[] = multi.getParameterValues("target"); //대상
 				String target = "";
 				for(int i=0;i<tar.length;i++) {
 					target += tar[i];
 				}
 
-				String gen[] = request.getParameterValues("gender"); //성별
+				String gen[] = multi.getParameterValues("gender"); //성별
 				String gender = "";
 				for(int i=0;i<gen.length;i++) {
 					gender += gen[i];
 				}
 
-				String name = request.getParameter("name"); //이름
-				String birth_date = request.getParameter("birth_date"); //생년월일
+				String name = multi.getParameter("name"); //이름
+				String birth_date = multi.getParameter("birth_date"); //생년월일
 
-				String date_str = request.getParameter("missing_date") //실종일자
-							+ request.getParameter("missing_time");
+				String date_str = multi.getParameter("missing_date") //실종일자
+							+ multi.getParameter("missing_time");
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 				Date date = sdf.parse(date_str);
 				Timestamp missing_date = new Timestamp(date.getTime());
 
-				String area[] = request.getParameterValues("missing_area");
+				String area[] = multi.getParameterValues("missing_area");
 				String are = "";
 				for(int i=0; i<area.length; i++) {
 					are += area[i];
 				}
 				int missing_area = Integer.parseInt(are);
 
-				String missing_area_detail = request.getParameter("missing_area_detail"); //상세주소
+				String missing_area_detail = multi.getParameter("missing_area_detail"); //상세주소
 
-				int height = Integer.parseInt(request.getParameter("height")); //키
-				int weight = Integer.parseInt(request.getParameter("weight")); //체중
+				if(multi.getFile("file1") != null) {
+					String fileName = multi.getFilesystemName("file1");  // upload 된 파일 이름
+					String oriFileName = multi.getOriginalFileName("file1");  // upload 되는 파일의 원래 이름
+					System.out.println(fileName);
+					System.out.println(oriFileName);
+				}
+				if(multi.getFile("file2") != null) {
+					String fileName = multi.getFilesystemName("file2");  // upload 된 파일 이름
+					String oriFileName = multi.getOriginalFileName("file2");  // upload 되는 파일의 원래 이름
+					System.out.println(fileName);
+					System.out.println(oriFileName);
+				}
+				if(multi.getFile("file3") != null) {
+					String fileName = multi.getFilesystemName("file3");  // upload 된 파일 이름
+					String oriFileName = multi.getOriginalFileName("file3");  // upload 되는 파일의 원래 이름
+					System.out.println(fileName);
+					System.out.println(oriFileName);
+				}
 				
-				String hai[] = request.getParameterValues("hair"); //머리스타일
+				int height = Integer.parseInt(multi.getParameter("height")); //키
+				int weight = Integer.parseInt(multi.getParameter("weight")); //체중
+				
+				String hai[] = multi.getParameterValues("hair"); //머리스타일
 				String ha = "";
 				for(int i=0;i<hai.length;i++) {
 					ha += hai[i];
 				}
 				int hair = Integer.parseInt(ha);
 
-				String blood[] = request.getParameterValues("blood_type"); //혈액형
+				String blood[] = multi.getParameterValues("blood_type"); //혈액형
 				String blood_typ = "";
 				for(int i=0;i<blood.length;i++) {
 					blood_typ += blood[i];
 				}
 				int blood_type = Integer.parseInt(blood_typ);
 
-				String feature = request.getParameter("feature"); //신체특징
+				String feature = multi.getParameter("feature"); //신체특징
 
-				String up[] = request.getParameterValues("top"); //긴팔,반팔
+				String up[] = multi.getParameterValues("top"); //긴팔,반팔
 				String to = "";
 				for(int i=0; i<up.length;i++) {
 					to += up[i];
 				}
 				int top = Integer.parseInt(to);
 
-				String topkind[] = request.getParameterValues("top_kind"); //상의종류
+				String topkind[] = multi.getParameterValues("top_kind"); //상의종류
 				String top_kin = "";
 				for(int i=0; i<topkind.length; i++) {
 					top_kin += topkind[i];
 				}
 				int top_kind = Integer.parseInt(top_kin);
 
-				String down[] = request.getParameterValues("bottoms"); //긴바지, 반바지
+				String down[] = multi.getParameterValues("bottoms"); //긴바지, 반바지
 				String bottom = "";
 				for(int i=0; i<down.length; i++) {
 					bottom += down[i];
 				}
 				int bottoms = Integer.parseInt(bottom);
 
-				String bottomskind[] = request.getParameterValues("bottoms_kind"); //하의종류
+				String bottomskind[] = multi.getParameterValues("bottoms_kind"); //하의종류
 				String bottoms_kin = "";
 				for(int i=0; i<bottomskind.length; i++) {
 					bottoms_kin += bottomskind[i];
 				}
 				int bottoms_kind = Integer.parseInt(bottoms_kin);
 
-				String foot[] = request.getParameterValues("shoes"); //신발종류
+				String foot[] = multi.getParameterValues("shoes"); //신발종류
 				String shoe = "";
 				for(int i=0; i<foot.length; i++) {
 					shoe += foot[i];
 				}
 				int shoes = Integer.parseInt(shoe);
-				int shoes_size = Integer.parseInt(request.getParameter("shoes_size"));
+				int shoes_size = Integer.parseInt(multi.getParameter("shoes_size"));
 				
-				String reporter = request.getParameter("reporter");  //제보자이름
+				String reporter = multi.getParameter("reporter");  //제보자이름
 				
 				////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////
@@ -135,17 +169,17 @@ public class ChildController extends HttpServlet {
 				////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////
 
-				String re_birth_date = request.getParameter("re_birth_date");//제보자 생년월일
+				String re_birth_date = multi.getParameter("re_birth_date");//제보자 생년월일
 				
-				String relation[] = request.getParameterValues("re_relation"); //실종자와의 관계
+				String relation[] = multi.getParameterValues("re_relation"); //실종자와의 관계
 				String re_relatio = "";
 				for(int i=0; i<relation.length; i++) {
 					re_relatio += relation[i];
 				}
 				int re_relation = Integer.parseInt(re_relatio);
 
-				String re_contact1 = request.getParameter("re_contact1"); //보호자 폰번호
-				String re_contact2 = request.getParameter("re_contact2"); //not null아님, 집전화
+				String re_contact1 = multi.getParameter("re_contact1"); //보호자 폰번호
+				String re_contact2 = multi.getParameter("re_contact2"); //not null아님, 집전화
 				String agreeYN = "N";
 
 				int result = childDAO.insert(new ChildDTO(0, target, gender, name, birth_date, missing_date,   missing_area, missing_area_detail,
