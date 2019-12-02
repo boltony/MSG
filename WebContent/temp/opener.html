@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <input type="button" id="tonew" value="새 창">
+    <input type="button" id="print" value="값 출력">
+    <script>
+        var a = 10;
+        
+        $("#tonew").on("click", function(){
+            window.open("open.html", "", "width=400px, height=200px, left=200px, top=200px");
+        });
+        
+        $("#print").on("click", function(){
+            console.log("a 값 : " + a);
+        });
+    </script>
+</body>
+</html>

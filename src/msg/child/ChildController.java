@@ -188,6 +188,7 @@ public class ChildController extends HttpServlet {
 						int fileResult = fileDAO.insert(dto);
 					}
 				}
+				System.out.println();
 
 				if(result>0) {
 					System.out.println("등록성공!");
@@ -201,6 +202,44 @@ public class ChildController extends HttpServlet {
 			}
 			else if(cmd.contentEquals("/childList.child")) {
 
+				String s_name = "%%";
+				if(request.getParameter("s_name") != null) {
+					s_name = "%" + request.getParameter("s_name").replaceAll(" ", "") + "%";					
+				}
+				
+				String s_gender = "%%";
+				if(request.getParameter("gender") != null) {
+					s_gender = request.getParameter("gender");
+					if(s_gender.equals("A")) {
+						s_gender = "%%";
+					}
+				}
+				
+				String s_target = "%%"; 
+				if(request.getParameter("target") != null) {
+					s_target = request.getParameter("target");
+					if(s_target.equals("A")) {
+						s_target = "%%";
+					}
+				}
+				
+				String s_area = "%%";
+				if(request.getParameter("s_area") != null) {
+					s_area = "%" + request.getParameter("s_area") + "%";
+				}
+				
+				String s_feature = "%%";
+				if(request.getParameter("s_feature") != null) {
+					s_feature = "%" + request.getParameter("s_feature") + "%";
+				}
+				
+				System.out.println("이름 검색 : " + s_name);
+				System.out.println("성별 검색 : " + s_gender);
+				System.out.println("대상 검색 : " + s_target);
+				System.out.println("지역 검색 : " + s_area);
+				System.out.println("특징 검색 : " + s_feature);
+				System.out.println();
+				
 				int cpage = 1;
 				String tmpPage = request.getParameter("cpage");
 				if(tmpPage != null) {
@@ -210,8 +249,8 @@ public class ChildController extends HttpServlet {
 				int begin = cpage * ChildConfiguration.recordCountPerPage -(ChildConfiguration.recordCountPerPage - 1);
 				int end = cpage * ChildConfiguration.recordCountPerPage;
 
-				List<ChildDTO> list = childDAO.selectByPage(begin, end);
-				String pageNavi = childDAO.getPageNavi(cpage);
+				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_feature, begin, end);
+				String pageNavi = childDAO.getPageNavi(cpage, list.size());
 
 				for(int i = 0; i < list.size(); i++) {
 					int seq = list.get(i).getSeq();

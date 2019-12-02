@@ -34,10 +34,11 @@ public class ChildDAO {
 		return bds.getConnection();
 	}
 
-	public String getPageNavi(int currentPage) throws Exception {  // 현재 내가 위치한 페이지
+	public String getPageNavi(int currentPage, int count) throws Exception {  // 현재 내가 위치한 페이지
 
 		// 게시판 내의 글의 총 개수 (DB에 있는 글의 개수)
-		int recordTotalCount = this.getPostCount();
+//		int recordTotalCount = this.getPostCount();
+		int recordTotalCount = count;
 		System.out.println("DB에 있는 글의 개수 : " + recordTotalCount);
 
 		// 페이지당 글의 개수 설정 (static 변수로 수정)
@@ -185,17 +186,25 @@ public class ChildDAO {
 		}
 	}
 
-	public List<ChildDTO> selectByPage(int begin, int end) throws Exception {
-		String sql = "select * from"
-				+ "(select child.*, row_number() over (order by seq desc) as rown from child)"
+	public List<ChildDTO> selectByPage(String name , String gender , String target , String missing_area_detail , String feature , int begin, int end) throws Exception {
+		String sql = "select * from "
+				+ "(select child.*, row_number() over (order by seq desc) as rown from child "
+				+ "where name like ? and gender like ? and target like ? and missing_area_detail like ? and feature like ?) "
 				+ "where rown between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql)
+//				PreparedStatement pstat = new LoggableStatement(con, sql);  // sql 문이 실제로 어떻게 실행되는지 보여주기 위한 변환
 				){
-			pstat.setInt(1, begin);
-			pstat.setInt(2, end);
-
+			pstat.setString(1, name);
+			pstat.setString(2, gender);
+			pstat.setString(3, target);
+			pstat.setString(4, missing_area_detail);
+			pstat.setString(5, feature);
+			pstat.setInt(6, begin);
+			pstat.setInt(7, end);
+			
+//			System.out.println(((LoggableStatement)pstat).getQueryString());  // sql 문이 실제로 어떻게 실행됐는지 출력
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){

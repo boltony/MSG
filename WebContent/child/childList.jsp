@@ -24,6 +24,13 @@
 	box-sizing: border-box
 }
 
+.search_box {
+	border: 1px solid black;
+	width: 600px;
+	height: 300px;
+	margin: auto
+}
+
 .missing_list {
 	max-width: 950px;
 }
@@ -62,7 +69,7 @@
 
 	<jsp:include page="../resources/jsp/navi.jsp"></jsp:include>
 	<jsp:include page="../resources/jsp/quickMenu.jsp"></jsp:include>
-
+	
 	<!-- ----- child list 시작 --------------------------------------------  -->
 	<br>
 	<div class="container">
@@ -73,6 +80,38 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- ----- child 검색 시작 ----------------------------------------------  -->
+	<div class="search_box">
+		<form action="childList.child" method="post" class="frm">
+			이름 입력<input type="text" id="s_name" name="s_name">
+			<br>
+			성별 구분
+			<input type="radio" name="gender" value="A" checked>전체
+			<input type="radio" name="gender" value="M">남자
+			<input type="radio" name="gender" value="W">여자
+			<br>
+			대상 구분
+			<input type="radio" name="target" value="A" checked>전체
+			<input type="radio" name="target" value="010">아동
+			<input type="radio" name="target" value="060">정신장애인
+			<input type="radio" name="target" value="070">치매노인
+			<br>
+			실종 지역
+			<input type="text" id="s_area" name="s_area">
+			<br>
+			신체 특징
+			<input type="text" id="s_feature" name="s_feature">
+			<br><br>
+			<input type="submit">
+			<input type="reset">
+		</form>
+	</div>
+	<hr>
+	<!-- ----- child 검색 끝 -----------------------------------------------  -->
+	
+	
 	<div class="container missing_list">
 		<c:choose>
 			<c:when test="${list.size()==0}">
@@ -147,8 +186,8 @@
 					description : '#카카오톡 #카카오API #카카오링크 #공유',
 					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
 					link : {
-						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				},
 				social : {
@@ -159,14 +198,14 @@
 				buttons : [ {
 					title : '웹으로 보기',
 					link : {
-						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				}, {
 					title : '앱으로 보기',
 					link : {
-						mobileWebUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://58.122.72.24:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				} ]
 			});
