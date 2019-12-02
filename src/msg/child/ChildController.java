@@ -202,41 +202,41 @@ public class ChildController extends HttpServlet {
 			}
 			else if(cmd.contentEquals("/childList.child")) {
 
-				String s_name = "%%";
+				String s_name = "";
 				if(request.getParameter("s_name") != null) {
-					s_name = "%" + request.getParameter("s_name").replaceAll(" ", "") + "%";					
+					s_name = request.getParameter("s_name").replaceAll(" ", "");					
 				}
 				
-				String s_gender = "%%";
+				String s_gender = "";
 				if(request.getParameter("gender") != null) {
 					s_gender = request.getParameter("gender");
-					if(s_gender.equals("A")) {
-						s_gender = "%%";
-					}
 				}
 				
-				String s_target = "%%"; 
+				String s_target = ""; 
 				if(request.getParameter("target") != null) {
 					s_target = request.getParameter("target");
-					if(s_target.equals("A")) {
-						s_target = "%%";
-					}
 				}
 				
-				String s_area = "%%";
+				String s_area = "";
 				if(request.getParameter("s_area") != null) {
-					s_area = "%" + request.getParameter("s_area") + "%";
+					s_area = request.getParameter("s_area");
 				}
 				
-				String s_feature = "%%";
+				String s_area_detail = "";
+				if(request.getParameter("s_area_detail") != null) {
+					s_area_detail = request.getParameter("s_area_detail");
+				}
+				
+				String s_feature = "";
 				if(request.getParameter("s_feature") != null) {
-					s_feature = "%" + request.getParameter("s_feature") + "%";
+					s_feature = request.getParameter("s_feature");
 				}
 				
 				System.out.println("이름 검색 : " + s_name);
 				System.out.println("성별 검색 : " + s_gender);
 				System.out.println("대상 검색 : " + s_target);
 				System.out.println("지역 검색 : " + s_area);
+				System.out.println("상세 지역 : " + s_area_detail);
 				System.out.println("특징 검색 : " + s_feature);
 				System.out.println();
 				
@@ -249,8 +249,12 @@ public class ChildController extends HttpServlet {
 				int begin = cpage * ChildConfiguration.recordCountPerPage -(ChildConfiguration.recordCountPerPage - 1);
 				int end = cpage * ChildConfiguration.recordCountPerPage;
 
-				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_feature, begin, end);
-				String pageNavi = childDAO.getPageNavi(cpage, list.size());
+				int count = (childDAO.selectBySearch(s_name, s_gender, s_target, s_area, s_area_detail, s_feature)).size();
+				String search = "&s_name=" + s_name + "&gender=" + s_gender + "&target=" + s_target + 
+								"&s_area=" + s_area + "&s_area_detail=" + s_area_detail + "&s_feature=" + s_feature;
+				
+				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_area_detail, s_feature, begin, end);
+				String pageNavi = childDAO.getPageNavi(cpage, count, search);
 
 				for(int i = 0; i < list.size(); i++) {
 					int seq = list.get(i).getSeq();
@@ -262,7 +266,7 @@ public class ChildController extends HttpServlet {
 					}
 					request.setAttribute("rep_file" + seq, val);
 				}
-
+				
 				request.setAttribute("list", list);
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("child/childList.jsp").forward(request, response);

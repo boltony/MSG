@@ -25,9 +25,7 @@
 }
 
 .search_box {
-	border: 1px solid black;
-	width: 600px;
-	height: 300px;
+	width: 400px;
 	margin: auto
 }
 
@@ -84,8 +82,9 @@
 	
 	<!-- ----- child 검색 시작 ----------------------------------------------  -->
 	<div class="search_box">
-		<form action="childList.child" method="post" class="frm">
-			이름 입력<input type="text" id="s_name" name="s_name">
+		<form action="childList.child" method="get" class="frm">
+			이름 입력
+			<input type="text" id="s_name" name="s_name">
 			<br>
 			성별 구분
 			<input type="radio" name="gender" value="A" checked>전체
@@ -99,13 +98,34 @@
 			<input type="radio" name="target" value="070">치매노인
 			<br>
 			실종 지역
-			<input type="text" id="s_area" name="s_area">
+			<select name="s_area">
+				<option value=0>전체</option>
+				<option value=1>서울</option>
+				<option value=2>부산</option>
+				<option value=3>대구</option>
+				<option value=4>인천</option>
+				<option value=5>광주</option>
+				<option value=6>대전</option>
+				<option value=7>울산</option>
+				<option value=8>강원</option>
+				<option value=9>경기</option>
+				<option value=10>경남</option>
+				<option value=11>경북</option>
+				<option value=12>전남</option>
+				<option value=13>전북</option>
+				<option value=14>제주</option>
+				<option value=15>충남</option>
+				<option value=16>충북</option>
+				<option value=17>세종</option>
+			</select>
+			상세지역
+			<input type="text" id="s_area_detail" name="s_area_detail">
 			<br>
 			신체 특징
 			<input type="text" id="s_feature" name="s_feature">
 			<br><br>
-			<input type="submit">
-			<input type="reset">
+			<input type="submit" value="실종 대상 검색">
+			<input type="reset" value="검색 초기화">
 		</form>
 	</div>
 	<hr>

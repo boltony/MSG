@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,8 +11,11 @@
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
               crossorigin="anonymous">
-        <title>실종아동 상세정보</title>
+              
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>실종아동 상세정보</title>
         <style>
             *{
                 box-sizing:border-box;
@@ -24,15 +28,9 @@
                 max-width:1100px;
             }
 
-            .info_box{
-                height:300px;
-            }
-
-            .img_info{
-                text-align:center;
-            }
-            .img_info>img{
-                height:100%;
+            .slide{
+            	width:400px;
+            	margin:auto;
             }
 
             .info{
@@ -86,10 +84,61 @@
     	<br>
         <div class="container cont1">
             <div class="row">
-                <div class="col-12 col-lg-4 info_box img_info">
-                    <img src="${file_names_list[0]}">
-                </div>
-                <div class="col-12 col-lg-4 info_box text_info1">
+                <div class="col-12 info_box img_info">
+	                <div id="carousel_img" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<c:choose>
+								<c:when test="${file_names_list[0] != null}">
+									<li data-target="#carousel_img" data-slide-to="0" class="active"></li>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${file_names_list[1] != null}">
+									<li data-target="#carousel_img" data-slide-to="1"></li>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${file_names_list[2] != null}">
+									<li data-target="#carousel_img" data-slide-to="2"></li>
+								</c:when>
+							</c:choose>
+						</ol>
+						<div class="carousel-inner">
+							<c:choose>
+								<c:when test="${file_names_list[0] != null}">
+									<div class="carousel-item active">
+										<img src=${file_names_list[0]} class="d-block w-100" alt="...">
+									</div>	
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${file_names_list[1] != null}">
+									<div class="carousel-item">
+										<img src=${file_names_list[1]} class="d-block w-100" alt="...">
+									</div>	
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${file_names_list[2] != null}">
+									<div class="carousel-item">
+										<img src=${file_names_list[2]} class="d-block w-100" alt="...">
+									</div>	
+								</c:when>
+							</c:choose>
+						</div>
+						<a class="carousel-control-prev" href="#carousel_img" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carousel_img" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+                <div class="col-12 col-md-6 info_box text_info1">
                     <br><br>
                     <div class="row">
                         <div class="col-1"></div>
@@ -122,8 +171,9 @@
                         <div class="col-5 info info_key">실종지역</div>
                         <div class="col-5 info info_val">${dto.get_real_missing_area()}</div>
                     </div>
+                    <br>
                 </div>
-                <div class="col-12 col-lg-4 info_box text_info2">
+                <div class="col-12 col-md-6 info_box text_info2">
                     <br><br>
                     <div class="row">
                         <div class="col-1"></div>
@@ -160,12 +210,13 @@
                         <div class="col-5 info info_key">신발 (사이즈)</div>
                         <div class="col-5 info info_val">${dto.get_real_shoes()} (${dto.shoes_size})</div>
                     </div>
+                    <br>
                 </div>
             </div>
             <hr>
             <br>
             <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6">
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8 detail_info detail_key">실종지역 상세정보</div>
@@ -177,8 +228,8 @@
                         <div class="col-2"></div>
                     </div>
                 </div>
-                <div class="col-12 d-lg-none"><hr></div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 d-md-none"><hr></div>
+                <div class="col-12 col-md-6">
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8 detail_info detail_key">특징 및 특이사항</div>

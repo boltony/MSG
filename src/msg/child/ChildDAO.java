@@ -34,12 +34,12 @@ public class ChildDAO {
 		return bds.getConnection();
 	}
 
-	public String getPageNavi(int currentPage, int count) throws Exception {  // 현재 내가 위치한 페이지
+	public String getPageNavi(int currentPage, int count, String search) throws Exception {  // 현재 내가 위치한 페이지
 
 		// 게시판 내의 글의 총 개수 (DB에 있는 글의 개수)
-//		int recordTotalCount = this.getPostCount();
+		//		int recordTotalCount = this.getPostCount();
 		int recordTotalCount = count;
-		System.out.println("DB에 있는 글의 개수 : " + recordTotalCount);
+		System.out.println("검색 조건에 맞는 글의 개수 : " + recordTotalCount);
 
 		// 페이지당 글의 개수 설정 (static 변수로 수정)
 		//		int recordCountPerPage = 10;
@@ -93,17 +93,17 @@ public class ChildDAO {
 		// String 덧셈 역할을 해주는 class
 		StringBuilder sb = new StringBuilder();
 		if(needPrev == true) {
-			sb.append("<a href='childList.child?cpage=" + (startNavi - 1) + "'>");
+			sb.append("<a href='childList.child?cpage=" + (startNavi - 1) + search + "'>");
 			sb.append("< ");
 			sb.append("</a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='childList.child?cpage=" + i + "'>");
+			sb.append("<a href='childList.child?cpage=" + i + search + "'>");
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext == true) {
-			sb.append("<a href='childList.child?cpage=" + (endNavi + 1) + "'>");
+			sb.append("<a href='childList.child?cpage=" + (endNavi + 1) + search + "'>");
 			sb.append(">");
 			sb.append("</a>");
 		}
@@ -167,7 +167,7 @@ public class ChildDAO {
 			return result;
 		}
 	}
-	
+
 	public int getSeqByPost(String reporter) throws Exception {
 		String sql = "select max(seq) from child where reporter_id = ?";
 		try(
@@ -186,25 +186,120 @@ public class ChildDAO {
 		}
 	}
 
-	public List<ChildDTO> selectByPage(String name , String gender , String target , String missing_area_detail , String feature , int begin, int end) throws Exception {
+	public List<ChildDTO> selectByPage(String name, String gender, String target, String missing_area, 
+										String missing_area_detail, String feature, int begin, int end) throws Exception {
+		
+		name = "%" + name + "%";
+		if(gender.equals("") || gender.equals("A")) {
+			gender = "%%";
+		}
+		if(target.equals("") || target.equals("A")) {
+			target = "%%";
+		}
+		if(missing_area.equals("") || missing_area.equals("0")) {
+			missing_area = "(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)";
+		}
+		else {
+			missing_area = "(" + missing_area + ")";
+		}
+		missing_area_detail = "%" + missing_area_detail + "%";
+		feature = "%" + feature + "%";
+		
 		String sql = "select * from "
 				+ "(select child.*, row_number() over (order by seq desc) as rown from child "
-				+ "where name like ? and gender like ? and target like ? and missing_area_detail like ? and feature like ?) "
+				+ "where name like ? and gender like ? and target like ? and missing_area in ? and missing_area_detail like ? and feature like ?) "
 				+ "where rown between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql)
-//				PreparedStatement pstat = new LoggableStatement(con, sql);  // sql 문이 실제로 어떻게 실행되는지 보여주기 위한 변환
+						//				PreparedStatement pstat = new LoggableStatement(con, sql);  // sql 문이 실제로 어떻게 실행되는지 보여주기 위한 변환
 				){
 			pstat.setString(1, name);
 			pstat.setString(2, gender);
 			pstat.setString(3, target);
-			pstat.setString(4, missing_area_detail);
-			pstat.setString(5, feature);
-			pstat.setInt(6, begin);
-			pstat.setInt(7, end);
-			
-//			System.out.println(((LoggableStatement)pstat).getQueryString());  // sql 문이 실제로 어떻게 실행됐는지 출력
+			pstat.setString(4, missing_area);
+			pstat.setString(5, missing_area_detail);
+			pstat.setString(6, feature);
+			pstat.setInt(7, begin);
+			pstat.setInt(8, end);
+
+			//			System.out.println(((LoggableStatement)pstat).getQueryString());  // sql 문이 실제로 어떻게 실행됐는지 출력
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<ChildDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					ChildDTO dto = new ChildDTO();
+
+					dto.setSeq(rs.getInt("seq"));
+					dto.setTarget(rs.getString("target"));
+					dto.setGender(rs.getString("gender"));
+					dto.setName(rs.getString("name"));
+					dto.setBirth_date(rs.getString("birth_date"));
+					dto.setMissing_date(rs.getTimestamp("missing_date"));
+					dto.setMissing_area(rs.getInt("missing_area"));
+					dto.setMissing_area_detail(rs.getString("missing_area_detail"));
+					dto.setHeight(rs.getInt("height"));
+					dto.setWeight(rs.getInt("weight"));
+					dto.setHair(rs.getInt("hair"));
+					dto.setBlood_type(rs.getInt("blood_type"));
+					dto.setFeature(rs.getString("feature"));
+					dto.setTop(rs.getInt("top"));
+					dto.setTop_kind(rs.getInt("top_kind"));
+					dto.setBottoms(rs.getInt("bottoms"));
+					dto.setBottoms_kind(rs.getInt("bottoms_kind"));
+					dto.setShoes(rs.getInt("shoes"));
+					dto.setShoes_size(rs.getInt("shoes_size"));
+					dto.setReporter(rs.getString("reporter"));
+					dto.setReporter_id(rs.getString("reporter_id"));
+					dto.setRe_birth_date(rs.getString("re_birth_date"));
+					dto.setRe_relation(rs.getInt("re_relation"));
+					dto.setRe_contact1(rs.getString("re_contact1"));
+					dto.setRe_contact2(rs.getString("re_contact2"));
+					dto.setAgreeYN(rs.getString("agreeYN"));
+
+					list.add(dto);
+				}
+
+				con.commit();
+				return list;
+			}
+		}
+	}
+
+	public List<ChildDTO> selectBySearch(String name, String gender, String target, String missing_area, 
+										String missing_area_detail, String feature) throws Exception {
+		
+		name = "%" + name + "%";
+		if(gender.equals("") || gender.equals("A")) {
+			gender = "%%";
+		}
+		if(target.equals("") || target.equals("A")) {
+			target = "%%";
+		}
+		if(missing_area.equals("") || missing_area.equals("0")) {
+			missing_area = "(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)";
+		}
+		else {
+			missing_area = "(" + missing_area + ")";
+		}
+		missing_area_detail = "%" + missing_area_detail + "%";
+		feature = "%" + feature + "%";
+		
+		String sql = "select * from child "
+				+ "where name like ? and gender like ? and target like ? and missing_area in ? and missing_area_detail like ? and feature like ? "
+				+ "order by seq desc";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql)
+				){
+			pstat.setString(1, name);
+			pstat.setString(2, gender);
+			pstat.setString(3, target);
+			pstat.setString(4, missing_area);
+			pstat.setString(5, missing_area_detail);
+			pstat.setString(6, feature);
+
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){
