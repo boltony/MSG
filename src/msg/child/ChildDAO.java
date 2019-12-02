@@ -33,7 +33,64 @@ public class ChildDAO {
 	public Connection getConnection() throws Exception {
 		return bds.getConnection();
 	}
+	
+	public int insert(ChildDTO dto) throws Exception{
+		String sql = "insert into child values(child_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+
+
+			pstat.setString(1, dto.getTarget());
+			pstat.setString(2, dto.getGender());
+			pstat.setString(3, dto.getName());
+			pstat.setString(4, dto.getBirth_date());
+			pstat.setTimestamp(5, dto.getMissing_date());
+			pstat.setInt(6, dto.getMissing_area());
+			pstat.setString(7, dto.getMissing_area_detail());
+			pstat.setInt(8, dto.getHeight());
+			pstat.setInt(9, dto.getWeight());
+			pstat.setInt(10, dto.getHair());
+			pstat.setInt(11, dto.getBlood_type());
+			pstat.setString(12, dto.getFeature());
+			pstat.setInt(13, dto.getTop());
+			pstat.setInt(14, dto.getTop_kind());
+			pstat.setInt(15, dto.getBottoms());
+			pstat.setInt(16, dto.getBottoms_kind());
+			pstat.setInt(17, dto.getShoes());
+			pstat.setInt(18, dto.getShoes_size());
+			pstat.setString(19, dto.getReporter());
+			pstat.setString(20, dto.getReporter_id());
+			pstat.setString(21, dto.getRe_birth_date());
+			pstat.setInt(22, dto.getRe_relation());
+			pstat.setString(23, dto.getRe_contact1());
+			pstat.setString(24, dto.getRe_contact2());
+			pstat.setString(25, dto.getAgreeYN());      
+
+			int result = pstat.executeUpdate();
+			con.commit();
+
+			return result;
+		}
+	}
+
+	private int getPostCount() throws Exception {
+		String sql = "select count(*) from child";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.commit();
+			return result;
+		}
+	}
+	
 	public String getPageNavi(int currentPage, int count, String search) throws Exception {  // 현재 내가 위치한 페이지
 
 		// 게시판 내의 글의 총 개수 (DB에 있는 글의 개수)
@@ -110,104 +167,38 @@ public class ChildDAO {
 
 		return sb.toString();
 	}
-
-	private int getPostCount() throws Exception {
-		String sql = "select count(*) from child";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
-			rs.next();
-			int result = rs.getInt(1);
-
-			con.commit();
-			return result;
-		}
-	}
-
-	public int insert(ChildDTO dto) throws Exception{
-		String sql = "insert into child values(child_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-
-
-			pstat.setString(1, dto.getTarget());
-			pstat.setString(2, dto.getGender());
-			pstat.setString(3, dto.getName());
-			pstat.setString(4, dto.getBirth_date());
-			pstat.setTimestamp(5, dto.getMissing_date());
-			pstat.setInt(6, dto.getMissing_area());
-			pstat.setString(7, dto.getMissing_area_detail());
-			pstat.setInt(8, dto.getHeight());
-			pstat.setInt(9, dto.getWeight());
-			pstat.setInt(10, dto.getHair());
-			pstat.setInt(11, dto.getBlood_type());
-			pstat.setString(12, dto.getFeature());
-			pstat.setInt(13, dto.getTop());
-			pstat.setInt(14, dto.getTop_kind());
-			pstat.setInt(15, dto.getBottoms());
-			pstat.setInt(16, dto.getBottoms_kind());
-			pstat.setInt(17, dto.getShoes());
-			pstat.setInt(18, dto.getShoes_size());
-			pstat.setString(19, dto.getReporter());
-			pstat.setString(20, dto.getReporter_id());
-			pstat.setString(21, dto.getRe_birth_date());
-			pstat.setInt(22, dto.getRe_relation());
-			pstat.setString(23, dto.getRe_contact1());
-			pstat.setString(24, dto.getRe_contact2());
-			pstat.setString(25, dto.getAgreeYN());      
-
-			int result = pstat.executeUpdate();
-			con.commit();
-
-			return result;
-		}
-	}
-
-	public int getSeqByPost(String reporter) throws Exception {
-		String sql = "select max(seq) from child where reporter_id = ?";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			pstat.setString(1, reporter);
-			try(					
-					ResultSet rs = pstat.executeQuery();
-					){
-				rs.next();
-				int seq = rs.getInt(1);
-
-				return seq;				
-			}
-		}
-	}
-
+	
 	public List<ChildDTO> selectByPage(String name, String gender, String target, String missing_area, 
 										String missing_area_detail, String feature, int begin, int end) throws Exception {
 		
 		name = "%" + name + "%";
+		
 		if(gender.equals("") || gender.equals("A")) {
 			gender = "%%";
 		}
+		
 		if(target.equals("") || target.equals("A")) {
 			target = "%%";
 		}
+		
+		int min = 0;
+		int max = 0;
 		if(missing_area.equals("") || missing_area.equals("0")) {
-			missing_area = "(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)";
+			min = 1;
+			max = 17;
 		}
 		else {
-			missing_area = "(" + missing_area + ")";
+			min = Integer.parseInt(missing_area);
+			max = Integer.parseInt(missing_area);
 		}
+		
 		missing_area_detail = "%" + missing_area_detail + "%";
+		
 		feature = "%" + feature + "%";
 		
 		String sql = "select * from "
 				+ "(select child.*, row_number() over (order by seq desc) as rown from child "
-				+ "where name like ? and gender like ? and target like ? and missing_area in ? and missing_area_detail like ? and feature like ?) "
+				+ "where name like ? and gender like ? and target like ? and (missing_area between ? and ?) and missing_area_detail like ? and feature like ?) "
 				+ "where rown between ? and ?";
 		try(
 				Connection con = this.getConnection();
@@ -217,11 +208,12 @@ public class ChildDAO {
 			pstat.setString(1, name);
 			pstat.setString(2, gender);
 			pstat.setString(3, target);
-			pstat.setString(4, missing_area);
-			pstat.setString(5, missing_area_detail);
-			pstat.setString(6, feature);
-			pstat.setInt(7, begin);
-			pstat.setInt(8, end);
+			pstat.setInt(4, min);
+			pstat.setInt(5, max);
+			pstat.setString(6, missing_area_detail);
+			pstat.setString(7, feature);
+			pstat.setInt(8, begin);
+			pstat.setInt(9, end);
 
 			//			System.out.println(((LoggableStatement)pstat).getQueryString());  // sql 문이 실제로 어떻게 실행됐는지 출력
 			try(
@@ -270,24 +262,33 @@ public class ChildDAO {
 	public List<ChildDTO> selectBySearch(String name, String gender, String target, String missing_area, 
 										String missing_area_detail, String feature) throws Exception {
 		
-		name = "%" + name + "%";
+name = "%" + name + "%";
+		
 		if(gender.equals("") || gender.equals("A")) {
 			gender = "%%";
 		}
+		
 		if(target.equals("") || target.equals("A")) {
 			target = "%%";
 		}
+		
+		int min = 0;
+		int max = 0;
 		if(missing_area.equals("") || missing_area.equals("0")) {
-			missing_area = "(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)";
+			min = 1;
+			max = 17;
 		}
 		else {
-			missing_area = "(" + missing_area + ")";
+			min = Integer.parseInt(missing_area);
+			max = Integer.parseInt(missing_area);
 		}
+		
 		missing_area_detail = "%" + missing_area_detail + "%";
+		
 		feature = "%" + feature + "%";
 		
 		String sql = "select * from child "
-				+ "where name like ? and gender like ? and target like ? and missing_area in ? and missing_area_detail like ? and feature like ? "
+				+ "where name like ? and gender like ? and target like ? and (missing_area between ? and ?) and missing_area_detail like ? and feature like ? "
 				+ "order by seq desc";
 		try(
 				Connection con = this.getConnection();
@@ -296,9 +297,10 @@ public class ChildDAO {
 			pstat.setString(1, name);
 			pstat.setString(2, gender);
 			pstat.setString(3, target);
-			pstat.setString(4, missing_area);
-			pstat.setString(5, missing_area_detail);
-			pstat.setString(6, feature);
+			pstat.setInt(4, min);
+			pstat.setInt(5, max);
+			pstat.setString(6, missing_area_detail);
+			pstat.setString(7, feature);
 
 			try(
 					ResultSet rs = pstat.executeQuery();
@@ -433,4 +435,23 @@ public class ChildDAO {
 			}
 		}
 	}
+	
+	public int getSeqByPost(String reporter) throws Exception {
+		String sql = "select max(seq) from child where reporter_id = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, reporter);
+			try(					
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				int seq = rs.getInt(1);
+
+				return seq;				
+			}
+		}
+	}
+	
 }

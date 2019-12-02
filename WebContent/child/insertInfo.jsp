@@ -218,7 +218,7 @@
 							<td colspan="3"><select id="hair" name="hair">
 									<option value="999" selected="selected">선택</option>
 									<option value="110">대머리</option>
-									<option value="120">삭발</option>
+									<option value="120">가발</option>
 									<option value="130">삭발</option>
 									<option value="140">묶음머리</option>
 									<option value="150">짧은 생머리</option>

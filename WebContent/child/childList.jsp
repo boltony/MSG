@@ -206,8 +206,8 @@
 					description : '#카카오톡 #카카오API #카카오링크 #공유',
 					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
 					link : {
-						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				},
 				social : {
@@ -218,8 +218,8 @@
 				buttons : [ {
 					title : '웹으로 보기',
 					link : {
-						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				}, {
 					title : '앱으로 보기',

@@ -253,8 +253,8 @@ public class ChildController extends HttpServlet {
 				String search = "&s_name=" + s_name + "&gender=" + s_gender + "&target=" + s_target + 
 								"&s_area=" + s_area + "&s_area_detail=" + s_area_detail + "&s_feature=" + s_feature;
 				
-				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_area_detail, s_feature, begin, end);
 				String pageNavi = childDAO.getPageNavi(cpage, count, search);
+				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_area_detail, s_feature, begin, end);
 
 				for(int i = 0; i < list.size(); i++) {
 					int seq = list.get(i).getSeq();

@@ -107,21 +107,21 @@
 							<c:choose>
 								<c:when test="${file_names_list[0] != null}">
 									<div class="carousel-item active">
-										<img src=${file_names_list[0]} class="d-block w-100" alt="...">
+										<img src="${file_names_list[0]}" class="d-block w-100" alt="...">
 									</div>	
 								</c:when>
 							</c:choose>
 							<c:choose>
 								<c:when test="${file_names_list[1] != null}">
 									<div class="carousel-item">
-										<img src=${file_names_list[1]} class="d-block w-100" alt="...">
+										<img src="${file_names_list[1]}" class="d-block w-100" alt="...">
 									</div>	
 								</c:when>
 							</c:choose>
 							<c:choose>
 								<c:when test="${file_names_list[2] != null}">
 									<div class="carousel-item">
-										<img src=${file_names_list[2]} class="d-block w-100" alt="...">
+										<img src="${file_names_list[2]}" class="d-block w-100" alt="...">
 									</div>	
 								</c:when>
 							</c:choose>
