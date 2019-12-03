@@ -22,7 +22,7 @@
             }
             .cont1{
                 border:1px solid black;
-                border-radius:20px;
+                border-radius:10px;
                 margin:auto;
                 min-width:500px;
                 max-width:1100px;
@@ -41,6 +41,7 @@
             .info_key{
                 text-align:right;
                 background-color:#d6d6d6;
+                margin-right:1px;
                 margin-bottom:1px;
             }
             .info_val{
@@ -68,12 +69,13 @@
             }
             .to_write{
                 border-radius:10px;
-                background-color:#ffcc57;
+                background-color:#26679f;
                 font-size:25px;
                 text-align:center;
             }
             .to_write>a{
                 color:white;
+                width:100%;
             }
             .to_write>a:hover{
                 text-decoration:none;
@@ -261,5 +263,6 @@
                 <div class="col-4"></div>
             </div>
         </div>
+        <br>
     </body>
 </html>

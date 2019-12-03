@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import msg.child.configuration.ChildConfiguration;
+import msg.configuration.Configuration;
 
 
 @WebServlet("*.child")
@@ -246,8 +246,8 @@ public class ChildController extends HttpServlet {
 					cpage = Integer.parseInt(tmpPage);
 				}
 
-				int begin = cpage * ChildConfiguration.recordCountPerPage -(ChildConfiguration.recordCountPerPage - 1);
-				int end = cpage * ChildConfiguration.recordCountPerPage;
+				int begin = cpage * Configuration.recordCountPerPage -(Configuration.recordCountPerPage - 1);
+				int end = cpage * Configuration.recordCountPerPage;
 
 				int count = (childDAO.selectBySearch(s_name, s_gender, s_target, s_area, s_area_detail, s_feature)).size();
 				String search = "&s_name=" + s_name + "&gender=" + s_gender + "&target=" + s_target + 

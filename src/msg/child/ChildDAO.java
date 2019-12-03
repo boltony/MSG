@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import msg.child.configuration.ChildConfiguration;
+import msg.configuration.Configuration;
 
 public class ChildDAO {
 	private BasicDataSource bds = new BasicDataSource();
@@ -107,11 +107,11 @@ public class ChildDAO {
 		// 페이지의 총 개수
 		int pageTotalCount = 0;
 
-		if(recordTotalCount % ChildConfiguration.recordCountPerPage > 0) {
-			pageTotalCount = recordTotalCount / ChildConfiguration.recordCountPerPage + 1;
+		if(recordTotalCount % Configuration.recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
 		}
 		else {
-			pageTotalCount = recordTotalCount / ChildConfiguration.recordCountPerPage;
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
 		}
 
 		// 현재 내가 위치한 페이지 값이 비정상 값일 때, 조정하는 보안 코드
@@ -123,9 +123,9 @@ public class ChildDAO {
 		}
 
 		// 현재 내가 위치한 페이지에 따라 네비게이터 시작 페이지 값을 구하는 공식
-		int startNavi = ((currentPage - 1) / ChildConfiguration.naviCountPerPage) * ChildConfiguration.naviCountPerPage + 1;
+		int startNavi = ((currentPage - 1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1;
 
-		int endNavi = startNavi + ChildConfiguration.naviCountPerPage - 1;
+		int endNavi = startNavi + Configuration.naviCountPerPage - 1;
 
 		// 페이지 끝 값이 비정상 값일 때, 조정하는 보안 코드
 		if(endNavi > pageTotalCount) {
@@ -262,7 +262,7 @@ public class ChildDAO {
 	public List<ChildDTO> selectBySearch(String name, String gender, String target, String missing_area, 
 										String missing_area_detail, String feature) throws Exception {
 		
-name = "%" + name + "%";
+		name = "%" + name + "%";
 		
 		if(gender.equals("") || gender.equals("A")) {
 			gender = "%%";

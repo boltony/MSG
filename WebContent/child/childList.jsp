@@ -35,7 +35,7 @@
 
 .simple_list {
 	border: 1px solid black;
-	border-radius: 20px;
+	border-radius: 10px;
 }
 .simple_list>img {
 	width: 200px;
@@ -65,8 +65,8 @@
 </head>
 <body>
 
-	<jsp:include page="../resources/jsp/navi.jsp"></jsp:include>
-	<jsp:include page="../resources/jsp/quickMenu.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/quickMenu.jsp"></jsp:include>
 	
 	<!-- ----- child list 시작 --------------------------------------------  -->
 	<br>
@@ -136,7 +136,7 @@
 		<c:choose>
 			<c:when test="${list.size()==0}">
 				<div class="row">
-					<div class="col-12 text-center">작성된 글이 없습니다.</div>
+					<div class="col-12 text-center">검색 조건에 맞는 글이 없습니다.</div>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -183,7 +183,7 @@
 	<hr>
 	<!-- ----- child list 끝 ---------------------------------------------  -->
 
-	<jsp:include page="../resources/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 
 	<script>
 		$("#backBtn").on("click", function() {
@@ -206,8 +206,8 @@
 					description : '#카카오톡 #카카오API #카카오링크 #공유',
 					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
 					link : {
-						mobileWebUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				},
 				social : {
@@ -218,8 +218,8 @@
 				buttons : [ {
 					title : '웹으로 보기',
 					link : {
-						mobileWebUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq,
-						webUrl : 'http://192.168.0.9:8080/MSG/childDetail.child?seq='+btn_seq
+						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
+						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq
 					}
 				}, {
 					title : '앱으로 보기',
