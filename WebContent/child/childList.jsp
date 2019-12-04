@@ -24,18 +24,42 @@
 	box-sizing: border-box
 }
 
+#leftBar {
+	width: 300px;
+	height: 100%;
+	float: left;
+	padding-left: 30px;
+	line-height: 20px;
+}
+
+#leftBarTitle {
+	height: 100px;
+	width: 100%;
+	padding-top: 30px;
+}
+
+#leftBar_contents1 {
+	/*background-color: #7ac9d8; */
+	width: 70%;
+	height: 100px;
+	min-width: 800px;
+	float: left;
+}
+
 .search_box {
 	width: 400px;
 	margin: auto
 }
 
 .missing_list {
+	min-width: 950px;
 	max-width: 950px;
 }
 
 .simple_list {
 	border: 1px solid black;
 	border-radius: 10px;
+	min-width: 400px;
 }
 .simple_list>img {
 	width: 200px;
@@ -68,15 +92,21 @@
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	<jsp:include page="/resources/jsp/quickMenu.jsp"></jsp:include>
 	
-	<!-- ----- child list 시작 --------------------------------------------  -->
-	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col-12 text-center">
-				<h3>실종아동 목록</h3>
-				<hr>
-			</div>
+	
+	<div class="leftContainer">
+	<div id=leftBar>
+		<div id=leftBarTitle>
+			<h3>마이 페이지</h3>
 		</div>
+		<p><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya>실종정보등록</a></p>
+		<p><a href="${pageContext.request.contextPath}/childList.child" class=mya style="color: orangered;">실종아동찾기</a></p>
+		<p><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya>긴급메일작성</a></p>
+	</div>
+	<br>
+	
+	<!-- ----- child list 시작 --------------------------------------------  -->
+	<div id="leftBar_contents1">
+		<h3 style="padding-left: 30px;">실종아동 목록</h3>
 	</div>
 	
 	
@@ -128,7 +158,7 @@
 			<input type="reset" value="검색 초기화">
 		</form>
 	</div>
-	<hr>
+	<br>
 	<!-- ----- child 검색 끝 -----------------------------------------------  -->
 	
 	
@@ -142,7 +172,7 @@
 			<c:otherwise>
 				<div class="row">
 					<c:forEach items="${list}" var="dto" varStatus="status">
-						<div class="col-12 col-lg-5 simple_list mb-5 ml-0 ml-lg-5">
+						<div class="col-5 simple_list mb-5 ml-5">
 							<c:set var="rep_file" value="rep_file${dto.seq}"></c:set>
 							<img class="missing_img" src="${requestScope[rep_file]}">							
 							<br>
@@ -182,6 +212,10 @@
 	<br>
 	<hr>
 	<!-- ----- child list 끝 ---------------------------------------------  -->
+
+
+	</div>
+	
 
 	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 

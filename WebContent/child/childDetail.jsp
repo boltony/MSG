@@ -257,11 +257,6 @@
                 <div class="col-2"></div>
             </div>
             <br>
-            <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4 to_write"><a href="">제보하러 가기</a></div>
-                <div class="col-4"></div>
-            </div>
         </div>
         <br>
     </body>
