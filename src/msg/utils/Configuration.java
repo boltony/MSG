@@ -1,4 +1,4 @@
-package msg.configuration;
+package msg.utils;
 
 public class Configuration {
 	public static int recordCountPerPage = 10;  // 페이지당 글의 개수 설정

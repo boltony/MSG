@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import msg.configuration.Configuration;
+import msg.member.MemberDTO;
+import msg.utils.Configuration;
 
 
 @WebServlet("*.child")
@@ -149,9 +150,11 @@ public class ChildController extends HttpServlet {
 
 				////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////
-				String reporter_id = "dd"; //세션값으로 로그인아이디 들어가는자린데 일단 임의값넣음
+				MemberDTO ldto = (MemberDTO)request.getSession().getAttribute("loginInfo");
+				String reporter_id = ldto.getId(); //세션값으로 로그인아이디 들어가는자린데 일단 임의값넣음
 				////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////
+				System.out.println("제보자 아이디 : " + reporter_id);
 
 				String re_birth_date = multi.getParameter("re_birth_date");//제보자 생년월일
 
@@ -192,9 +195,9 @@ public class ChildController extends HttpServlet {
 
 				if(result>0) {
 					System.out.println("등록성공!");
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("main.jsp");
 					pw.append("<script>alert('등록에 성공했습니다\n실종자가 하루빨리 가족의품으로 돌아오길 기원합니다');"
-							+ "location.href='index.jsp';</script>");
+							+ "location.href='main.jsp';</script>");
 				}
 				else {
 					System.out.println("등록실패");

@@ -31,7 +31,7 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fixedStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <style>
 .mya {
 	color: black;
@@ -71,26 +71,16 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../resources/jsp/navi.jsp"></jsp:include>
-	<jsp:include page="../resources/jsp/quickMenu.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/quickMenu.jsp"></jsp:include>
 	
 	<div style="width: 100%; height: 1000px; position: relative;">
 
-		<div
-			style="width: 300px; height: 100%; float: left; padding-left: 30px; line-height: 20px;"
-			class="col-2">
+		<div style="width: 300px; height: 100%; float: left; padding-left: 30px; line-height: 20px;" class="col-2">
 			<h3>실종아동 등록</h3>
-			<p>
-				<a href="#" class=mya style="color: orangered;">실종정보등록</a>
-			</p>
-			<p>
-				<a href="#" class=mya>내 신고 내역</a>
-			</p>
-			<p>
-				<a href="em.jsp" class=mya>긴급메일작성</a>
-			</p>
-
-
+			<p><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya style="color: orangered;">실종정보등록</a></p>
+			<p><a href="${pageContext.request.contextPath}/childList.child" class=mya>실종아동찾기</a></p>
+			<p><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya>긴급메일작성</a></p>
 		</div>
 
 
@@ -377,7 +367,7 @@
 	</div>
 	<!-- ----- 여기는 중간 화면 이런 식으로 참고만 해 주세요 시작 ---------------  -->
 
-	<jsp:include page="../resources/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 
 	<script>
     

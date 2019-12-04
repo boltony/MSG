@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import msg.configuration.Configuration;
+import msg.utils.Configuration;
 
 public class ChildDAO {
 	private BasicDataSource bds = new BasicDataSource();

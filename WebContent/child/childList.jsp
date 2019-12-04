@@ -18,7 +18,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <title>실종아동 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fixedStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <style>
 * {
 	box-sizing: border-box
@@ -156,8 +156,8 @@
 							</div>
 							<br> <br>
 							<div>
-								<a class="detail_btn" href="${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}" 
-								onclick="window.open(this.href, '', 'width=1000px, height=700px, left=200px, top=100px'); return false;">
+								<a class="detail_btn" href="#" 
+								onclick="window.open('${pageContext.request.contextPath}/childDetail.child?seq=${dto.seq}', '', 'width=1000px, height=700px, left=200px, top=100px, status=no'); return false;">
 									<img src="${pageContext.request.contextPath}/resources/images/icon_search.png">
 								</a>
 								<a class="kakao-link-btn" href="javascript:;">
