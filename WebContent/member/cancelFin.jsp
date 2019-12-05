@@ -24,6 +24,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -43,7 +44,16 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
+	<!-- -->
+	text-align: center;
+	<!-- -->
 }
+
+<!-- -->
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
+}
+<!-- -->
 
 #leftBarTitle {
 	height: 100px;
@@ -69,45 +79,20 @@
 	float: left;
 }
 
-#pwRe1 {
-	width: 130px;
-	background-color: white;
-	border-radius: 8px;
-	background-color: #bf5f5f;
-	color: #f8f8f8;
-	border: none;
-}
-
-#pwRe1:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
-}
-
-#pwRe2 {
-	width: 100px;
-	background-color: white;
-	border-radius: 8px;
-	background-color: #399fb2;
-	color: #f8f8f8;
-	border: none;
-}
-
-#pwRe2:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
-}
-
 #toMain {
-	width: 100px;
-	height: 40px;
+	width: 120px; height: 40px;
 	margin: auto;
 	text-align: center;
 	position: relative;
 	top: 50px;
-	background-color: #49939d;
+	background-color: #66b5d0;
+	font-size: 16px;
 	color: white;
 	border: none;
 	border-radius: 5px;
+}
+h2>div{
+
 }
 </style>
 </head>
@@ -124,7 +109,9 @@
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+	<!--   -->
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
+	<!--   -->
 			</div>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya>나의 정보</a>
@@ -138,13 +125,17 @@
 			<p>
 				<a href="mydonate.mem" class=mya>후원 내역</a>
 			</p>
-			<p>
-				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya>회원 탈퇴</a>
-			</p>
+			<!--  style="color:white;"  -->
+			<!--   border-bottom: 1px solid black;  -->
+			<div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;"><p>
+			<!--   -->
+				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya style="color:white;">회원 탈퇴</a>
+			<!--   -->
+			</p></div>
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3 style="padding-left: 30px;">회원 탈퇴 안내</h3>
+			<h1 style="padding-left: 30px; line-height: 100px; text-align: center;">후원 취소 안내</h1>
 
 		</div>
 		<div id=leftBar_contents2>

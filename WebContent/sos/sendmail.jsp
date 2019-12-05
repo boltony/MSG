@@ -20,52 +20,22 @@
                 text-decoration: none;
             }
     #send {
-			background-color: #66b5d0;
-			height: 70px;
-			width: 180px;
-			padding: 15px 30px;
-			margin: 10px;
+			margin-top : 40px;
+			background-color:  #66b5d0;
+			height: 40px;
+			width: 120px;
 			border: none;
 			color: white;
 			text-align: center;
 			text-decoration: none;
-			font-size: 20px;
+			font-size: 16px;
 			display: inline-block;
 			cursor: pointer;
 			transition: all 0.35s;
-            border-radius: 15px 15px 15px 15px;
+            border-radius: 8px;
           
 		}
-        #send:hover{
-            text-shadow: 2px 2px 5px;
-        }
-		#send span {
-			display: inline-block;
-			position: relative;
-			transition: 0.5s;
-		}
-		#send span::after {
-			
-			
-			position: absolute;
-			
-			opacity: 10;
-			font-size: 30px;
-			transition: 0.35s;
-            color: white;
-            transition-duration: 0.35s;
-		}
-		#send:hover span {color: white;
-            transition-duration: 1s; }
-		#send:hover span::after {
-			opacity: 1;
-			right: 0px;
-		}
-        #send:active {
-			background-color: #26679F;
-
-			transform: translateY(4px);
-		}
+       
 
 
         </style>
@@ -94,11 +64,9 @@
         <div style="width: 100%; height: 500px; position: relative; min-width:1200px">
            <div style="min-width:182px;width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;" class="col-2">
                 <div style="height: 100px; width: 100%; padding-top: 30px;"><h3>실종아동 등록</h3></div>
-                <p><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya>실종정보등록</a></p>
-                <p><a href="#" class=mya>내 신고 내역</a></p>
-                <p><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya style="color: orangered">긴급메일작성</a></p>
-                
-
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya>실종정보등록</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;;"><a href="${pageContext.request.contextPath}/childList.child" class=mya>실종아동찾기</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;background-color: #476491;line-height:30px;"><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya style="color:white;">긴급메일작성</a></p>
             </div>
             <div class="col-9" style="margin:0px;margin-right:0px;height:100%;left:10%;min-width:400px;display:block;">
             <h2 style="text-align: center;">긴급메일작성</h2>
@@ -121,14 +89,11 @@
 	<option value="14" name="missing_area">제주</option>
 	<option value="15" name="missing_area">충남</option>
 	<option value="16" name="missing_area">충북</option>
-	<option value="17" name="missing_area">세종</option>  </select><label id="areack" style="color:red;font-size:20px">지역을먼저 선택해주세요</label>
+	<option value="17" name="missing_area">세종</option>  </select><label id="areack" style="color:red;font-size:15px">지역을먼저 선택해주세요</label>
            <br>
            
-            <textarea id=title style= "width : 70%; height:25%; background-color: #c3c349; font-size: 20px;resize:none"name="title" placeholder="제목을 입력하세요" maxlength="50";></textarea>
-          
-           
-            
-            <textarea id="content" name="content" style="width: 70%;height: 50%;resize:none;background-color:#d89595;font-size: 20px;" placeholder="내용을 입력하세요"></textarea>
+            <textarea id=title style= "border:0px;width : 70%; height:25%; background-color: #edfffe; font-size: 20px;resize:none"name="title" placeholder="제목을 입력하세요" maxlength="50"></textarea>        
+            <textarea id="content" name="content" style="border:0px;width: 70%;height: 50%;resize:none;background-color:#d9eeff;font-size: 20px;" placeholder="내용을 입력하세요"></textarea>
             
             
             <div style="text-align: center; height: 25%">
@@ -183,7 +148,7 @@
         	var title = $("#title").val();
         	var content = $("#content").val();
         	
-    		if(area != 999 && title != null && content != null){
+    		if(area != 999 && title != "" && content != ""){
             var send = confirm("긴급메일을 전송하시겠습니까?");
             if(send){
             

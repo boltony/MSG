@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제하기</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.8.min.js"
 	type="application/javascript"></script>
@@ -21,7 +21,7 @@
 			show_agree_window : 0, // 부트페이 정보 동의 창 보이기 여부
 
 			user_info : {
-				username : '${name}',
+				username : '${rname}',
 				email : '${email}',
 				addr : '${loginInfo.address1}',
 				phone : '${phone}'
@@ -40,18 +40,19 @@
 			location.href = "${pageContext.request.contextPath}/support/support_page.jsp";
 
 		}).cancel(function(data) {
-			alert("결제가 취소되었습니다.")
-			console.log(data);
-
+			var rs = confirm("결제를 취소하시겠습니까?")
+			if(rs){
+			window.close();
+			}
 		}).done(function(data) {
 			$.ajax({
 				url : "paySuccess.sup",
 				type : "post",
 				data : {
 					id : '${loginInfo.id}',
-					name : '${loginInfo.name}',
-					phone : '${loginInfo.phone}',
-					email : '${loginInfo.email}',
+					name : '${rname}',
+					phone : '${phone}',
+					email : '${email}',
 					card_name : data.card_name,
 					method_name : data.method_name,
 					pg : data.pg,

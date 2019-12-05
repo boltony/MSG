@@ -37,48 +37,38 @@
                 font-size:12px;
                 height:30px;
                 line-height:30px;
+                background-color:#d6d6d6;
             }
             .info_key{
                 text-align:right;
-                background-color:#d6d6d6;
                 margin-right:1px;
-                margin-bottom:1px;
+                margin-bottom:3px;
             }
             .info_val{
-                background-color:#d6d6d6;
             }
 
             .detail_info{
                 font-size:20px;
+                height:40px;
                 text-align:center;
+                background-color:#d6d6d6;
             }
             .detail_key{
-                background-color:#d6d6d6;
+	            line-height:40px;
                 margin-bottom:1px;
             }
             .detail_val{
-                background-color:#d6d6d6;
+            	background-color:#efefef;
             }
             
-            .notice{
-                border-radius:10px;
+            #notice{
+                border-radius:8px;
                 color:white;
-                background-color:#26679f;
+                background-color:#d6d6d6;
                 font-size:25px;
                 text-align:center;
-            }
-            .to_write{
-                border-radius:10px;
-                background-color:#26679f;
-                font-size:25px;
-                text-align:center;
-            }
-            .to_write>a{
-                color:white;
-                width:100%;
-            }
-            .to_write>a:hover{
-                text-decoration:none;
+                width:500px;
+                margin:auto;
             }
         </style>
     </head>
@@ -247,16 +237,9 @@
             <br><br>
         </div>
         <hr>
-        <div class="container cont2">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-8 notice">
-                    <div>해당 실종자를 목격하신 분께서는</div>
-                    <div>제보 게시판에 제보 부탁드립니다.</div>
-                </div>
-                <div class="col-2"></div>
-            </div>
-            <br>
+        <div id="notice">
+			<div>해당 실종자를 목격하신 분께서는</div>
+			<div>제보 게시판에 제보 부탁드립니다.</div>
         </div>
         <br>
     </body>

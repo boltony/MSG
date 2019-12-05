@@ -25,6 +25,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -44,6 +45,11 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
+	text-align: center;
+}
+
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
 }
 
 #leftBarTitle {
@@ -60,7 +66,7 @@
 	float: left;
 }
 
-#leftBar_contents1 h3 {
+#leftBar_contents1 h1 {
 	line-height: 50px;
 }
 
@@ -141,12 +147,11 @@ tr {
 }
 
 #modifyBtn {
-	width: 100px;
-	height: 30px;
-	background-color: #2a9cb1;
+	width: 120px; height: 40px;
+    background-color: #66b5d0;
 	color: white;
-	border: none;
-	border-radius: 5px;
+	border: none; border-radius: 5px;
+	font-size: 16px;
 }
 
 #zipcode_btn {
@@ -183,14 +188,14 @@ input[type='password'], input[type='text'] {
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_Info.jsp" class=mya>나의 정보</a>
 			</p>
-			<p>
-				<a href="${pageContext.request.contextPath}/member/mypage_modify.jsp" class=mya>정보 수정하기</a>
-			</p>	
+			<p><div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+				<a href="${pageContext.request.contextPath}/member/mypage_modify.jsp" class=mya style="color:white;">정보 수정하기</a>
+			</div></p>
 			<p>
 				<a href="${pageContext.request.contextPath}/mywrite.mem" class=mya>내 글 목록</a>
 			</p>
@@ -203,8 +208,8 @@ input[type='password'], input[type='text'] {
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3 style="padding-left: 30px;">정보 수정</h3>
-			<p style="padding-left: 30px;">정보를 수정할 경우에는 <u>비밀번호를 꼭 다시</u> 한 번 입력해 주세요.</p>
+			<h1 style="padding-left: 30px;">정보 수정</h1>
+			<p style="padding-left: 30px; border-bottom: 1px solid black;">정보를 수정할 경우에는 <b>비밀번호를 꼭 다시</b> 한 번 입력해 주세요.</p>
 
 		</div>
 		<div id=leftBar_contents2>
@@ -227,10 +232,10 @@ input[type='password'], input[type='text'] {
 					</div></a>
 			</div>
 			<div style="width: 100%; height: 100px;"></div>
-			<div style="width: 70%; height: 60%; float: left;">
+			<div style="width: 600px;; height: 60%; margin:auto;">
 
 				<div
-					style="width: 800px; margin-top: 30px; margin-left: 150px;">
+					style="width: 800px; margin-top: 30px; margin-left: -30px;">
 					<form action="${pageContext.request.contextPath}/infoModify.mem" method="post" id="frm">
 						<table class=modifyTb>
 							<tr>
@@ -352,9 +357,6 @@ input[type='password'], input[type='text'] {
 	</div>
 
 	<script>
-		$("#modifyBtn").on("click", function() {
-			$("#frm").submit();
-		})
 
 		$("#pw_find_hint>option[value=${sessionScope.loginInfo.pw_find_hint}]")
 				.attr("selected", true);
@@ -367,6 +369,12 @@ input[type='password'], input[type='text'] {
 	<!-- ----- footer 끝 ------------------------------------------  -->
 
 	<script>
+	var pwValid = 0;
+	var phoneValid = 0;
+	var pwcheckValid = 0;
+	var emailValid = 0;
+	var emailCheckValid = 0;
+	
 		// 우편번호 찾기 실행 함수
 		function sample4_execDaumPostcode() {
 			new daum.Postcode({
@@ -388,34 +396,28 @@ input[type='password'], input[type='text'] {
 							var result = regex.exec(data);
 
 							if (result != null) {
-								$("#alert_pw_form").html("올바른 비밀번호 형식입니다.")
-										.css("color", "blue");
+								$("#alert_pw_form").html("올바른 비밀번호 형식입니다.").css("color", "blue");
+								pwValid = 1;
 							} else {
-								$("#alert_pw_form").html("잘못된 비밀번호 형식입니다.")
-										.css("color", "red");
+								$("#alert_pw_form").html("잘못된 비밀번호 형식입니다.").css("color", "red");
 								$("#pw").focus();
+								pwValid = 0;
 								return false;
 							}
 						})
+						
+		// 비밀번호-비밀번호체크 일치 여부
+		$("#pw_check").on("input", function() {
+			if ($("#pw").val() == $("#pw_check").val()) {
+				$("#alert_pw").html("비밀번호가 일치합니다.").css("color", "blue");
+				pwcheckValid = 1;
+			} else {
+				$("#alert_pw").html("비밀번호가 일치하지 않습니다.").css("color", "red");
+				pwcheckValid = 0;
+			}
+		})
+						
 
-		// 이름 정규식 검사
-		$("#name").on(
-				"blur",
-				function() {
-					var regex = /^[가-힣]+$/;
-					var data = $("#name").val();
-					var result = regex.exec(data);
-
-					if (result != null) {
-						$("#alert_name_form").html("올바른 이름 형식입니다.").css(
-								"color", "blue");
-					} else {
-						$("#alert_name_form").html("잘못된 이름 형식입니다.").css(
-								"color", "red");
-						$("#name").focus();
-						return false;
-					}
-				})
 		// 전화번호 정규식 검사
 		$("#phone").on(
 				"blur",
@@ -425,12 +427,12 @@ input[type='password'], input[type='text'] {
 					var result = regex.exec(data);
 
 					if (result != null) {
-						$("#alert_phone_form").html("올바른 전화번호 형식입니다.").css(
-								"color", "blue");
+						$("#alert_phone_form").html("올바른 전화번호 형식입니다.").css("color", "blue");
+						phoneValid = 1;
 					} else {
-						$("#alert_phone_form").html("잘못된 전화번호 형식입니다.").css(
-								"color", "red");
+						$("#alert_phone_form").html("잘못된 전화번호 형식입니다.").css("color", "red");
 						$("#phone").focus();
+						phoneValid = 0;
 						return false;
 					}
 				})
@@ -443,29 +445,18 @@ input[type='password'], input[type='text'] {
 					var result = regex.exec(data);
 
 					if (result != null) {
-						$("#alert_email_form").html("올바른 이메일 형식입니다.").css(
-								"color", "blue");
+						$("#alert_email_form").html("올바른 이메일 형식입니다.").css("color", "blue");
+						emailValid = 1;
 					} else {
-						$("#alert_email_form").html("잘못된 이메일 형식입니다.").css(
-								"color", "red");
+						$("#alert_email_form").html("잘못된 이메일 형식입니다.").css("color", "red");
 						$("#email").focus();
+						emailValid = 0;
 						return false;
 					}
 				})
-		// 비밀번호-비밀번호체크 일치 여부
-		$("#pw_check").on("input", function() {
-			if ($("#pw").val() == $("#pw_check").val()) {
-				$("#alert_pw").html("비밀번호가 일치합니다.").css("color", "blue");
-			} else {
-				$("#alert_pw").html("비밀번호가 일치하지 않습니다.").css("color", "red");
-			}
-		})
-
+		
 		// 각 칸이 비어있으면 alert 창 띄우고 return 시키기!
-		$("#modifyBtn")
-				.on(
-						"click",
-						function() {
+		$("#modifyBtn").on("click",	function() {
 							if ($("#pw").val() == ""
 									|| $("#pw_check").val() == ""
 									|| $("#phone").val() == ""
@@ -477,7 +468,11 @@ input[type='password'], input[type='text'] {
 								alert("모든 항목은 필수 입력 사항입니다.");
 								return;
 							}
-							// 동의 구하는 radio 버튼이 동의가 아니면 return false하기!
+							
+							if(idValid * pwValid * nameValid * phoneValid * emailValid * emailCheckValid * pwcheckValid * idduplValid == 0){
+								alert("입력한 정보를 다시 확인해주세요!");
+								return;
+							}
 
 							if ($("#pw").val() != $("#pw_check").val()) {
 								alert("비밀번호 확인이 일치하지 않습니다.");

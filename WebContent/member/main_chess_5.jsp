@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>　</title>
+<title></title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
 @font-face {
@@ -38,13 +38,13 @@
 }
 
 #closeBtn {
-	width: 100px;
+	width: 120px;
 	height: 40px;
-	background-color: #7ac9d8;
+	background-color: #66b5d0;
 	border: none;
 	border-radius: 5px;
 	color: white;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 table {
@@ -80,10 +80,9 @@ td {
 				</h3>
 			</div>
 			아이가 평소에 잘 알고 있더라도 당황할 경우 이와 같은 정보들을 잊기 쉬워요.<br> 아이 자신의 이름, 부모님
-			성함, 자신의 나이, 집 주소, 집 번호, 부모님 핸드폰 번호 등을 기억할 수 있게 함께 연습해 주세요.<br>
-			<br> <span style="color: #ea0000;"><b>어떠한 상황에서라도
-					자연스럽게 위의 정보들을 말할 수 있도록 평소에 알려 주시는 것이 좋습니다.</b></span><br>
-			<br>
+			성함, 자신의 나이, 집 주소, 집 번호, 부모님 핸드폰 번호 등을 기억할 수 있게 함께 연습해 주세요.<br> <br>
+			<span style="color: #ea0000;"><b>어떠한 상황에서라도 자연스럽게 위의 정보들을
+					말할 수 있도록 평소에 알려 주시는 것이 좋습니다.</b></span><br> <br>
 
 			<div class="hx">
 				<h3 class="check">
@@ -92,11 +91,8 @@ td {
 						style="width: 20px; position: relative; top: 5px;"> 파악하기
 				</h3>
 			</div>
-			목적지와 동행인 알리기<br>
-			<br> <span style="color: #ea0000;"><b>외출할 일이 있다면 부모님께
-					어디에 누구와 가는지 알리는 것이 좋습니다.</b></span><br>
-			<br>
-			<br>
+			목적지와 동행인 알리기<br> <br> <span style="color: #ea0000;"><b>외출할
+					일이 있다면 부모님께 어디에 누구와 가는지 알리는 것이 좋습니다.</b></span><br> <br> <br>
 
 			<div class="hx">
 				<h3 class="check">
@@ -106,11 +102,10 @@ td {
 					주의시키기
 				</h3>
 			</div>
-			구체적인 예를 들어 설명해 주세요. 낯선 사람을 무조건 경계하라는 것이 아니라 길을 물어보며 차에 태우려고 한다든지, 강아지를
-			함께 찾아 달라며 아이에게 도움을 요청하는 등의 행동은 거부할 수 있게 해야 합니다.<br>
-			<br> <span style="color: #ea0000;"><b>어른은 아이에게 도움을
-					요청하지 않는다는 사실을 부모님도 미리 알고, 아이에게 알려 주어야 할 필요가 있습니다.</b></span><br>
-			<br>
+			구체적인 예를 들어 설명해 주세요. 낯선 사람을 무조건 경계하라는 것이 아니라 길을 물어보며 차에 태우려고 한다든지,
+			강아지를 함께 찾아 달라며 아이에게 도움을 요청하는 등의 행동은 거부할 수 있게 해야 합니다.<br> <br>
+			<span style="color: #ea0000;"><b>어른은 아이에게 도움을 요청하지 않는다는
+					사실을 부모님도 미리 알고, 아이에게 알려 주어야 할 필요가 있습니다.</b></span><br> <br>
 
 		</div>
 		<div id=termsClose>

@@ -31,7 +31,7 @@
             
        }
         th, td { padding: 10px; }
-		tr:not(.hide):nth-child(3n+2) { background-color: #F3F3F3; }
+		tr:not(.hide, .accept_btn):nth-child(3n+2) { background-color: #F3F3F3; }
         #sendinfo{
             float: right;
             width: 19%;
@@ -62,6 +62,10 @@
          margin-left : 10px;
          max-width:188px
         }
+        
+        .accept_btn{
+        	background-color: #f6fff2;
+        }
 
         </style>
       
@@ -80,11 +84,11 @@
 
 <div style="width: 100%; height: auto; position: relative; min-width:1400px;">
             <div style="min-width:182px;width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;" class="col-2">
-                <div style="height: 100px; width: 100%; padding-top: 30px;"><h3>관리자메뉴</h3></div>
-                <p><a href="${pageContext.request.contextPath}/viewAll.man" class=mya>회원관리</a></p>
-                <p><a href="${pageContext.request.contextPath}/list.mem" class=mya style="color: orangered">긴급제보등록승인</a></p>
-                <p><a href="${pageContext.request.contextPath}/Ylist.mem" class=mya>이메일수신동의회원 긴급메일일괄전송</a></p>
-                
+                <div style="height: 100px; width: 100%; padding-top: 30px;"><h3 style="margin-left:20px;">관리자 메뉴</h3></div>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/viewAll.man" class=mya>회원관리</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;background-color: #476491;"><a href="${pageContext.request.contextPath}/list.mem" class=mya style="color:white;">긴급신고관리</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/Ylist.mem" class=mya>일괄전송</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="requestlist.child" class=mya>실종아동관리</a></p>
 
             </div>
 
@@ -118,33 +122,40 @@
 
 	<input type="button" value="내용보기" id="show${dto.seq}"/></td></tr>
 <tr class="hide" id="cont${dto.seq }" style="display:none"; style="height:300px;
- background-color : #f6fff2;"><td colspan=4 style="text-align:left;padding-left:10px;
- text-indent:30px;max-width: 497px;word-break:break-all">내용 : ${dto.contents}</td>
-<td style="max-width: 188px;"><input type="button" value="내용숨기기" id="hide${dto.seq}"/>
+ background-color : #f6fff2;"><td colspan=5 style="text-align:left;padding-left:10px;
+ text-indent:30px;max-width: 497px;word-break:break-all">내용 : ${dto.contents}</td></tr>
+ <tr class="accept_btn" id="con${dto.seq}" style="display:none;text-align:right">
+<td colspan=5 style="max-width: 188px;"><input type="button" value="내용숨기기" id="hide${dto.seq}"/>
 <input type="button" value="승인하기" id="accept${dto.seq}"><input type="button" value="블랙" id="black${dto.seq}">
+<input type="button" value="삭제" id="del${dto.seq}">
 </td></tr>
 
    <script>
+   $("#del${dto.seq}").on("click",function(){
+        location.href = "${pageContext.request.contextPath}/Ndel.sos?seq=${dto.seq}"
+     });
 $('#show${dto.seq}').on("click",function(){
-	
-	$('#cont${dto.seq}').show();
-	$('#show${dto.seq}').css('display','none');
+   $('#con${dto.seq}').show();
+   $('#cont${dto.seq}').show();
+   $('#show${dto.seq}').css('display','none');
 })
 
   $('#hide${dto.seq}').on("click",function(){
-	  $('#cont${dto.seq}').hide();
-	  $('#show${dto.seq}').css('display','');
-		
-		
-	})
-	$('#accept${dto.seq}').on("click",function(){
-		location.href="accept.sos?seq=${dto.seq}"
-	})
-	$('#black${dto.seq}').on("click",function(){
-		location.href="${pageContext.request.contextPath}/black.mem?writer=${dto.writer}";
-	})
+     $('#con${dto.seq}').hide();
+     $('#cont${dto.seq}').hide();
+     $('#show${dto.seq}').css('display','');
+      
+      
+   })
+   $('#accept${dto.seq}').on("click",function(){
+      location.href="accept.sos?seq=${dto.seq}"
+   })
+   $('#black${dto.seq}').on("click",function(){
+      location.href="${pageContext.request.contextPath}/black.mem?writer=${dto.writer}";
+   })
 
   </script>
+
 </c:forEach>
 
 </table>

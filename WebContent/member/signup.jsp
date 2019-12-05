@@ -8,12 +8,158 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     </head>
+    <style>
+    body {
+    font-family: 'GoyangIlsan';
+    letter-spacing: 0.5px;
+}
+#signup_form {
+    width: 1000px;
+    margin: auto;
+}
+#signup_header {
+    text-align: center;
+    background-color: #4a7d9f;
+    color: white;
+    width: 700px;
+    height: 100px;
+    line-height: 50px;
+    margin: auto;
+    border-radius: 10px;
+}
+#signup_header_container {
+
+    font-size: 30px;
+}
+
+#content {
+    border: 1px solid black;
+}
+
+.terms {
+    overflow-y: scroll;
+    width: 800px;
+    height: 200px;
+    margin: auto;
+    border: 1px solid rgba(128, 128, 128, 0.42);
+    padding: 10px;
+    background-color: rgba(173, 169, 169, 0.13);
+}
+
+.terms p {
+    font-size: 12px;
+}
+
+#signup_form span{
+    font-size: 17px;
+}
+
+.alert1{
+    font-size: 11px;
+    color: red;
+    margin-bottom: 0px;
+}
+.alert2{
+    font-size: 11px; 
+    margin-bottom: 0px; 
+    color: red;
+}
+
+.signup_title{
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+    display: inline-block;
+}
+
+.agreement_container{
+    text-align: center;
+    margin: 10px;
+}
+
+.signup_title_container{
+    text-align: center;
+    height: 50px;
+    margin-top: 10px;
+}
+
+.signup_title_img{
+    display: inline-block;
+    position: relative;
+}
+
+.signup_btn_container{
+    text-align: center;
+    margin: 15px;
+    margin-top: 50px;
+}
+
+.signup_btn{
+    width: 120px;
+    height: 40px;
+    background-color: #66B5D0;		
+    box-shadow: none;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-family: 'GoyangIlsan';
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: white;
+}
+
+.basic_info{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 130px;
+    position: relative;
+    left: 50px;
+}
+
+.basic_info span{
+    display: inline-block;
+    text-align: right;
+    width: 150px;
+}
+
+.basic_info input[type=text],input[type=password]{
+    width: 275px;
+    height: 30px;
+}
+
+.basic_info input[type=radio]{
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.basic_info p{
+    display: inline-block;
+}
+
+.basic_info input[placeholder]{
+    font-size:13px;
+}
+
+#zipcode_btn{
+    border: none;
+    border-radius: 5px;
+    background-color: #C9AF96;
+    width: 100px;
+}
+#email_confirm_btn {
+    border: none;
+    border-radius: 5px;
+    background-color: #C9AF96;
+    width:100px;
+}
+    </style>
     
   <body>
   
@@ -90,8 +236,8 @@
         <div class="basic_info">
             <span>이메일</span>
             <input type="text" id="email" name="email" placeholder=" 이메일 입력 후 인증버튼을 클릭하세요">
-            <p class="alert2" id="alert_email_form"></p>
             <input type="button" id="email_confirm_btn" value="이메일 인증">
+            <p class="alert2" id="alert_email_form"></p>
             
         </div>
         <div class="basic_info">
@@ -109,8 +255,8 @@
         </div>
         <div class="basic_info">
             <span>이메일 수신여부</span>
-            <input type="radio" name="email_receive" value="Y">수신함
-            <input type="radio" name="email_receive" value="N">수신하지 않음
+            <label><input type="radio" name="email_receive" value="Y" checked>수신함</label>
+            <label><input type="radio" name="email_receive" value="N">수신하지 않음</label>
             <p style="font-size: 11px; color: gray;">본 항목에 '수신함' 체크시 실종아동 긴급신고 메일이 발송됩니다.</p>
         </div>
         <div></div>
@@ -259,10 +405,10 @@
         </div>
     </div>
     <div class="agreement_container">
-        <input type="radio" name="terms_agreement1" value="agree">
-        <span>동의</span>
-        <input type="radio" name="terms_agreement1" value="disagree">
-        <span>동의하지 않음</span>
+        <label><input type="radio" name="terms_agreement1" value="agree">
+        <span>동의</span></label>
+        <label><input type="radio" name="terms_agreement1" value="disagree" checked>
+        <span>동의하지 않음</span></label>
     </div>
     <br><br>
     <div class="signup_title_container">
@@ -385,10 +531,10 @@
         </div>
     </div>
     <div class="agreement_container">
-        <input type="radio" name="terms_agreement2" value="agree">
-        <span>동의</span>
-        <input type="radio" name="terms_agreement2" value="disagree">
-        <span>동의하지 않음</span>
+        <label><input type="radio" name="terms_agreement2" value="agree">
+        <span>동의</span></label>
+        <label><input type="radio" name="terms_agreement2" value="disagree" checked>
+        <span>동의하지 않음</span></label>
     </div>
       <div class="signup_btn_container">
        <button type="button" class="signup_btn" id="signup_join">회원가입</button>
@@ -473,6 +619,17 @@
 			}
 		})
 		
+		// 비밀번호-비밀번호체크 일치 여부
+	$("#pw_check").on("input",function(){
+		if($("#pw").val() == $("#pw_check").val()){
+			$("#alert_pw").html("비밀번호가 일치합니다.").css("color","blue");
+			pwcheckValid = 1;
+		}else{
+			$("#alert_pw").html("비밀번호가 일치하지 않습니다.").css("color","red");
+			pwcheckValid = 0;
+		}
+	})
+		
 	// 이름 정규식 검사
 		$("#name").on("blur",function(){
 			var regex = /^[가-힣]+$/;
@@ -515,16 +672,7 @@
 				emailValid = 0;
 			}
 		})
-	// 비밀번호-비밀번호체크 일치 여부
-	$("#pw_check").on("input",function(){
-		if($("#pw").val() == $("#pw_check").val()){
-			$("#alert_pw").html("비밀번호가 일치합니다.").css("color","blue");
-			pwcheckValid = 1;
-		}else{
-			$("#alert_pw").html("비밀번호가 일치하지 않습니다.").css("color","red");
-			pwcheckValid = 0;
-		}
-	})
+	
 	
 	// 각 칸이 비어있으면 alert 창 띄우고 return 시키기!
 		$("#signup_join").on("click",function(){
@@ -539,22 +687,23 @@
 				return;
 			}		
 			
-			if(idValid * pwValid * nameValid * phoneValid * emailValid * emailCheckValid * pwcheckValid * idduplValid == 0){
+			else if(idValid * pwValid * nameValid * phoneValid * emailValid * emailCheckValid * pwcheckValid * idduplValid == 0){
 				alert("입력한 정보를 다시 확인해주세요!");
 				return;
 			}
 			
 			// 동의 구하는 radio 버튼이 동의가 아니면 return false하기!
-			if($(":radio[name='terms_agreement1']:checked").val()=="disagree"){
+			else if($(":radio[name='terms_agreement1']:checked").val()=="disagree"){
 				alert("이용약관에 동의하지 않으면 회원가입이 불가능합니다.");
 				return;
 			}
-			if($(":radio[name='terms_agreement2']:checked").val()=="disagree"){
+			else if($(":radio[name='terms_agreement2']:checked").val()=="disagree"){
 				alert("개인정보처리방침에 동의하지 않으면 회원가입이 불가능합니다.");
 				return;
 			}
-			
-			$("#signup_form").submit();
+			else{
+				$("#signup_form").submit();
+			}
 		})
 		
 		$("#signup_cancel").on("click",function(){
@@ -563,7 +712,7 @@
 		
 		$("#email_confirm_btn").on("click",function(){
 			var email = $("#email").val();
-			window.open("../emailConfirm.mail?email=" + email,"회원가입 이메일 인증","width=500,height=300,resizable=no");
+			window.open("../emailConfirm.mail?email=" + email,"회원가입 이메일 인증","width=550,height=350,resizable=no");
 		})
 	
 	</script>

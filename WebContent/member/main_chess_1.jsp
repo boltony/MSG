@@ -26,11 +26,11 @@
                 text-align: center;
             }
             #closeBtn{
-                width: 100px; height: 40px;
-                background-color: #7ac9d8;
+                width: 120px; height: 40px;
+                background-color: #66b5d0;
                 border: none; border-radius: 5px;
                 color: white;
-                font-size: 15px;
+                font-size: 16px;
             }
 
             table{

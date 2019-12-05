@@ -27,7 +27,6 @@ a{
 	color: black;
 }
 #wrapper {
-	width: 90%;
 	margin: auto;
 }
 
@@ -53,7 +52,7 @@ a{
 
 .tTitle {
 	width: 43%;
-	text-align: left;
+	text-align: center;
 }
 
 .tDate {
@@ -69,7 +68,11 @@ a{
 	background-color: #FFCC57;
 }
 #mMenuBtn>a{
-	color: white;
+	width:160px;
+	height:30px;
+	font-size:20px;
+	list-style:none;
+	color:white;
 }
 td, th{
 	border-bottom:2px solid #c6c6c6;
@@ -86,31 +89,34 @@ th{
 	padding:0px;
 }
 #ul>li{
-	width:170px;
+	width:160px;
 	height:30px;
 	font-size:20px;
 	list-style:none;
-	font-weight:bold;
+	color: #535353;
 }
 button{
 	background-color: #FFCC57;
+	width:120px;
+	height:40px;
 	color:white;
-	font-weight:bold;
 	border:none;
 }
 #searchBtn,  #searchOption{
 	height:30px;
+	width:80px;
 }
-h2{
-	font-weight:bold;
-	width:200px;
+h3{
+	width:160px;
+	height:100px;
+	text-align:center;
 }
-#leftMenu{
-	margin-left:40px;
-}
-h1{
+#title{
+	font-size:40px;
+	margin:0px;
 	display:inline-block;
 }
+
 #babyText{
 	padding-top:20px;
 	float:right;
@@ -127,6 +133,12 @@ h1{
 	float:right;
 }
 
+a:hover{
+	text-decoration:none;
+	color:black;
+}
+
+
 
 
 </style>
@@ -135,20 +147,22 @@ h1{
 <jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 <jsp:include page="/resources/jsp/quickMenu.jsp"></jsp:include>
 	<div id="wrapper" style="padding-top:10px;min-width:1200px">
-		<div class="row">
+		<div class="row" style="padding-left:30px;">
 			<!--           wrapper에서 menu-->
 			<div class="col-2 text-center" id="leftMenu" style="min-width:220px;">
-				<h2 style="padding-top:10px">자유게시판</h2>
-				<ul id="ul">
+				<h3 style="padding-top:10px">자유게시판</h3>
+				<ul id="ul" style="text-align:center">
 					<li id="mMenuBtn" ><a href="${pageContext.request.contextPath}/missing.bo">실종아동 제보</a></li>
+					<p></p>
 					<li id="pMenuBtn"><a href="${pageContext.request.contextPath}/protect.bo">보호아동 제보</a></li>
+					<p></p>
 				</ul>
 			</div>
 			<!--            wrapper에서 내용-->
 			<div class="col-9">
 				<div class="row" style="height:190px">
 					<div class="col-12" style="border-bottom:3px solid #c6c6c6;padding-right:0px">
-						<h1 style="font-weight: bold;">실종아동 제보</h1>
+						<p id="title">실종아동 제보</p>
 						
 						<img id="babyImg" src="${pageContext.request.contextPath}/resources/images/%EA%B2%8C%EC%8B%9C%ED%8C%90%20%EC%95%A0%EA%B8%B0%EC%82%AC%EC%A7%84.png">
 						<span id="babyText" style="display:inline-block">
@@ -202,7 +216,7 @@ h1{
 						</table>
 					</div>
 				</div>
-				<div class="row text-right" style="padding-top:10px; padding-right:62px">
+				<div class="row text-right" style="padding-top:30px; padding-right:62px">
 					<div class="col-12">
 					<c:choose>
 					<c:when test="${loginInfo!=null }">

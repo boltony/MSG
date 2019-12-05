@@ -397,9 +397,9 @@ button[id^=login] {
 #policyTitle2 {
 	color: #4e4e4e;
 	text-align: center;
+	width: 100%;
 	height: 100px;
 	line-height: 100px;
-	width: 100%;
 	min-width: 1200px;
 }
 
@@ -432,22 +432,22 @@ button[id^=login] {
 	<c:choose>
 	<c:when test="${loginInfo==null}">
 	<div id=upnavi>
-            <a href="${pageContext.request.contextPath}/member/login.jsp" class=mainSmallMenu>로그인</a>　
-            <a href="${pageContext.request.contextPath}/member/signup.jsp" class=mainSmallMenu>회원가입</a>　
+            <a href="${pageContext.request.contextPath}/member/login.jsp" class=mainSmallMenu>로그인</a> |
+            <a href="${pageContext.request.contextPath}/member/signup.jsp" class=mainSmallMenu>회원가입</a> |
             <a href="${pageContext.request.contextPath}/member/login_my.jsp" class=mainSmallMenu>마이페이지</a>   
         </div>
 	</c:when>
 	<c:when test="${loginInfo!=null and loginInfo.manager_check=='Y'}">
 	<div id=upnavi>
-           ${loginInfo.name} 님 환영합니다!  
-           <a href="${pageContext.request.contextPath}/viewAll.man" class=mainSmallMenu>관리자 페이지</a>   
-           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>　
+           ${loginInfo.name} 님 환영합니다! |
+           <a href="${pageContext.request.contextPath}/viewAll.man" class=mainSmallMenu>관리자 페이지</a> |
+           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>
         </div>     
 	</c:when>
 	<c:when test="${loginInfo!=null and loginInfo.manager_check=='N'}">
 	<div id=upnavi>
-           ${loginInfo.name} 님 환영합니다!  
-           <a href="${pageContext.request.contextPath}/member/mypage.jsp" class=mainSmallMenu>마이페이지</a>   
+           ${loginInfo.name} 님 환영합니다! |
+           <a href="${pageContext.request.contextPath}/member/mypage.jsp" class=mainSmallMenu>마이페이지</a> |
            <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>　
         </div>     
 	</c:when>
@@ -465,15 +465,14 @@ button[id^=login] {
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
          <ul class="navbar-nav">
-            <li class="nav-item active"><a class="nav-link" href="#">
-                  공지사항 <span class="sr-only">(current)</span>
+            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/notice.no">공지사항 <span class="sr-only">(current)</span>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/child/insertInfo.jsp">실종아동등록</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/childList.child">실종아동찾기</a></li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">게시판</a>
+					aria-haspopup="true" aria-expanded="false">자유게시판</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/missing.bo">실종 아동 제보하기</a>
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/protect.bo">보호 아동 제보하기</a>
@@ -544,7 +543,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z1.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_1.jsp','policy','width=850,height=550,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_1.jsp','chess1','width=850,height=550,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>세계 실종 아동의 날</h4>
@@ -564,7 +563,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z5.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_2.jsp','policy','width=850,height=500,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_2.jsp','chess2','width=850,height=500,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>
@@ -583,7 +582,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z6.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_3.jsp','policy','width=850,height=450,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_3.jsp','chess3','width=850,height=450,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>안전 Dream의 지문 등 사전등록제</h4>
@@ -605,7 +604,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z2.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_4.jsp','policy','width=850,height=600,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_4.jsp','chess4','width=850,height=600,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>실종 신고</h4>
@@ -622,7 +621,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z3.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_5.jsp','policy','width=850,height=700,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_5.jsp','chess5','width=850,height=700,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>아이들에게 꼭 알려 주세요</h4>
@@ -639,7 +638,7 @@ button[id^=login] {
 			<div class=chess
 				style="background-image: url(${pageContext.request.contextPath}/resources/images/z8.jpg)">
 				<!-- 한 개의 큰 틀 -->
-				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_6.jsp','policy','width=850,height=450,location=no,status=no,scrollbars=no'); return false;">
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/main_chess_6.jsp','chess6','width=850,height=450,location=no,status=no,scrollbars=no'); return false;">
 					<div class=chess_sheet>
 						<!-- 호버 전 -->
 						<h4>실종 아동 현황</h4>
@@ -666,32 +665,30 @@ button[id^=login] {
 
 
    <!-- 하단 -->
-   <div class=policyContainer>
-      <div id=policyTitle1>
-         <div id=policy1>
-            <img src="${pageContext.request.contextPath}/resources/images/logo_n.png"
-               style="width: 200px; margin-left: -25px;"><br> <br>
-            +82 10 0000 0000<br> info@msg.missingchildren<br>
-            Daeil-building 3F, 120 Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
+	<div class=policyContainer>
+		<div id=policyTitle1>
+			<div id=policy1>
+				<img src="${pageContext.request.contextPath}/resources/images/logo_n.png"
+					style="width: 200px; margin-left: -25px;"><br><br>
+					+82 10 0000 0000<br>
+					info@msg.missingchildren<br>
+					Daeil-building 3F, 120 Namdaemun-ro Jung-gu Seoul Republic of Korea<br>
+			</div>
+			<div id=policy2>
+				<a href="${pageContext.request.contextPath}/main.jsp" class=poline>Home</a><br> 
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/policy.jsp','policy1',
+				'width=850,height=630,location=no,status=no,scrollbars=no'); return false;">개인 정보 취급 방침</a><br>
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/terms.jsp','policy2',
+				'width=850,height=630,location=no,status=no,scrollbars=no'); return false;">이용 안내</a><br>
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/emailCollect.jsp','policy3',
+				'width=850,height=430,location=no,status=no,scrollbars=no'); return false;">이메일 무단 수집 거부</a><br>
+				<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/inquiry.jsp','policy4',
+				'width=850,height=430,location=no,status=no,scrollbars=no'); return false;">문의하기</a><br>
+			</div>
+		</div>
 
-         </div>
-         <div id=policy2>
-            <a href="${pageContext.request.contextPath}/main.jsp" class=poline>Home</a><br> 
-            <a href="#" class=poline
-               onclick="window.open('${pageContext.request.contextPath}/member/policy.jsp','policy','width=850,height=630,location=no,status=no,scrollbars=no'); return false;">개인
-               정보 취급 방침</a><br> <a href="#" class=poline
-               onclick="window.open('${pageContext.request.contextPath}/member/terms.jsp','policy','width=850,height=630,location=no,status=no,scrollbars=no'); return false;">
-               이용 안내</a><br> <a href="#" class=poline
-               onclick="window.open('${pageContext.request.contextPath}/member/emailCollect.jsp','policy','width=850,height=430,location=no,status=no,scrollbars=no'); return false;">
-               이메일 무단 수집 거부</a><br>
-			<a href="#" class=poline onclick="window.open('${pageContext.request.contextPath}/member/inquiry.jsp','policy','width=850,height=430,location=no,status=no,scrollbars=no'); return false;">
-			문의하기</a><br>
-         </div>
-      </div>
-
-      <div id=policyTitle2>Copyright © 2019 KH Missing children Go
-         home ㅣ Created by MSG All Right Reserved</div>
-   </div>
+		<div id=policyTitle2>Copyright © 2019 KH Missing children Go home ㅣ Created by MSG All Right Reserved</div>
+	</div>
    
    <!--  -------------- script 시작 -------------------  -->
    <script>

@@ -26,6 +26,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -45,14 +46,17 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
-	"
+	text-align: center;
+}
+
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
 }
 
 #leftBarTitle {
 	height: 100px;
 	width: 100%;
 	padding-top: 30px;
-	"
 }
 
 #leftBar_contents1 {
@@ -64,7 +68,7 @@
 	text-align: center;
 }
 
-#leftBar_contents1 h3 {
+#leftBar_contents1 h2 {
 	line-height: 100px;
 }
 
@@ -75,17 +79,11 @@
 }
 
 #pwRe {
-	width: 100px;
-	background-color: white;
-	border-radius: 8px;
-	background-color: #1e9db5;
+	width: 120px; height: 40px;
+	background-color: #66b5d0;
+	border-radius: 5px;
 	color: #f8f8f8;
 	border: none;
-}
-
-#pwRe:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
 }
 </style>
 
@@ -109,11 +107,11 @@
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
-			<p>
-				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya>나의 정보</a>
-			</p>
+			<p><div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya style="color:white;">나의 정보</a>
+			</div></p>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_modify.jsp" class=mya>정보 수정하기</a>
 			</p>	
@@ -129,16 +127,16 @@
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3>안전한 사용을 위하여 비밀번호를 다시 한 번 확인합니다.</h3>
+			<h2 style="color:white;">안전한 사용을 위하여 비밀번호를 다시 한 번 확인합니다.</h2>
 		</div>
 		<div id=leftBar_contents2 style="">
 		<form action="${pageContext.request.contextPath}/relogin_info.mem" method="post" name="frm" id="frm">
 			<div
-				style="background-color: white; width: 50%; height: 100px; margin: auto; line-height: 40px; padding-top: 50px">
+				style="background-color: white; width: 400px; height: 100px; margin: auto; line-height: 40px; padding-top: 50px">
 				아이디　　<span><b>${sessionScope.loginInfo.id}</b></span><br> 비밀번호　<input type="password"
-					style="height: 25px;" id="pw" name=pw><br>
+					style="height: 25px; width:180px;" id="pw" name=pw><br>
 				<br>
-				<div style="padding-left: 100px;">
+				<div style="padding-left: 80px;">
 					<button id=pwRe>확인</button>
 				</div>
 			</div>

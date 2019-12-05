@@ -8,44 +8,6 @@
     font-family: 'GoyangIlsan';
 }
 
-/* ----- footer ----- */
-.policyContainer{
-    background-color: #b1b1b1;
-}
-#policyTitle1{
-    min-width: 1200px;
-    width: 100%;
-    color: #747474;
-    height: 330px;
-    /*                background-color: #363333;*/
-    background-color: white;
-}
-#policyTitle2{
-    color: #4e4e4e;
-    text-align: center;
-    width: 100%;
-    height: 100px;
-    line-height: 100px;
-}
-#policy1{
-    margin-top: 100px; margin-left: 100px;
-    float: left;
-}
-#policy2{
-    margin: 100px; width: 300px;
-    float: right;
-    line-height: 30px;
-}
-.poline{
-    color: #747474;
-}
-.poline:hover{
-    text-decoration: none;
-    color: #d6c304;
-}
-.usee{
-	height:200px;
-}
 
 
 /* ----- nav ----- */
@@ -63,10 +25,12 @@
     z-index: 1;
 }
 #upnavi{
-    position: relative;
-    margin: 3px;
-    float: right;
+    width:330px;
     color: #717171;
+    margin: 3px;
+    left:100%;
+    transform:translateX(-100%);
+    position: fixed;
     z-index:2;
 }
 .mainSmallMenu{
@@ -115,6 +79,8 @@ ropdown{
 	z-index: 1;
 }
 
+
+
 /* ----- quick ----- */
 #container0{
     position: fixed;
@@ -156,141 +122,45 @@ ropdown{
 }
 
 
-/* ------ signup------- */
-         
-    body {
-        font-family: 'GoyangIlsan';
-        letter-spacing: 0.5px;
-    }
-    #signup_form {
-        width: 1000px;
-        margin: auto;
-    }
-    #signup_header {
-        text-align: center;
-        background-color: #4a7d9f;
-        color: white;
-        width: 700px;
-        height: 100px;
-        line-height: 50px;
-        margin: auto;
-        border-radius: 10px;
-    }
-    #signup_header_container {
-        margin-top: 40px;
-        font-size: 30px;
-    }
 
-    #content {
-        border: 1px solid black;
-    }
-
-    .terms {
-        overflow-y: scroll;
-        width: 800px;
-        height: 200px;
-        margin: auto;
-        border: 1px solid rgba(128, 128, 128, 0.42);
-        padding: 10px;
-        background-color: rgba(173, 169, 169, 0.13);
-    }
-
-    .terms p {
-        font-size: 12px;
-    }
-    
-    #signup_form span{
-        font-size: 17px;
-    }
-   
-    .alert1{
-        font-size: 11px;
-        color: red;
-        margin-bottom: 0px;
-    }
-    .alert2{
-     font-size: 11px; 
-     margin-bottom: 0px; 
-     color: red;
-     }
-  
-    .signup_title{
-        margin: 10px;
-        font-size: 16px;
-        font-weight: bolder;
-        text-align: center;
-        display: inline-block;
-    }
-   
-    .agreement_container{
-        text-align: center;
-        margin: 10px;
-    }
-   
-    .signup_title_container{
-        text-align: center;
-        height: 50px;
-        margin-top: 10px;
-    }
-   
-    .signup_title_img{
-        display: inline-block;
-        position: relative;
-    }
-    
-    .signup_btn_container{
-        text-align: center;
-        margin: 15px;
-    }
-    
-    .signup_btn{
-        width: 150px;
-        height: 50px;
-        background-color: #66B5D0;
-        box-shadow: none;
-        border-radius: 5px;
-        border: none;
-        font-size: 15px;
-        font-family: 'GoyangIlsan';
-        letter-spacing: 0.5px;
-        text-align: center;
-    }
-  
-    .basic_info{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        position: relative;
-        left: 50px;
-    }
-    
-    .basic_info span{
-        display: inline-block;
-        text-align: right;
-        width: 150px;
-    }
-    
-    .basic_info input[type=text],input[type=password]{
-        width: 275px;
-        height: 30px;
-    }
-	
-	.basic_info input[type=radio]{
-    margin-left: 20px;
-    margin-right: 5px;
-	}
-   
-    .basic_info p{
-    display: inline-block;
-	}
-	
-	.basic_info input[placeholder]{
-	font-size:13px;
-	}
-	
-	#zipcode_btn{
-        border: none;
-        border-radius: 5px;
-        background-color: #C9AF96;
-	}
-
-
+/* ----- footer ----- */
+.policyContainer{
+    background-color: #b1b1b1;
+    min-width: 1200px;
+}
+#policyTitle1{
+    min-width: 1200px;
+    width: 100%;
+    color: #747474;
+    height: 350px;
+    /*                background-color: #363333;*/
+    background-color: white;
+}
+#policyTitle2{
+    color: #4e4e4e;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    min-width: 1200px;
+}
+#policy1{
+    margin-top: 100px; margin-left: 100px;
+    float: left;
+}
+#policy2{
+    margin: 100px; width: 300px;
+    float: right;
+    line-height: 30px;
+}
+.poline{
+    color: #747474;
+}
+.poline:hover{
+    text-decoration: none;
+    color: #fdb813;
+    text-shadow: 0px 0px 1px #b5b5b5;
+}
+.usee{
+	height:200px;
+}

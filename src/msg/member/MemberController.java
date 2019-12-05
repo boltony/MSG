@@ -15,6 +15,7 @@ import msg.sos.SosDTO;
 import msg.support.SupportDTO;
 import msg.utils.Configuration;
 import msg.utils.EncryptionUtils;
+import msg.utils.XSS_protect;
 
 @WebServlet("*.mem")
 public class MemberController extends HttpServlet {
@@ -31,8 +32,8 @@ public class MemberController extends HttpServlet {
 
 		try {
 			if (cmd.equals("/login.mem")) {
-				String id = request.getParameter("id");
-				String pw = request.getParameter("pw");
+				String id = XSS_protect.replaceParameter(request.getParameter("id"));
+				String pw = XSS_protect.replaceParameter(request.getParameter("pw"));
 				boolean result = MemberDAO.getInstance().isLoginOk(id, pw);
 
 				if(result==true) {
@@ -54,13 +55,13 @@ public class MemberController extends HttpServlet {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 				String pw_find_hint = request.getParameter("pw_find_hint");
-				String pw_find_answer = request.getParameter("pw_find_answer");
+				String pw_find_answer = XSS_protect.replaceParameter(request.getParameter("pw_find_answer"));
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
 				String email = request.getParameter("email");
-				String zipcode = request.getParameter("zipcode");
-				String address = request.getParameter("address");
-				String address2 = request.getParameter("address2");
+				String zipcode = XSS_protect.replaceParameter(request.getParameter("zipcode"));
+				String address = XSS_protect.replaceParameter(request.getParameter("address"));
+				String address2 = XSS_protect.replaceParameter(request.getParameter("address2"));
 				String email_receive = request.getParameter("email_receive");
 				System.out.println(email_receive);
 
@@ -92,9 +93,9 @@ public class MemberController extends HttpServlet {
 
 			}
 			else if(cmd.equals("/findID.mem")) {
-				String name = request.getParameter("id_find_name");
-				String phone = request.getParameter("id_find_phone");
-				String email = request.getParameter("id_find_email");
+				String name = XSS_protect.replaceParameter(request.getParameter("id_find_name"));
+				String phone = XSS_protect.replaceParameter(request.getParameter("id_find_phone"));
+				String email = XSS_protect.replaceParameter(request.getParameter("id_find_email"));
 
 				List<String> ids = MemberDAO.getInstance().findID(name, phone, email);
 
@@ -111,7 +112,7 @@ public class MemberController extends HttpServlet {
 			if(cmd.contentEquals("/relogin_info.mem")) {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
 				String id = request.getParameter("id");
-				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
+				String pw = XSS_protect.replaceParameter(EncryptionUtils.getSHA512(request.getParameter("pw")));
 				Boolean result = dao.reloginResult(dto.getId(), pw);
 				System.out.println("아이디 : " + dto.getId() + " 비번 : " + pw);
 				System.out.println("결과 : " + result);
@@ -127,7 +128,7 @@ public class MemberController extends HttpServlet {
 				// 수정 비밀번호 재확인
 			}else if(cmd.contentEquals("/relogin_modify.mem")) {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
-				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
+				String pw = XSS_protect.replaceParameter(EncryptionUtils.getSHA512(request.getParameter("pw")));
 				Boolean result = dao.reloginResult(dto.getId(), pw);
 				if(result) {
 					response.sendRedirect("member/mypage_modify.jsp");
@@ -141,8 +142,8 @@ public class MemberController extends HttpServlet {
 
 			}
 			else if(cmd.contentEquals("/mylogin.mem")) {
-				String id = request.getParameter("id");
-				String pw = request.getParameter("pw");
+				String id = XSS_protect.replaceParameter(request.getParameter("id"));
+				String pw = XSS_protect.replaceParameter(request.getParameter("pw"));
 				boolean result = MemberDAO.getInstance().isLoginOk(id, pw);
 
 				if(result==true) {	// session을 dto에 담기
@@ -160,7 +161,7 @@ public class MemberController extends HttpServlet {
 			}
 			else if(cmd.contentEquals("/memOut.mem")) {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
-				String check_pw = EncryptionUtils.getSHA512(request.getParameter("outcheck1"));
+				String check_pw = XSS_protect.replaceParameter(EncryptionUtils.getSHA512(request.getParameter("outcheck1")));
 
 				Boolean result = dao.reloginResult(dto.getId(), check_pw);
 				if(result) {
@@ -169,7 +170,7 @@ public class MemberController extends HttpServlet {
 						request.getSession().invalidate();
 						response.sendRedirect("member/outFin.jsp");
 					}else {
-						response.sendRedirect("member/error");
+						response.sendRedirect("error.jsp");
 					}
 				}else {
 					response.setContentType("text/html; charset=UTF8");
@@ -205,38 +206,44 @@ public class MemberController extends HttpServlet {
 
 			// 내 기부 내역
 			else if(cmd.contentEquals("/mydonate.mem")) {
-				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
-
-				int cpage = 1;
-				String param = request.getParameter("cpage");
-				if(param!=null) {
-					cpage = Integer.parseInt(param);
+				if(request.getSession().getAttribute("loginInfo") == null) {
+					response.sendRedirect("member/login.jsp");
 				}
+				else {
+					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
 
-				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1);
-				int end = cpage * Configuration.recordCountPerPage;
-				List<SupportDTO> pageList = dao.selectByPageD(dto.getId(), start, end);
-				String navi = dao.getPageNaviD(dto.getId(), cpage);
+					int cpage = 1;
+					String param = request.getParameter("cpage");
+					if(param!=null) {
+						cpage = Integer.parseInt(param);
+					}
 
-				List<SupportDTO> list = dao.mydonateList(dto.getId());
-				String totalDonation = dao.totalDonation(dto.getId());
-				request.setAttribute("pageList", pageList);
-				request.setAttribute("list", list);
-				request.setAttribute("navi", navi);
-				request.setAttribute("totalDonation", totalDonation);
-				request.getRequestDispatcher("member/mypage_donate.jsp").forward(request, response);
+					int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1);
+					int end = cpage * Configuration.recordCountPerPage;
+
+					List<SupportDTO> pageList = dao.selectByPageD(dto.getId(), start, end);
+					String navi = dao.getPageNaviD(dto.getId(), cpage);
+
+					List<SupportDTO> list = dao.mydonateList(dto.getId());
+					String totalDonation = dao.totalDonation(dto.getId());
+					request.setAttribute("pageList", pageList);
+					request.setAttribute("list", list);
+					request.setAttribute("navi", navi);
+					request.setAttribute("totalDonation", totalDonation);
+					request.getRequestDispatcher("member/mypage_donate.jsp").forward(request, response);
+				}
 
 				// 수정한 정보 db로 입력
 			}else if(cmd.contentEquals("/infoModify.mem")) {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginInfo");
 				String pw = request.getParameter("pw");
 				String pw_find_hint = request.getParameter("pw_find_hint");
-				String pw_find_answer = request.getParameter("pw_find_answer");
+				String pw_find_answer = XSS_protect.replaceParameter(request.getParameter("pw_find_answer"));
 				String phone = request.getParameter("phone");
 				String email = request.getParameter("email");
-				String zipcode = request.getParameter("zipcode");
-				String address1 = request.getParameter("address1");
-				String address2 = request.getParameter("address2");
+				String zipcode = XSS_protect.replaceParameter(request.getParameter("zipcode"));
+				String address1 = XSS_protect.replaceParameter(request.getParameter("address1"));
+				String address2 = XSS_protect.replaceParameter(request.getParameter("address2"));
 				String email_receive = request.getParameter("email_receive");
 				System.out.println(email_receive);
 
@@ -255,7 +262,7 @@ public class MemberController extends HttpServlet {
 
 			}
 			else if(cmd.contentEquals("/acceptY.mem")) {
-				String contents = request.getParameter("contents");
+				String contents = XSS_protect.replaceParameter(request.getParameter("contents"));
 				List<MemberDTO> list = dao.selectAll();
 				request.setAttribute("con", contents);
 				request.setAttribute("list", list);
@@ -314,7 +321,7 @@ public class MemberController extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("/error.jsp");
 		}
 	}
 

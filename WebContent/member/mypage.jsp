@@ -9,7 +9,7 @@
 <title>My Page</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	href="https://stackpath.boot	strapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <script
@@ -25,6 +25,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -44,6 +45,11 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
+	text-align: center;
+}
+
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
 }
 
 #leftBarTitle {
@@ -53,15 +59,14 @@
 }
 
 #leftBar_contents1 {
-	/*background-color: #7ac9d8; */
 	width: 70%;
-	height: 100px;
 	min-width: 800px;
 	float: left;
+	height:65px;
+	border-bottom: 1px solid black;
 }
 
-#leftBar_contents1 h3 {
-	line-height: 100px;
+#leftBar_contents1 h1 {
 }
 
 #leftBar_contents2 {
@@ -70,34 +75,6 @@
 	float: left;
 	height: 350px;
 	line-height: 50px;
-}
-
-#pwRe1 {
-	width: 130px;
-	background-color: white;
-	border-radius: 8px;
-	background-color: #bf5f5f;
-	color: #f8f8f8;
-	border: none;
-}
-
-#pwRe1:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
-}
-
-#pwRe2 {
-	width: 100px;
-	background-color: white;
-	border-radius: 8px;
-	background-color: #399fb2;
-	color: #f8f8f8;
-	border: none;
-}
-
-#pwRe2:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
 }
 
 .my_icons_container {
@@ -145,7 +122,7 @@
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya>나의 정보</a>
@@ -165,7 +142,7 @@
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3 style="padding-left: 30px;">마이 페이지</h3>
+			<h1>마이 페이지</h1>
 
 		</div>
 

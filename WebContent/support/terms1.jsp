@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
+<style>
+.modal-dialog{
+	background-color: rgba(173, 169, 169, 0.13);
+}
+</style>
 <body>
  <div id="UserAgreementDialog" class="panel panel-default modal fade in" role="dialog" style="display: block;  max-width: 790px;">
     <div class="modal-dialog">

@@ -21,6 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import msg.member.MemberDTO;
 import msg.utils.Configuration;
+import msg.utils.XSS_protect;
 
 
 @WebServlet("*.child")
@@ -89,7 +90,7 @@ public class ChildController extends HttpServlet {
 				}
 				int missing_area = Integer.parseInt(are);
 
-				String missing_area_detail = multi.getParameter("missing_area_detail"); //상세주소
+				String missing_area_detail = XSS_protect.replaceParameter(multi.getParameter("missing_area_detail")); //상세주소
 
 				int height = Integer.parseInt(multi.getParameter("height")); //키
 				int weight = Integer.parseInt(multi.getParameter("weight")); //체중
@@ -108,7 +109,7 @@ public class ChildController extends HttpServlet {
 				}
 				int blood_type = Integer.parseInt(blood_typ);
 
-				String feature = multi.getParameter("feature"); //신체특징
+				String feature = XSS_protect.replaceParameter(multi.getParameter("feature")); //신체특징
 
 				String up[] = multi.getParameterValues("top"); //긴팔,반팔
 				String to = "";
@@ -256,8 +257,8 @@ public class ChildController extends HttpServlet {
 				String search = "&s_name=" + s_name + "&gender=" + s_gender + "&target=" + s_target + 
 								"&s_area=" + s_area + "&s_area_detail=" + s_area_detail + "&s_feature=" + s_feature;
 				
-				String pageNavi = childDAO.getPageNavi(cpage, count, search);
 				List<ChildDTO> list = childDAO.selectByPage(s_name, s_gender, s_target, s_area, s_area_detail, s_feature, begin, end);
+				String pageNavi = childDAO.getPageNavi(cpage, count, search);
 
 				for(int i = 0; i < list.size(); i++) {
 					int seq = list.get(i).getSeq();
@@ -296,6 +297,45 @@ public class ChildController extends HttpServlet {
 				request.setAttribute("file_names_list", file_names_list);
 				request.getRequestDispatcher("child/childDetail.jsp").forward(request, response);
 			}
+			else if(cmd.contentEquals("/requestlist.child")) {
+	            int cpage = 1;
+	            String tmpPage = request.getParameter("cpage");
+	            if(tmpPage != null) {
+	               cpage = Integer.parseInt(tmpPage);
+	            }
+	            
+	            int begin = cpage * Configuration.recordCountPerPage -(Configuration.recordCountPerPage - 1);
+	            int end = cpage * Configuration.recordCountPerPage;
+	            
+	            List<ChildDTO> list = childDAO.selectByPageN(begin, end);
+	            String pageNavi = childDAO.getPageNaviN(cpage);
+	            
+	            request.setAttribute("list", list);
+	            request.setAttribute("pageNavi", pageNavi);
+	            request.getRequestDispatcher("child/agreeN.jsp").forward(request, response);;
+	         }
+	         else if(cmd.contentEquals("/reportdel.child")) {
+	            int seq = Integer.parseInt(request.getParameter("seq"));
+	            int result = childDAO.delete(seq);
+	            if(result > 0) {
+	               System.out.println("삭제성공!");
+	               response.sendRedirect("requestlist.child");
+	            }else {
+	               response.sendRedirect("error.jsp");
+	            }
+	         }
+	         else if(cmd.contentEquals("/reportaccept.child")) {
+	            int seq = Integer.parseInt(request.getParameter("seq"));
+	            int result = childDAO.NtoY(seq);
+	            if(result > 0 ) {
+	               System.out.println("NtoY 성공");
+	               pw.append("<script> alert('승인 완료'); </script>");
+	               response.sendRedirect("requestlist.child");
+	               
+	            }else {
+	               response.sendRedirect("error.jsp");
+	            }
+	         }
 
 		} catch (Exception e) {
 			e.printStackTrace();

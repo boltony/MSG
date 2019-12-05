@@ -24,6 +24,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -43,6 +44,11 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
+	text-align: center;
+}
+
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
 }
 
 #leftBarTitle {
@@ -59,8 +65,9 @@
 	float: left;
 }
 
-#leftBar_contents1 h3 {
+#leftBar_contents1 h1 {
 	line-height: 100px;
+	text-align: center;
 }
 
 #leftBar_contents2 {
@@ -70,7 +77,7 @@
 }
 
 #pwRe1 {
-	width: 130px;
+	width: 120px; height: 40px;
 	background-color: white;
 	border-radius: 8px;
 	background-color: #bf5f5f;
@@ -78,23 +85,13 @@
 	border: none;
 }
 
-#pwRe1:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
-}
-
 #pwRe2 {
-	width: 100px;
+	width: 120px; height: 40px;
 	background-color: white;
 	border-radius: 8px;
-	background-color: #399fb2;
+	background-color: #66b5d0;
 	color: #f8f8f8;
 	border: none;
-}
-
-#pwRe2:hover {
-	background-color: #367c89;
-	transition-duration: 0.4s;
 }
 </style>
 </head>
@@ -111,7 +108,7 @@
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya>나의 정보</a>
@@ -125,25 +122,25 @@
 			<p>
 				<a href="${pageContext.request.contextPath}/mydonate.mem" class=mya>후원 내역</a>
 			</p>
-			<p>
-				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya>회원 탈퇴</a>
-			</p>
+			<p><div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya  style="color:white;">회원 탈퇴</a>
+			</div></p>
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3 style="padding-left: 30px;">회원 탈퇴 안내</h3>
+			<h1 style="color:white";>회원 탈퇴 안내</h1>
 
 		</div>
 		<form action="${pageContext.request.contextPath}/memOut.mem" method="post" name="frm" id=frm>
 			<div id=leftBar_contents2>
-				<p style="padding-left: 30px; height: 50px; line-height: 50px;">
+				<p style="height: 50px; line-height: 50px; text-align: center; min-width:800px;">
 					${sessionScope.loginInfo.name}님께서 사용하고 계신 아이디 <span><b>${sessionScope.loginInfo.id}</b></span>는 탈퇴할 경우 계정 복구가 불가하오니 신중하게 선택하시기
 					바랍니다.
 				</p>
 				<div
-					style="background-color: white; width: 50%; height: 100px; margin: auto; line-height: 40px; padding-top: 50px">
-					아이디　 <span><b>${sessionScope.loginInfo.id}</b></span><br> 비밀번호 <input type="password"
-						name=outcheck1 id=outcheck1 style="height: 25px;" required><br>
+					style="background-color: white; width: 400px; height: 100px; margin: auto; line-height: 40px; padding-top: 50px">
+					아이디　　 <span><b>${sessionScope.loginInfo.id}</b></span><br> 비밀번호 　<input type="password"
+						name=outcheck1 id=outcheck1 style="height: 25px; width:180px;" required><br>
 					<br>
 					<br>
 					<p style="font-size: 15px;">

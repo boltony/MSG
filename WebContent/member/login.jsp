@@ -314,7 +314,28 @@ to {opacity: 1;}
 			return;
 		}
 		$("#login_form").submit();
-	})
+	});
+	
+	$(document).on("keyup", function(e){
+        console.log(e.keyCode);
+
+        if(e.keyCode == 13){
+        	var login_input_id = $("#id").val();
+    		var login_input_pw = $("#password").val();
+    		if(login_input_id==""){
+    			alert("아이디 항목은 필수 입력값입니다.");
+    			$("#id").focus();
+    			return;
+    		}
+    		if(login_input_pw==""){
+    			alert("비밀번호 항목은 필수 입력값입니다.");
+    			$("#password").focus();
+    			return;
+    		}
+    		$("#login_form").submit();
+        }
+    });
+	
 	</script>
 </body>
 </html>

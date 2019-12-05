@@ -73,8 +73,9 @@ public class BoardDAO {
 				else if(content.contentEquals("%전남%")) {content = "15";}
 				else if(content.contentEquals("%제주%")) {content = "16";}
 				else if(content.contentEquals("%세종%")) {content = "17";}
-				else {content="";
-				sql = "select count(*) from board where board = ?";
+				else {
+					content="";
+					sql = "select count(*) from board where board = ?";
 				}
 				
 			}else {

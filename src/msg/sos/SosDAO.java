@@ -380,4 +380,22 @@ public class SosDAO {
 		}
 	}
 
+	public int deletesos(SosDTO dto) throws Exception{
+		String sql = 
+				"delete sos where seq=?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, dto.getSeq());
+
+
+			int result = pstat.executeUpdate();
+			con.commit();
+
+			return result;
+		}
+	}
+
 }

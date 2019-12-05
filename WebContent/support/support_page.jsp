@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title> 
+<title>후원신청</title> 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -38,7 +38,7 @@
                 font-size: 25px; 
                 font-family: 'GoyangIlsan'; 
                 color: white;
-                border-radius: 10px;
+                border-radius: 8px;
             }
             .procedure{
                 float: left;
@@ -75,13 +75,13 @@
 		<div
 			style="width: 300px; height: 100%; float: left; padding-left: 30px; line-height: 20px;"
 			class="col-2">
-			<div style="height: 100px; width: 300px; padding-top: 30px;">
+			<div style="height: 100px; width: 160px; text-align:center; padding-top: 30px;">
 				<h3>후원하기</h3>
 			</div>
-			<p>
-				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya>후원하기</a>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; background-color:#66b5d0; line-height:30px;">
+				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya style="color:white;">후원하기</a>
 			</p>
-			<p>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; line-height:30px;">
 				<a href="${pageContext.request.contextPath}/mydonate.mem" class=mya>후원 내역</a>
 			</p>
 
@@ -90,7 +90,7 @@
 			style="width: 60%; float: left; position: relative; left: 5%; border-bottom: 1px solid black;">
 			<div
 				style="width: 100%; border-bottom: 1px solid black; padding-top: 25px">
-				<h1>후원하기</h1>
+				<p style="font-size:40px">후원하기</p>
 			</div>
 			<div
 				style="width: 100%; height: 60px; position: relative; top: 50px; overflow: hidden;">

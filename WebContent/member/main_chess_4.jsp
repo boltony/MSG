@@ -38,13 +38,13 @@
 }
 
 #closeBtn {
-	width: 100px;
+	width: 120px;
 	height: 40px;
-	background-color: #7ac9d8;
+	background-color: #66b5d0;
 	border: none;
 	border-radius: 5px;
 	color: white;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 table {

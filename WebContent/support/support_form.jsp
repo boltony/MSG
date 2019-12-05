@@ -5,14 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title> 
+<title>신청서 작성</title> 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -106,7 +104,7 @@ input[type=text] {
 	font-size: 25px;
 	font-family: 'GoyangIlsan';
 	color: white;
-	border-radius: 10px;
+	border-radius: 8px;
 }
 </style>
 <body>
@@ -131,13 +129,13 @@ input[type=text] {
 	<div style="width: 100%; min-width:1500px; height: 1200px; position: relative;">
 		<div
 			style="width: 300px; height: 100%; float: left; padding-left: 30px; line-height: 20px;">
-			<div style="height: 100px; width: 300px; padding-top: 30px;">
+			<div style="height: 100px; width: 160px; padding-top: 30px; text-align:center">
 				<h3>후원하기</h3>
 			</div>
-			<p>
-				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya>후원하기</a>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; background-color:#66b5d0; line-height:30px;">
+				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya style="color:white;">후원하기</a>
 			</p>
-			<p>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; line-height:30px;">
 				<a href="${pageContext.request.contextPath}/mydonate.mem" class=mya>후원 내역</a>
 			</p>
 
@@ -146,7 +144,7 @@ input[type=text] {
 			style="width: 60%; min-width: 500px; height: 1050px; float: left; position: relative; left: 5%; border-bottom: 1px solid black;">
 			<div
 				style="width: 100%; border-bottom: 1px solid black; padding-top: 30px">
-				<p style="font-size: 30px; line-height:">후원하기</p>
+				<p style="font-size: 40px; line-height:">후원하기</p>
 			</div>
 			<div
 				style="width: 100%; height: 60px; position: relative; top: 50px; overflow: hidden;">
@@ -166,10 +164,12 @@ input[type=text] {
 					</h5>
 				</div>
 			</div>
-			<div style="position: relative; top: 100px;">
+			<div style="position: relative; top: 100px; height: 800px;">
 				<list>
 				<ul class="ul" style="width: 20%; text-align: center;">
-					<p style="font-size: 20px;">후원자 정보</p>
+					<p style="font-size: 20px;">후원자 정보<br>
+						<p style="font-size:7px; color:red;">*후원자 정보는 변경가능합니다.</p>
+					</p>
 				</ul>
 				<ul class="ul"
 					style="width: 80%; border-bottom: 1px solid black; overflow: hidden;">
@@ -180,7 +180,7 @@ input[type=text] {
 							<label style="font-size: 15px;">성함</label>
 						</div>
 						<div class="value">
-							<input type="text" id="name" value="${loginInfo.name }">
+							<input type="text" id="rname" value="${loginInfo.name }">
 						</div>
 
 						<div class="element">
@@ -305,7 +305,7 @@ input[type=text] {
 				</list>
 			</div>
 			<div
-				style="height: 100px; position: relative; top: 130px; text-align: center;">
+				style="height: 100px; position: relative; text-align: center;">
 				<input type="button" value="결제하기" id="pay">
 			</div>
 
@@ -348,18 +348,30 @@ input[type=text] {
 								alert("최소 후원 금액은 1000원 이상입니다.");
 								return;
 							} else {
-								window
-										.open('../pay.sup?name='
-												+ $("#name").val() + '&phone='
-												+ $("#phone").val() + '&email='
-												+ $("#email").val()
-												+ '&donation='
-												+ $("#donation").val(), '',
-												'width=600px,height=700px,top=200px,left=500px')
+								   $.ajax({
+									      url : "${pageContext.request.contextPath}/xssProtect.sup",
+									      type: "post",
+									      data:{
+									         rname : $("#rname").val(),
+									         phone : $("#phone").val(),
+									         email : $("#email").val()
+									      },
+									      dataType : "json"
+									   }).done(function(data){
+									      console.log(data.rname);
+									      window.open('${pageContext.request.contextPath}/pay.sup?rname='
+									      + data.rname + '&phone='
+									      + data.phone + '&email='
+									      + data.email
+									      + '&donation='
+									      + $("#donation").val(), '','width=600px,height=700px,top=200px,left=500px')
 
-								console.log("aa");
-								console.log('${data}');
-							}
+									   }).fail(function(a,b,c){
+									      console.log(a);
+									      console.log(b);
+									      console.log(c);
+									   });
+									}
 
 						})
 

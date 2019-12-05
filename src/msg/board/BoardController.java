@@ -17,6 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import msg.member.MemberDAO;
 import msg.member.MemberDTO;
 import msg.utils.Configuration;
+import msg.utils.XSS_protect;
 
 
 //session - loginInfo - memberDTO
@@ -131,8 +132,6 @@ public class BoardController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				dao.viewCount(seq);
 				BoardDTO dto = dao.detailView(seq);
-				List<FileDTO> fileList = FileDAO.getInstance().getAllFiles(seq);
-				request.setAttribute("fileList", fileList);
 				String currentPage = request.getParameter("currentPage");
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("dto", dto);
@@ -174,8 +173,10 @@ public class BoardController extends HttpServlet {
 				System.out.println("board: "+board);
 				int area = Integer.parseInt(request.getParameter("area"));
 				System.out.println("area: "+area);
-				String title = request.getParameter("title");
+				String title = XSS_protect.replaceParameter(request.getParameter("title"));
+				
 				System.out.println("title: "+title);
+				
 				String summernote = request.getParameter("summernote");
 				System.out.println("summernote :"+summernote);
 				
@@ -193,6 +194,14 @@ public class BoardController extends HttpServlet {
 				
 			}else if(cmd.contentEquals("/imgSend.bo")) {
 				int root = Integer.parseInt(request.getParameter("root"));
+				
+				
+				String realPath = request.getServletContext().getRealPath("/board_files");
+				File uploadRealPath = new File(realPath);
+				if(!uploadRealPath.exists()) {
+					uploadRealPath.mkdir();
+				}
+				
 				String uploadPath = request.getServletContext().getRealPath("/board_files/file"+root);
 				System.out.println(uploadPath);
 				
@@ -211,7 +220,6 @@ public class BoardController extends HttpServlet {
 
 					System.out.println("file name : " + fileName);
 					System.out.println("original name : " + oriFileName);
-					FileDTO fDto = new FileDTO(0,root, fileName, oriFileName);
 				}
 
 				String url = "board_files/file"+root+"/" + multi.getOriginalFileName("img");
@@ -240,7 +248,6 @@ public class BoardController extends HttpServlet {
 				String board = request.getParameter("board");
 				BoardDTO dto = dao.detailView(seq);
 				
-				request.setAttribute("board", board);
 				request.setAttribute("dto", dto);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("seq", seq);
@@ -248,13 +255,46 @@ public class BoardController extends HttpServlet {
 
 			}else if(cmd.contentEquals("/update.bo")) {
 				String writer = ((MemberDTO)request.getSession().getAttribute("loginInfo")).getId(); //이후에 session에서 꺼내온 아이디로 바꿔주기
+				System.out.println(writer);
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				String board = xssProtect(request.getParameter("board"));
 				int area = Integer.parseInt(request.getParameter("area"));
-				String title = request.getParameter("title");
+				String title = XSS_protect.replaceParameter(request.getParameter("title"));
 				String summernote = request.getParameter("summernote");
 				BoardDTO dto = new BoardDTO(seq, board, area, null, writer, title, summernote, null, 0);
 				dao.update(dto);
+				
+				String path = request.getServletContext().getRealPath("/board_files/") + "file"+seq;
+				
+				System.out.println("경로 : "+path);
+				File folder = new File(path);
+				try {
+					if(folder.exists()) {
+						System.out.println("folder.exist");
+						File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+						System.out.println("폴더안의 파일갯수 : " +folder_list.length);
+						
+						for (int j = 0; j < folder_list.length; j++) {
+							System.out.println(folder_list[j]);
+							if(summernote.contains(folder_list[j].getName())) {
+								System.out.println("파일존재");
+							}else {
+								folder_list[j].delete();
+								System.out.println("수정하면서 이미지를 지워 파일이 삭제되었습니다.");
+							}
+
+						}
+						
+						File[] folder_list1 = folder.listFiles(); //파일리스트 얻어오기
+						if(folder_list1.length == 0 && folder.isDirectory()){ 
+							folder.delete(); //대상폴더 삭제
+							System.out.println("폴더가 삭제되었습니다.");
+						}
+					}
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+				
 				String currentPage = request.getParameter("currentPage");
 				request.setAttribute("seq", seq);
 				request.setAttribute("currentPage", currentPage);

@@ -7,11 +7,15 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-        th,td{
-            border-right: 1px solid;
-            border-top: 1px solid;
-        }
-    </style>
+th,td{
+	border-right: 1px solid;
+	border-top: 1px solid;
+}
+
+.modal-dialog{
+	background-color: rgba(173, 169, 169, 0.13);
+}
+</style>
 </head>
 <body>
    <div id="PersonalInfoProvideAgreement" class="panel panel-default modal fade in" role="dialog" style="display: block;  max-width: 790px;">

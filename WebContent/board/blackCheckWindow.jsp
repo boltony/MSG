@@ -8,12 +8,20 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
+@font-face { 
+    font-family: 'GoyangIlsan'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
 #wrapper{
+	background-color: #ffcc57;
 	width:280px;
 	height:180px;
-	border:1px solid black;
 	padding:0px;
 	margin:0px;
+	text-align:center;
+	font-family: 'GoyangIlsan';
 }
 #header{
 	width:100%;
@@ -22,24 +30,25 @@
 	font-weight:bold;
 	color:white;
 	font-size:20px;
-	padding-top:10px;
+	padding-top:30px;
 }
 #contents{
+	font-family: 'GoyangIlsan';
+	font-weight:bold;
 	text-align:center;
 }
 button{
-	background-color: #ffa700;
 	color:white;
 	font-weight:bold;
 	border:none;
+ 	background-color: #c9af96;
 }
 </style>
 </head>
 <body>
 	<div id="wrapper">
-		<div id="header">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+		<div id="header">블랙리스트 관리</div>
 		<div id="contents">
-			<br>
 			<br>
 			아이디 : ${id }
 			<br>

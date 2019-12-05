@@ -22,6 +22,22 @@
             .mya:hover{
                 text-decoration: none;
             }
+            .black_btn{
+            	width:128px;
+            	height:30px;
+            	text-align:center;
+            	background-color:#66b5d0;
+            	border: none;
+            	margin:auto;
+            	font-size:14px;
+            	color: white;
+            }
+            #member_tb th{
+            background-color: #c9e3f2;
+            }
+            #member_tb{
+            margin:auto;
+            }
         </style>
     </head>
     <body>
@@ -37,52 +53,57 @@
 
         <!-- ----- 관리자페이지 - 회원관리 시작 ---------------  -->
         <div style="width: 100%; height: 500px; position: relative; min-width:1500px;">
-            <div style="width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;">
-                <div style="height: 100px; width: 100%; padding-top: 30px;"><h3>관리자 페이지</h3></div>
-                <p><a href="${pageContext.request.contextPath}/viewAll.man" class=mya>회원관리</a></p>
-                <p><a href="${pageContext.request.contextPath}/list.mem" class=mya>긴급신고관리</a></p>
-                <p><a href="#" class=mya>실종아동관리</a></p>
+                <div style="min-width:182px;width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;" class="col-2">
+                <div style="height: 100px; width: 100%; padding-top: 30px;"><h3 style="margin-left:20px;">관리자 메뉴</h3></div>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;background-color: #476491;"><a href="${pageContext.request.contextPath}/viewAll.man" class=mya style="color:white;">회원관리</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/list.mem" class=mya>긴급제보등록승인</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/Ylist.mem" class=mya>일괄전송</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="requestlist.child" class=mya>실종아동관리</a></p>
+
             </div>
+
             
             
             <div style="width:70%; height: 80%; float: left; min-width: 1200px;">
-            <h3>회원목록</h3>
-           <table border=1 style='min-width:1163px'>
-           <tr>
-           <th>No</th>
-           <th>아이디</th>
-           <th>이름</th>
-           <th>전화번호</th>
-           <th>이메일</th>
-           <th>우편번호</th>
-           <th>주소1</th>
-           <th>주소2</th>
-           <th>긴급메일 수신</th>
-           <th>관리자 여부</th>
-           <th>블랙리스트</th>
-           <th>버튼</th>
+            <div style="border-bottom: 1px solid black;">
+            <h1>회원목록</h1>
+            </div>
+           <table border=1 style='min-width:1163px; margin-top:30px;' id="member_tb">
+           <tr style="text-align:center;">
+           <th style="width:30px; text-align:center;">No</th>
+           <th style="width:100px;">아이디</th>
+           <th style="width:100px;">이름</th>
+           <th style="width:100px;">전화번호</th>
+           <th style="width:180px;">이메일</th>
+           <th style="width:70px;">우편번호</th>
+           <th style="width:230px;">주소1</th>
+           <th style="width:75px;">주소2</th>
+           <th>긴급메일</th>
+           <th>관리자</th>
+           <th>블랙</th>
+           <th style="width:128px;"> 블랙리스트 버튼</th>
            </tr>
             <c:forEach items="${list}" var="dto">
 		<tr>
-		<td>${dto.seq }</td> 
-		<td>${dto.id }</td> 
-		<td>${dto.name}</td>
-		<td>${dto.phone }</td>
-		<td>${dto.email }</td>
-		<td>${dto.zipcode }</td>
-		<td>${dto.address1 }</td>
-		<td>${dto.address2 }</td>
-		<td>${dto.email_receive }</td>
-		<td>${dto.manager_check }</td> 
-		<td>${dto.black }</td>
+		<td style="text-align:center">${dto.seq }</td> 
+		<td style="padding-left:5px;"> ${dto.id }</td> 
+		<td style="padding-left:5px;"> ${dto.name}</td>
+		<td style="padding-left:5px;"> ${dto.phone }</td>
+		<td style="padding-left:5px;"> ${dto.email }</td>
+		<td style="text-align:center;"> ${dto.zipcode }</td>
+		<td style="padding-left:5px;"> ${dto.address1 }</td>
+		<td style="padding-left:5px;"> ${dto.address2 }</td>
+		<td style="text-align:center"> ${dto.email_receive }</td>
+		<td style="text-align:center"> ${dto.manager_check }</td> 
+		<td style="text-align:center"> ${dto.black }</td>
 		<td>
 		<c:choose>
 		<c:when test="${dto.black=='N'}">
-		<button onclick="location.href='${pageContext.request.contextPath}/blackIn.man?id=${dto.id}'">블랙리스트 추가</button>
+		<button class="black_btn" onclick="location.href='${pageContext.request.contextPath}/blackIn.man?id=${dto.id}'">블랙리스트 추가</button>
 		<br>
 		</c:when>
 		<c:otherwise>
-		<button onclick="location.href='${pageContext.request.contextPath}/blackOut.man?id=${dto.id}'">블랙리스트 제거</button>
+		<button class="black_btn" onclick="location.href='${pageContext.request.contextPath}/blackOut.man?id=${dto.id}'">블랙리스트 제거</button>
 		<br>
 		</c:otherwise>
 		</c:choose>

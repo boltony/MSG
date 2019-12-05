@@ -104,7 +104,7 @@ input[type=text] {
 	height: 100%;
 }
 
-#pay {
+#go_main {
 	width: 200px;
 	height: 80px;
 	background-color: #66B5D0;
@@ -113,7 +113,7 @@ input[type=text] {
 	font-size: 25px;
 	font-family: 'GoyangIlsan';
 	color: white;
-	border-radius: 10px;
+	border-radius: 8px;
 }
 </style>
 
@@ -133,13 +133,13 @@ input[type=text] {
 	<div style="width: 100%; min-width:1500px; height: 1200px; position: relative;">
 		<div
 			style="width: 300px; height: 100%; float: left; padding-left: 30px; line-height: 20px;">
-			<div style="height: 100px; width: 300px; padding-top: 30px;">
+			<div style="height: 100px; width: 160px; padding-top: 30px; text-align:center">
 				<h3>후원하기</h3>
 			</div>
-			<p>
-				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya>후원하기</a>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; background-color:#66b5d0; line-height:30px;">
+				<a href="${pageContext.request.contextPath}/support/support_page.jsp" class=mya style="color:white">후원하기</a>
 			</p>
-			<p>
+			<p style="font-size: 20px; width:160px; height:30px; text-align: center; line-height:30px;">
 				<a href="${pageContext.request.contextPath}/mydonate.mem" class=mya>후원 내역</a>
 			</p>
 
@@ -148,7 +148,7 @@ input[type=text] {
 			style="width: 60%; height: 1050px; float: left; position: relative; left: 5%; border-bottom: 1px solid black;">
 			<div
 				style="width: 100%; border-bottom: 1px solid black; padding-top: 30px">
-				<p style="font-size: 30px; line-height:">후원하기</p>
+				<p style="font-size: 40px; line-height:">후원하기</p>
 			</div>
 			<div
 				style="width: 100%; height: 60px; position: relative; top: 50px; overflow: hidden;">
@@ -193,7 +193,7 @@ input[type=text] {
 					</div>
 				</div>
 				<div style="height: 100px; position: relative; top: 10px; text-align: center;">
-				<input type="button" value="메인으로 이동" id="goMain">
+				<input type="button" value="메인으로 이동" id="go_main">
 			</div>
 			</div>
 		</div>

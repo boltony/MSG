@@ -26,6 +26,7 @@
 <style>
 .mya {
 	color: black;
+	font-size: 20px;
 }
 
 .mya:hover {
@@ -45,6 +46,11 @@
 	float: left;
 	padding-left: 30px;
 	line-height: 20px;
+	text-align: center;
+}
+
+#leftBar p, #leftBarTitle{
+ width:160px; text-align: center;
 }
 
 #leftBarTitle {
@@ -54,15 +60,12 @@
 }
 
 #leftBar_contents1 {
-	/*background-color: #7ac9d8; */
 	width: 70%;
-	height: 100px;
 	min-width: 800px;
 	float: left;
 }
 
-#leftBar_contents1 h3 {
-	line-height: 50px;
+#leftBar_contents1 h1 {
 }
 
 #leftBar_contents2 {
@@ -142,12 +145,12 @@ tr {
 }
 
 #modifyBtn {
-	width: 100px;
-	height: 30px;
-	background-color: #2a9cb1;
+	width: 120px; height: 40px;
+	background-color: #66b5d0;
 	color: white;
 	border: none;
 	border-radius: 5px;
+	font-size: 16px;
 }
 
 #zipcode_btn {
@@ -185,14 +188,14 @@ input[type='password'], input[type='text'] {
 	<div class=leftContainer>
 		<div id=leftBar>
 			<div id=leftBarTitle>
-				<h3>마이 페이지</h3>
+				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
-			<p>
-				<a href="${pageContext.request.contextPath}/member/mypage_Info.jsp" class=mya>나의 정보</a>
-			</p>
+			<p><div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+				<a href="${pageContext.request.contextPath}/member/mypage_Info.jsp" class=mya style="color:white;">나의 정보</a>
+			</div></p>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_modify.jsp" class=mya>정보 수정하기</a>
-			</p>	
+			</p>
 			<p>
 				<a href="${pageContext.request.contextPath}/mywrite.mem" class=mya>내 글 목록</a>
 			</p>
@@ -205,8 +208,8 @@ input[type='password'], input[type='text'] {
 
 		</div>
 		<div id=leftBar_contents1>
-			<h3 style="padding-left: 30px;">내 정보</h3>
-			<p style="padding-left: 30px;"><b>${loginInfo.name}</b>님의 소중한 개인 정보입니다.</p>
+			<h1 style="padding-left: 30px;">내 정보</h1>
+			<p style="padding-left: 30px; border-bottom: 1px solid black;"><b>${loginInfo.name}</b>님의 소중한 개인 정보입니다.</p>
 
 		</div>
 		<div id=leftBar_contents2>
@@ -229,10 +232,10 @@ input[type='password'], input[type='text'] {
 					</div></a>
 			</div>
 			<div style="width: 100%; height: 100px;"></div>
-			<div style="width: 50%; height: 60%; float: left;">
+			<div style="width: 600px; height: 60%;margin:auto;">
 
 				<div
-					style="width: 800px; margin-top: 30px; margin-left: 150px;">
+					style="width: 800px; margin-top: 30px; margin-left: -30px;">
 					<form action="${pageContext.request.contextPath}/signup.mem" method="post" id="signup_form">
 						<table class=modifyTb>
 							<tr>

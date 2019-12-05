@@ -6,23 +6,23 @@
 <c:choose>
 	<c:when test="${loginInfo==null}">
 	<div id=upnavi>
-            <a href="${pageContext.request.contextPath}/member/login.jsp" class=mainSmallMenu>로그인</a>　
-            <a href="${pageContext.request.contextPath}/member/signup.jsp" class=mainSmallMenu>회원가입</a>　
+            <a href="${pageContext.request.contextPath}/member/login.jsp" class=mainSmallMenu>로그인</a> |
+            <a href="${pageContext.request.contextPath}/member/signup.jsp" class=mainSmallMenu>회원가입</a> |
             <a href="${pageContext.request.contextPath}/member/login_my.jsp" class=mainSmallMenu>마이페이지</a>   
         </div>
 	</c:when>
 	<c:when test="${loginInfo!=null and loginInfo.manager_check=='Y'}">
 	<div id=upnavi>
-           ${loginInfo.name} 님 환영합니다!  
-           <a href="${pageContext.request.contextPath}/viewAll.man" class=mainSmallMenu>관리자 페이지</a>   
-           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>　
+           ${loginInfo.name} 님 환영합니다! |
+           <a href="${pageContext.request.contextPath}/viewAll.man" class=mainSmallMenu>관리자 페이지</a> |
+           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>
         </div>     
 	</c:when>
 	<c:when test="${loginInfo!=null and loginInfo.manager_check=='N'}">
 	<div id=upnavi>
-           ${loginInfo.name} 님 환영합니다!  
-           <a href="${pageContext.request.contextPath}/member/mypage.jsp" class=mainSmallMenu>마이페이지</a>   
-           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>　
+           ${loginInfo.name} 님 환영합니다! |
+           <a href="${pageContext.request.contextPath}/member/mypage.jsp" class=mainSmallMenu>마이페이지</a> |
+           <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>
         </div>     
 	</c:when>
 	</c:choose>
@@ -37,8 +37,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
          <ul class="navbar-nav ">
-            <li class="nav-item active"><a class="nav-link" href="#">
-                  공지사항 <span class="sr-only">(current)</span>
+            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/notice.no">공지사항 <span class="sr-only">(current)</span>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/child/insertInfo.jsp">실종아동등록</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/childList.child">실종아동찾기</a></li>

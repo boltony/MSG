@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,53 +21,32 @@
                 
             }
     #gosend {
-			background-color: #d89595;
-			height: 70px;
-			width: 180px;
-			padding: 15px 30px;
-			margin: 10px;
+    		margin-top : 40px;
+			background-color:  #66b5d0;
+			height: 40px;
+			width: 120px;
 			border: none;
 			color: white;
 			text-align: center;
 			text-decoration: none;
-			font-size: 20px;
+			font-size: 16px;
 			display: inline-block;
 			cursor: pointer;
 			transition: all 0.35s;
-            border-radius: 15px 15px 15px 15px;
+            border-radius: 8px;
            
 		}
-        #gosend:hover{
-            text-shadow: 2px 2px 5px;
-        }
-		#gosend span {
-			display: inline-block;
-			position: relative;
-			transition: 0.5s;
-		}
-		#gosend span::after {
-			
-			font-size: 30px;
-			transition: 0.35s;
-            color: white;
-            transition-duration: 0.35s;
-		}
-		#gosend:hover span { color: white;
-            transition-duration: 1s; }
-		#gosend:hover span::after {
-			opacity: 1;
-			right: 0px;
-		}
-        #gosend:active {
-			background-color: #9f6226;
-			
-			transform: translateY(4px);
-		}
-
+        
 
         </style>
     </head>
     <body>
+    	<c:choose>
+   <c:when test="${sessionScope.loginInfo==null}">
+      <jsp:forward page="/member/login.jsp"/>;
+   </c:when>   
+   </c:choose>
+    
         <!-- ----- navi 시작 ------------------------------------------  -->
         <jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
         <!-- ----- navi 끝 ------------------------------------------  -->
@@ -79,15 +58,15 @@
 
 
         <!-- ----- 여기는 중간 화면 이런 식으로 참고만 해 주세요 시작 ---------------  -->
-        <div style="width: 100%; height: 500px; position: relative; ">
+        <div style="width: 100%; height: 500px; position: relative; min-width:1000px; ">
             <div style="min-width:182px;width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;" class="col-2">
                 <div style="height: 100px; width: 100%; padding-top: 30px;"><h3>실종아동 등록</h3></div>
-                <p><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya>실종정보등록</a></p>
-                <p><a href="${pageContext.request.contextPath}/childList.child" class=mya>실종아동찾기</a></p>
-                <p><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya style="color: orangered">긴급메일작성</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/child/insertInfo.jsp" class=mya>실종정보등록</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;;"><a href="${pageContext.request.contextPath}/childList.child" class=mya>실종아동찾기</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;background-color: #476491;line-height:30px;"><a href="${pageContext.request.contextPath}/sos/em.jsp" class=mya style="color:white;">긴급메일작성</a></p>
             </div>
             
-            <div style="background-color: #c3c349; width: 70%; height: 30%; float: left; text-align: center;" class="col-9"> <h1 id="hh" style="text-align: center">긴급신고 메일작성</h1><br>실종아동 발생시 무엇보다 중요한것은 빠른 초기조치입니다.<br>
+            <div style="width: 70%; height: 30%; float: left; text-align: center;" class="col-9"> <label style="font-size:40px;text-align:center;">긴급신고 메일작성</label><hr>실종아동 발생시 무엇보다 중요한것은 빠른 초기조치입니다.<br>
        만약, 실종신고를 하지 않으셨다면 <br>
        긴급신고 서비스를 이용하신후에라도, 실종신고를 필히 해주시기바랍니다.<br>
             </div>
@@ -99,7 +78,7 @@
              <div style="width: 550px; text-align: center; margin: auto;">
         <div style="text-align: center;   float: left;"><img src="${pageContext.request.contextPath}/resources/images/emecall.png" style="height: 200px; width: 180px;"><br>
         <h3>실종아동등 신고</h3><label style="color: orangered">국번없이<br>112</label></div><div style="float: left; width: 50px;"><p></p></div>
-        <div style="text-align: center; "><img src="${pageContext.request.contextPath}/resources/images/pol.png" style="height: 200px; width: 180px;"><br>
+        <div style="text-align: center; float:right; "><img src="${pageContext.request.contextPath}/resources/images/pol.png" style="height: 200px; width: 180px;"><br>
         <h3>방문신고</h3><label style="color: orangered">경찰서 지구대/파출소에서<br>직접신고접수</label></div>
         
     </div>

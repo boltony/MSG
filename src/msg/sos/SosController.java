@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import msg.member.MemberDTO;
+import msg.utils.XSS_protect;
 
 /**
  * Servlet implementation class ddd
@@ -212,8 +213,8 @@ public class SosController extends HttpServlet {
 
 
 
-			String title = request.getParameter("title");
-			String contents = request.getParameter("content");
+			String title = XSS_protect.replaceParameter(request.getParameter("title"));
+			String contents = XSS_protect.replaceParameter(request.getParameter("content"));
 			/////////////////////////////////////////////
 			/////////////////////////////////////////////
 			/////////////////////////////////////////////
@@ -271,10 +272,39 @@ public class SosController extends HttpServlet {
 			//                request.setAttribute("id", memberId);
 			response.sendRedirect("main.jsp");
 		}
+		else if(cmd.contentEquals("/del.sos")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			SosDAO dao = SosDAO.getInstance();
+			try {
+				int result = dao.deletesos(new SosDTO(seq, null, null, null, null, null));
+				if(result>0) {
+					System.out.println("신고삭제완료");
+					response.sendRedirect("Ylist.mem");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		else if(cmd.contentEquals("/Ndel.sos")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			SosDAO dao = SosDAO.getInstance();
+			try {
+				int result = dao.deletesos(new SosDTO(seq, null, null, null, null, null));
+				if(result>0) {
+					System.out.println("신고삭제완료");
+					response.sendRedirect("list.mem");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 }
