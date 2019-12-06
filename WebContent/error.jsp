@@ -55,7 +55,7 @@
 
 #leftBar_contents1 {
 	background-color: #7ac9d8;
-	width: 70%;
+	width: 100%;
 	height: 100px;
 	min-width: 800px;
 	float: left;
@@ -66,7 +66,7 @@
 }
 
 #leftBar_contents2 {
-	width: 70%;
+	width: 100%;
 	height: 70%;
 	float: left;
 }

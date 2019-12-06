@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>Member Out</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -96,6 +97,13 @@
 </style>
 </head>
 <body>
+
+	<c:choose>
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
+	</c:choose>
+
 	<!-- ----- navi 시작 ------------------------------------------  -->
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	

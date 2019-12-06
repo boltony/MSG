@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Info</title>
+<title>Modify My Info</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -170,13 +170,14 @@ input[type='password'], input[type='text'] {
 </style>
 </head>
 <body>
-	<!-- ----- navi 시작 ------------------------------------------  -->
+
 	<c:choose>
-	<c:when test="${sessionScope.loginInfo==null}">
-		<jsp:forward page="/member/login_my.jsp"/>;
-	</c:when>	
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
 	</c:choose>
 	
+	<!-- ----- navi 시작 ------------------------------------------  -->
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	<!-- ----- navi 끝 ------------------------------------------  -->
 
@@ -299,7 +300,7 @@ input[type='password'], input[type='text'] {
 							<tr>
 								<td class=td_fir>이메일
 								<td class=td_sec><input type="text" id="email" name="email"
-									value="${sessionScope.loginInfo.email}"><br>
+									value="${sessionScope.loginInfo.email}" readonly><br>
 									<p class="alert2" id="alert_email_form"></p>
 							</tr>
 							<tr>
@@ -370,10 +371,10 @@ input[type='password'], input[type='text'] {
 
 	<script>
 	var pwValid = 0;
-	var phoneValid = 0;
 	var pwcheckValid = 0;
-	var emailValid = 0;
-	var emailCheckValid = 0;
+	var phoneValid = 1;
+	
+	
 	
 		// 우편번호 찾기 실행 함수
 		function sample4_execDaumPostcode() {
@@ -417,10 +418,9 @@ input[type='password'], input[type='text'] {
 			}
 		})
 						
-
 		// 전화번호 정규식 검사
 		$("#phone").on(
-				"blur",
+				"input",
 				function() {
 					var regex = /^010[0-9]{3,4}[0-9]{4}$/;
 					var data = $("#phone").val();
@@ -455,12 +455,16 @@ input[type='password'], input[type='text'] {
 					}
 				})
 		
+		
 		// 각 칸이 비어있으면 alert 창 띄우고 return 시키기!
 		$("#modifyBtn").on("click",	function() {
+			console.log(pwValid);
+			console.log(pwcheckValid);
+			console.log(phoneValid);
+			
 							if ($("#pw").val() == ""
 									|| $("#pw_check").val() == ""
 									|| $("#phone").val() == ""
-									|| $("#email").val() == ""
 									|| $("#zipcode").val() == ""
 									|| $("#address1").val() == ""
 									|| $("#address2").val() == ""
@@ -469,7 +473,7 @@ input[type='password'], input[type='text'] {
 								return;
 							}
 							
-							if(idValid * pwValid * nameValid * phoneValid * emailValid * emailCheckValid * pwcheckValid * idduplValid == 0){
+							if(pwValid * pwcheckValid * phoneValid == 0){
 								alert("입력한 정보를 다시 확인해주세요!");
 								return;
 							}

@@ -6,18 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import msg.utils.Statics;
 
 public class ChildFileDAO {
-	private BasicDataSource bds = new BasicDataSource();
-
-	private ChildFileDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("msg");
-		bds.setPassword("msg");
-		bds.setInitialSize(30);
-	}
+	
 
 	private static ChildFileDAO instance;
 
@@ -29,7 +21,7 @@ public class ChildFileDAO {
 	}
 
 	public Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return Statics.bds.getConnection();
 	}
 
 	public int insert(ChildFileDTO dto) throws Exception {

@@ -24,7 +24,7 @@
             }
             .black_btn{
             	width:128px;
-            	height:30px;
+            	height:100%;
             	text-align:center;
             	background-color:#66b5d0;
             	border: none;
@@ -41,6 +41,17 @@
         </style>
     </head>
     <body>
+    	<c:choose>
+			<c:when test="${sessionScope.loginInfo==null}">
+				<jsp:forward page="/member/login_my.jsp"/>;
+			</c:when>	
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${sessionScope.loginInfo.manager_check!='Y'}">
+				<jsp:forward page="/error.jsp"/>;
+			</c:when>	
+		</c:choose>
 
         <!-- ----- navi 시작 ------------------------------------------  -->
        <jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
@@ -56,9 +67,9 @@
                 <div style="min-width:182px;width: 300px; height: 100%;  float: left; padding-left: 30px; line-height: 20px;" class="col-2">
                 <div style="height: 100px; width: 100%; padding-top: 30px;"><h3 style="margin-left:20px;">관리자 메뉴</h3></div>
                 <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;background-color: #476491;"><a href="${pageContext.request.contextPath}/viewAll.man" class=mya style="color:white;">회원관리</a></p>
-                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/list.mem" class=mya>긴급제보등록승인</a></p>
-                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/Ylist.mem" class=mya>일괄전송</a></p>
                 <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="requestlist.child" class=mya>실종아동관리</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/list.mem" class=mya>긴급신고관리</a></p>
+                <p style="text-align:center;font-size:20px;width:160px;height:30px;line-height:30px;"><a href="${pageContext.request.contextPath}/Ylist.mem" class=mya>일괄전송</a></p>
 
             </div>
 
@@ -100,11 +111,11 @@
 		<c:choose>
 		<c:when test="${dto.black=='N'}">
 		<button class="black_btn" onclick="location.href='${pageContext.request.contextPath}/blackIn.man?id=${dto.id}'">블랙리스트 추가</button>
-		<br>
+		
 		</c:when>
 		<c:otherwise>
 		<button class="black_btn" onclick="location.href='${pageContext.request.contextPath}/blackOut.man?id=${dto.id}'">블랙리스트 제거</button>
-		<br>
+		
 		</c:otherwise>
 		</c:choose>
 		</td>

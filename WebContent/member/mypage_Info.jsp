@@ -170,13 +170,14 @@ input[type='password'], input[type='text'] {
 </style>
 </head>
 <body>
-	<!-- ----- navi 시작 ------------------------------------------  -->
+
 	<c:choose>
-	<c:when test="${sessionScope.loginInfo==null}">
-		<jsp:forward page="/member/login_my.jsp"/>;
-	</c:when>	
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
 	</c:choose>
 	
+	<!-- ----- navi 시작 ------------------------------------------  -->
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	<!-- ----- navi 끝 ------------------------------------------  -->
 

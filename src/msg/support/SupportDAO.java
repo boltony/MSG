@@ -3,20 +3,11 @@ package msg.support;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import msg.utils.Statics;
 
 public class SupportDAO {
 	private static SupportDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-
-	private SupportDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("msg");
-		bds.setPassword("msg");
-		bds.setInitialSize(30);
-	}
-
+	
 	public synchronized static SupportDAO getInstance() {
 		if(instance == null) {
 			instance = new SupportDAO();	
@@ -26,7 +17,7 @@ public class SupportDAO {
 	}
 	public Connection getConnection() throws Exception{
 
-		return bds.getConnection();
+		return Statics.bds.getConnection();
 
 	}
 	public int insertSupport(SupportDTO dto) throws Exception{

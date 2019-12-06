@@ -49,12 +49,10 @@
 
             .detail_info{
                 font-size:20px;
-                height:40px;
                 text-align:center;
                 background-color:#d6d6d6;
             }
             .detail_key{
-	            line-height:40px;
                 margin-bottom:1px;
             }
             .detail_val{

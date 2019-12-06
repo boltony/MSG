@@ -6,25 +6,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import msg.board.BoardDTO;
 import msg.support.SupportDTO;
 import msg.utils.Configuration;
 import msg.utils.EncryptionUtils;
+import msg.utils.Statics;
 
 public class MemberDAO {
 	private static MemberDAO instance;
-
-	private BasicDataSource bds = new BasicDataSource();
-
-	public MemberDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("msg");
-		bds.setPassword("msg");
-		bds.setInitialSize(30);
-	}
 
 	public synchronized static MemberDAO getInstance() {
 		if(instance == null) {
@@ -34,7 +23,7 @@ public class MemberDAO {
 	}
 
 	public Connection getConnection() throws Exception{
-		return bds.getConnection();
+		return Statics.bds.getConnection();
 	}
 
 	// 로그인
@@ -472,7 +461,7 @@ public class MemberDAO {
 	}
 
 	public List<MemberDTO> selectByPage(int startNum, int endNum) throws Exception{
-		String sql = "select * from (select member.*, row_number() over(order by seq desc) as rown from member) where rown between ? and ? and manager_check = 'N'";
+		String sql = "select * from (select member.*, row_number() over(order by seq desc) as rown from member) where rown between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

@@ -241,7 +241,7 @@
 						<c:forEach items="${list}" var="dto" varStatus="status">
 							<div class="col-5 simple_list mb-5 ml-5">
 								<c:set var="rep_file" value="rep_file${dto.seq}"></c:set>
-								<img class="missing_img" src="${requestScope[rep_file]}">							
+								<img class="missing_img" src="${requestScope[rep_file]}" onerror="this.src='${pageContext.request.contextPath}/resources/images/nonchild.png'" alt="">							
 								<br>
 								<h5>${dto.name}(${dto.get_real_gender()})</h5>
 								<div class="simple_info">
@@ -302,9 +302,9 @@
 				container : $('.kakao-link-btn')[i],
 				objectType : 'feed',
 				content : {
-					title : '카카오 링크 테스트',
-					description : '#카카오톡 #카카오API #카카오링크 #공유',
-					imageUrl : 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
+					title : '실종아동 전단지',
+					description : '#MSG #실종아동 #실종아동찾기프로젝트 #공유',
+					imageUrl : 'https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-user-20.png&r=120&g=120&b=120',
 					link : {
 						mobileWebUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq,
 						webUrl : 'http://192.168.60.54:8080/MSG/childDetail.child?seq='+btn_seq

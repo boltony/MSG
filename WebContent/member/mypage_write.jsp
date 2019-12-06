@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 쓴 글 목록</title>
+<title>My Write</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -147,14 +147,14 @@ a:hover {
 </style>
 </head>
 <body>
-   <!-- ----- navi 시작 ------------------------------------------  -->
+
    <c:choose>
-      <c:when test="${sessionScope.loginInfo==null}">
-         <jsp:forward page="/member/login_my.jsp" />;
-   </c:when>
-   </c:choose>
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
+	</c:choose>
 
-
+   <!-- ----- navi 시작 ------------------------------------------  -->
    <jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
    <!-- ----- navi 끝 ------------------------------------------  -->
 

@@ -711,8 +711,13 @@
 		})
 		
 		$("#email_confirm_btn").on("click",function(){
-			var email = $("#email").val();
-			window.open("../emailConfirm.mail?email=" + email,"회원가입 이메일 인증","width=550,height=350,resizable=no");
+			if(emailValid == 1){
+				var email = $("#email").val();
+				window.open("../emailConfirm.mail?email=" + email,"회원가입 이메일 인증","width=550,height=350,resizable=no");
+			}
+			else{
+				alert("이메일 형식을 확인해주세요");
+			}
 		})
 	
 	</script>

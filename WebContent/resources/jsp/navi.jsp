@@ -13,8 +13,8 @@
 	</c:when>
 	<c:when test="${loginInfo!=null and loginInfo.manager_check=='Y'}">
 	<div id=upnavi>
-           ${loginInfo.name} 님 환영합니다! |
            <a href="${pageContext.request.contextPath}/viewAll.man" class=mainSmallMenu>관리자 페이지</a> |
+           <a href="${pageContext.request.contextPath}/member/mypage.jsp" class=mainSmallMenu>마이페이지</a> |
            <a href="${pageContext.request.contextPath}/logout.mem" class=mainSmallMenu>로그아웃</a>
         </div>     
 	</c:when>
@@ -36,7 +36,7 @@
          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-         <ul class="navbar-nav ">
+         <ul class="navbar-nav" style="font-size:20px;">
             <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/notice.no">공지사항 <span class="sr-only">(current)</span>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/child/insertInfo.jsp">실종아동등록</a></li>

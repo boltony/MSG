@@ -134,13 +134,14 @@ a:hover{
 
 </head>
 <body>
-   <!-- ----- navi 시작 ------------------------------------------  -->
+
    <c:choose>
-   <c:when test="${sessionScope.loginInfo==null}">
-      <jsp:forward page="/MSG/member/login_my.jsp"/>;
-   </c:when>   
-   </c:choose>
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
+	</c:choose>
    
+   <!-- ----- navi 시작 ------------------------------------------  -->
    <jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
    <!-- ----- navi 끝 ------------------------------------------  -->
 

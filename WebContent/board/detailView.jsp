@@ -144,7 +144,7 @@ a{
    padding:0px;
 }
 
-#ul>li{
+#ul>li:not(#mMenuBtn, #pMenuBtn){
    width:160px;
    height:30px;
    font-size:20px;
@@ -172,7 +172,7 @@ a{
 
 .coWriter{
    color:#6d6d6d;
-   width:70px;
+   width:120px;
    display:inline-block;
 }
 .coDate{

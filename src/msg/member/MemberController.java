@@ -29,7 +29,6 @@ public class MemberController extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 
 		MemberDAO dao = MemberDAO.getInstance();
-
 		try {
 			if (cmd.equals("/login.mem")) {
 				String id = XSS_protect.replaceParameter(request.getParameter("id"));
@@ -321,7 +320,7 @@ public class MemberController extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("/error.jsp");
+			response.sendRedirect("error.jsp");
 		}
 	}
 

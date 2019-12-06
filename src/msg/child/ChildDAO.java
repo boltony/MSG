@@ -9,20 +9,13 @@ import java.util.List;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import msg.utils.Configuration;
+import msg.utils.Statics;
 
 public class ChildDAO {
-	private BasicDataSource bds = new BasicDataSource();
-
-	private ChildDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("msg");
-		bds.setPassword("msg");
-		bds.setInitialSize(30);
-	}
 
 	private static ChildDAO instance;
 
+	
 	public synchronized static ChildDAO getInstance() {  // synchronized를 작성하면 한 번에 하나의 thread만 접속 가능함
 		if(instance == null) {  // 첫 번째 사람만 instance를 만들고, 두 번째 사람부터는 만들어진 instance를 사용함
 			instance = new ChildDAO();
@@ -30,8 +23,8 @@ public class ChildDAO {
 		return instance;
 	}
 
-	public Connection getConnection() throws Exception {
-		return bds.getConnection();
+	public Connection getConnection() throws Exception{
+		return Statics.bds.getConnection();
 	}
 
 	public int insert(ChildDTO dto) throws Exception{

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>My Info</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -89,13 +89,14 @@
 
 </head>
 <body>
-	<!-- ----- navi 시작 ------------------------------------------  -->
+
 	<c:choose>
-	<c:when test="${sessionScope.loginInfo==null}">
-		<jsp:forward page="${pageContext.request.contextPath}/login_my.jsp"/>;
-	</c:when>	
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
 	</c:choose>
 	
+	<!-- ----- navi 시작 ------------------------------------------  -->
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	<!-- ----- navi 끝 ------------------------------------------  -->
 
@@ -109,9 +110,9 @@
 			<div id=leftBarTitle>
 				<h3 style="text-align: center; width: 160px;">마이 페이지</h3>
 			</div>
-			<p><div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+			<p style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_info.jsp" class=mya style="color:white;">나의 정보</a>
-			</div></p>
+			</p>
 			<p>
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_modify.jsp" class=mya>정보 수정하기</a>
 			</p>	

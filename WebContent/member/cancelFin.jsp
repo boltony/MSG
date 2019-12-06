@@ -120,16 +120,16 @@ h2>div{
 				<a href="${pageContext.request.contextPath}/member/mypage_pw_modify.jsp" class=mya>정보 수정하기</a>
 			</p>	
 			<p>
-				<a href="mywrite.mem" class=mya>내 글 목록</a>
+				<a href="${pageContext.request.contextPath}/mywrite.mem" class=mya>내 글 목록</a>
 			</p>
-			<p>
-				<a href="mydonate.mem" class=mya>후원 내역</a>
+			<p style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;">
+				<a href="${pageContext.request.contextPath}/mydonate.mem" class=mya style="color:white;">후원 내역</a>
 			</p>
 			<!--  style="color:white;"  -->
 			<!--   border-bottom: 1px solid black;  -->
-			<div style="width:160px; height:30px; background-color: #66b5d0; line-height: 30px;"><p>
+			<div><p>
 			<!--   -->
-				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya style="color:white;">회원 탈퇴</a>
+				<a href="${pageContext.request.contextPath}/member/mypage_out.jsp" class=mya >회원 탈퇴</a>
 			<!--   -->
 			</p></div>
 

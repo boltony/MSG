@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>Modify My Info</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -87,14 +87,14 @@
 
 </head>
 <body>
-	<!-- ----- navi 시작 ------------------------------------------  -->
+	
 	<c:choose>
-	<c:when test="${sessionScope.loginInfo==null}">
-		<jsp:forward page="${pageContext.request.contextPath}/member/login_my.jsp"/>;
-	</c:when>	
+		<c:when test="${sessionScope.loginInfo==null}">
+			<jsp:forward page="/member/login_my.jsp"/>;
+		</c:when>	
 	</c:choose>
 	
-	
+	<!-- ----- navi 시작 ------------------------------------------  -->
 	<jsp:include page="/resources/jsp/navi.jsp"></jsp:include>
 	<!-- ----- navi 끝 ------------------------------------------  -->
 

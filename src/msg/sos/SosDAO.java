@@ -6,20 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import msg.utils.Configuration;
+import msg.utils.Statics;
 
 public class SosDAO {
 	private static SosDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-	private SosDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("msg");
-		bds.setPassword("msg");
-		bds.setInitialSize(30);
-	}
+	
 	public synchronized static SosDAO getInstance() {
 		if(instance==null) {
 			instance = new SosDAO();
@@ -27,7 +19,7 @@ public class SosDAO {
 		return instance;
 	}
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return Statics.bds.getConnection();
 	}
 
 	public String getPageNavi(int currentPage) throws Exception {  // 현재 내가 위치한 페이지
@@ -88,17 +80,17 @@ public class SosDAO {
 		// String 덧셈 역할을 해주는 class
 		StringBuilder sb = new StringBuilder();
 		if(needPrev == true) {
-			sb.append("<a href='list.mail?cpage=" + (startNavi - 1) + "'>");
+			sb.append("<a href='list.mem?cpage=" + (startNavi - 1) + "'>");
 			sb.append("< ");
 			sb.append("</a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='list.mail?cpage=" + i + "'>");
+			sb.append("<a href='list.mem?cpage=" + i + "'>");
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext == true) {
-			sb.append("<a href='list.mail?cpage=" + (endNavi + 1) + "'>");
+			sb.append("<a href='list.mem?cpage=" + (endNavi + 1) + "'>");
 			sb.append(">");
 			sb.append("</a>");
 		}

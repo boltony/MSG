@@ -125,7 +125,7 @@
 		if(area == "999"){
 			$("#areack").css("color","red");
 			$("#areack").html("지역을먼저 선택해주세요");
-			$("#areack").css("font-size","20px");
+			$("#areack").css("font-size","15px");
 		}else{
 			$("#areack").css("color","skyblue");
 			$("#areack").html("지역선택이 완료되었습니다");
@@ -140,7 +140,7 @@
 		}else{
 			$("#areack").css("color","red");
 			$("#areack").html("지역을먼저 선택해주세요");
-			$("#areack").css("font-size","20px");
+			$("#areack").css("font-size","15px");
 		}
 	})
         $("#send").on("click",function(){

@@ -209,7 +209,7 @@ input[type=text] {
 	<!-- ----- footer 끝 ------------------------------------------  -->
 	
 	<script>
-	$("#goMain").on("click",function(){
+	$("#go_main").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/main.jsp";
 	})
 	</script>

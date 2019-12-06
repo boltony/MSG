@@ -36,8 +36,6 @@ public class CommentsDTO {
 	         return "5분 이내";
 	      }else if(300 < gapTime && gapTime <= 3600) {
 	         return "1시간 이내";
-	      }else if(3600 < gapTime && gapTime <= 86400) {
-	         return "오늘";
 	      }else {
 	         return sdf.format(this.write_date.getTime());
 	      }

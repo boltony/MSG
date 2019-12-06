@@ -14,10 +14,7 @@ import msg.utils.Statics;
 public class BoardDAO {
 	private static BoardDAO instance;
 	
-	private BoardDAO() {
-		
-	}
-	
+
 	public synchronized static BoardDAO getInstance() {
 		if(instance==null) {
 			instance = new BoardDAO();

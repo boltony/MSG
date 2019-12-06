@@ -86,7 +86,7 @@ textarea[readonly=true]{
 	border:none;
 }
 
-a:not(.poline){
+a:not(.poline, .nav-link){
 	color:black;
 	font-weight:bold;
 	text-decoration:none;
